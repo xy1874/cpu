@@ -1,5 +1,7 @@
 site_name: 计算机设计与实践（2021夏季） | 哈工大（深圳）
 copyright: 'Copyright &copy; 2019 - 2021 哈尔滨工业大学（深圳）'
+repo_name: 'CPU'
+repo_url: 'https://gitee.com/hitsz-cslab/cpu'
 
 markdown_extensions:
   - pymdownx.betterem:
@@ -20,6 +22,8 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.tilde
   - admonition
+  - mdx_math:
+      enable_dollar_delimiter: True
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
@@ -30,7 +34,7 @@ theme:
   language: 'zh'
   name: material
   features:
-    - tabs
+    - navigation.tabs
   icon:
     logo: fontawesome/solid/microchip
     repo: fontawesome/brands/git-alt
@@ -40,20 +44,30 @@ theme:
     accent: 'Cyan'
 nav:
   - 实验须知: index.md
-  - MIPS汇编实验: 
-    - 实验目的: lab1/part1.md
-    - 实验内容: lab1/part2.md
-    - 实验步骤: lab1/part3.md
-    - Logisim简介: lab1/part4.md
-  - 单周期CPU实验:
-    - 实验指导: lab2/lab_entry.md
-    - 指令详解: lab2/instruction_detail.md
-    - 存储器设计: lab2/mem.md
-    - 时钟设计: lab2/clk.md
-    - 单周期时序: lab2/clk_seq.md
-    - 单周期cpu功能测试: lab2/cpu_test.md
-    - 宏定义使用: lab2/attention.md
-  - 多周期CPU实验:
+  - 实验1：RISC-V汇编程序设计: 
+    - 实验概述: lab1/0-overview.md
+    - 实验步骤: lab1/1-step.md
+    - Logisim简介: lab1/2-logisim.md
+  - 实验2：单周期CPU设计:
+    - 实验指导: lab2/0-guide.md
+    - 指令详解: lab2/1-inst.md
+    - 存储器设计: lab2/2-mem.md
+    - 时钟设计: lab2/3-clk.md
+    - 单周期时序: lab2/4-timing.md
+    - 单周期cpu功能测试: lab2/5-verify.md
+    - 宏定义使用: lab2/6-macros.md
+  - 实验2：单周期CPU设计:
+    - 实验概述: lab2/0-overview.md
+    - 实验原理:
+      - miniRV-1指令集: lab2/1-inst.md
+      - 基本部件设计: lab2/2-parts.md
+      - 数据通路设计: lab2/3-datpth.md
+      - 控制器设计: lab2/4-ctrler.md
+      - 单周期CPU时序: lab2/5-timing.md
+      - 功能测试: lab2/6-verify.md
+      - 宏定义使用: lab2/7-macros.md
+    - 实验步骤: lab2/8-step.md
+  - 实验3：流水线CPU设计:
     - 实验指导: lab3/part1.md
   - 实验提交:
     - 实验提交: lab3/part2.md

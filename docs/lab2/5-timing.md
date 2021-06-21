@@ -1,0 +1,30 @@
+&emsp;&emsp;首先CPU中的部件可分为两大类：组合逻辑部件、时序逻辑部件。
+
+## 1. 组合逻辑部件
+&emsp;&emsp;运算器和控制器都是组合逻辑部件，组合逻辑部件当输入端信号的状态改变后，经过一定的逻辑门延迟时间，输出端的状态就会发生变化，并且一直维持到输入端状态再次发生变化。每个部件的延迟时间不等，但都是一小段的时间完成。如下图的实现方法中，Add指令除PC、RF为时序逻辑部件外，其他均为组合逻辑部件。
+
+![时序逻辑部件分析](./asset/clk_seq/circuit_analyse.png)
+
+## 2. 时序逻辑部件
+
+&emsp;&emsp;PC、寄存器堆、存储器等需要存储数据的部件，一般是需要时序部件来完成，在完成数据改变的时候，需要一个时钟沿触发。
+
+&emsp;&emsp;在一条指令实现的数据通路上，完成串行的数据改变，需要不同的时钟沿来触发。
+
+&emsp;&emsp;例如下图的设计，其中PC、RF、DM在指令执行过程中，都需要改变值，必须是时序部件，第一个上升沿改变PC的值，第二个上升沿写回RF、DM，写入的内容下一个时钟周期才可读。
+
+![cpu实现组成](./asset/clk_seq/cpu_structure.png)
+
+![cpu顶层框架](./asset/clk_seq/im_dm.png)
+
+&emsp;&emsp;如果采用上述的设计，IM不能采用时序部件来实现。可以采用[Distributed Memory IP](https://www.xilinx.com/xsw/dist_mem_gen) （LUT-based）来实现，
+
+&emsp;&emsp;但是这个IP核的存储容量相对较小，Depth：16-65536，Data Width：1-1024，可以满足我们实验的要求。
+
+&emsp;&emsp;时序如上图Add指令，写回寄存器与写回存储器都在周期末的下一个上升沿。
+
+&emsp;&emsp;IM、DM通常会使用时序部件IP核Block Memory实现，Block Memory是一个时序部件，读写都需要时钟沿触发。
+
+&emsp;&emsp;这样就需要保证其地址在时钟上升沿采样的时候已经准备好，要求PC和IM采用不同的时钟沿触发。在本实验要求的单周期设计中，可以使用如下方式实现：在时钟下降沿准备好PC，时钟上升沿读IM，下一个时钟下降沿读、写DM，上升沿回写RF。如下图所示。
+
+![block memory clk](./asset/clk_seq/bm_clk.png)
