@@ -1,218 +1,219 @@
+&emsp;&emsp;数据通路是用于描述CPU内部信息流的模型，刻画的是指令执行过程中的主要信息的基本流动路径。在图论中，一条路径通常包含若干个顶点和若干条边。因此，数据通路的设计也包含功能部件 (路径的“顶点”) 和部件互连 (路径的“边”) 两个方面。
+
+&emsp;&emsp;数据通路的主要功能部件包括时钟模块、程序计数器 (Program Counter, PC)、指令存储器 (Instruction ROM, IROM)、数据存储器 (Data RAM, DRAM)、寄存器文件 (Register File, RF)和算术逻辑运算单元 (Arithmetic and Logic Unit, ALU)，如图3-1所示。
+
+<center><img src = "../assets/3-1.png" width = 500></center>
+<center>图3-1 miniRV-1数据通路简图</center>
+
+
 ## 1. 时钟模块设计
 
-Minisys 实验板是一个以 Xilinx Artix-7TM系列 FPGA（XC7A100T FGG484C-1）为主芯片的实验平台，所以在vivado创建项目时，选择的芯片是XC7A100T FGG484-1。
+&emsp;&emsp;Minisys开发板是一个以Xilinx Artix-7系列FPGA为主芯片的实验平台。在Vivado中创建项目时，需选择的芯片型号是<font color = blue>**XC7A100TFGG484-1**</font>。
 
-Minisys 单周期 CPU 内部需要提供系统时钟信号来控制指令执行的时序。CPU 的执行速度与时钟频率成正比，即时钟频率越高，CPU 的执行速度越快。但是由于 CPU 内部部件
-会有一定的物理延迟，如果时钟频率过高，这些部件来不及响应，从而产生不稳定的输出结果。本课程设计所使用的 Minisys 实验板平台的时钟源信号的频率是 100MHz，这对 Minisys  CPU 来说太快了，所以本书采用 Xilinx 公司提供的 PPL 时钟 IP 核对该时钟信号进行分频，达到能使 Minisys  CPU 稳定工作的时钟信号。这里，将 100MHz 的时钟降为 23MHz。
-
+&emsp;&emsp;单周期CPU需要通过系统时钟信号来控制指令执行的时序。一般地，CPU的执行速率与时钟频率成正比，即时钟频率越高，CPU的执行速度越快。然而，CPU内部的部件存在一定的物理延迟，如果时钟频率过高，这些部件来不及响应，就会产生不稳定的输出结果。本实践课程使用的Minisys开发板具有频率为100MHz的晶振时钟源，该频率对于单周期CPU而言太快。因此，我们需要采用Vivado自带的PLL时钟IP核来对Minisys的时钟进行分频，从而确保单周期CPU能够稳定工作。这里，不妨将晶振时钟分频成25MHz。
 
 ### 1.1 时钟IP核使用
-在vivado中打开 IP Catalog 对话框，按图所示展开 IP Catalog->FPGA Features and Design->Clocking，并双击 Clocking Wizard。
 
-![时钟IP设置](./asset/clk/clk_wizard.png)
+&emsp;&emsp;打开Vivado，依次点击IP Catalog -> FPGA Features and Design -> Clocking，并双击 Clocking Wizard，如图3-2所示。
 
-此时会打开 Clocking Wizard 对话框。在 Clocking Wizard 对话框中，按照图所示，设置 PLL 时钟，名称为 cpuclk。
+<center><img src = "../assets/3-2.png"></center>
+<center>图3-2 打开Clocking Wizard IP核</center>
 
-![时钟IP设置1](./asset/clk/clk_set_1.png)
+&emsp;&emsp;然后，在Clocking Wizard对话框中，更改IP核名称为cpuclk，并设置采用PLL时钟，如图3-3所示。
 
-点击旁边 Output Clocks 选项页，将输出频率定为 23MHz，并去掉 Reset 和Locked 前的勾即去掉reset和locked输入，最后点击 OK。系统会提问是否生成输出产品，选择“Generate”，此时可以在目录下生成cpuclk.xci模块。
+<center><img src = "../assets/3-3.png"></center>
+<center>图3-3 时钟IP核的基本设置</center>
 
-![时钟IP设置2](./asset/clk/clk_set_2.png)
+&emsp;&emsp;点击切换到Output Clocks标签页，将clk_out1的输出频率设置为25MHz，并去掉Reset和Locked前的勾，点击OK，如图3-4所示。
+
+<center><img src = "../assets/3-4.png"></center>
+<center>图3-4 设置时钟IP核的输出频率</center>
+
+&emsp;&emsp;系统将弹出提示对话框，点击“Generate”生成output product。此时可以在相应目录下生成cpuclk.xci模块。
 
 ### 1.2 时钟模块仿真
-新建cpuclk_sim.v文件进行时钟仿真，示例代码如下，将cpuclk_sim 文件设置为顶层文件，右键点击cpuclk_sim.v，在弹出的菜单中选择 Set as Top。
 
-```angular2
+&emsp;&emsp;新建cpuclk_sim.v文件进行时钟仿真，示例代码如下，将cpuclk_sim 文件设置为顶层文件，右键点击cpuclk_sim.v，在弹出的菜单中选择Set as Top。
+
+``` Verilog
 `timescale 1ns / 1ps
-module cpuclk_sim( );
-    // INPUT
+module cpuclk_sim();
+    // input
     reg pclk = 0;
-    //output
+    // output
     wire clock;
-    cpuclk UCLK(
-        .clk_in1(pclk), 
-        .clk_out1(clock)
+    cpuclk UCLK (
+        .clk_in1    (pclk),
+        .clk_out1   (clock)
     );
     always #5 pclk = ~pclk;
 endmodule
-
 ```
 
 
-## 2. 存储器设计
+## 2. PC设计
 
-### 2.1 IP核读写时序
+&emsp;&emsp;PC是一个32位的寄存器，存储着当前指令的地址，因此又名为程序指针。对于32位的RISC架构CPU，指令均为32比特定长，即每条指令4个字节。因此，PC的第0位和第1位永远为0，故也可以把PC看成是一个30位的寄存器。
 
-我们已经在Cache实验中使用过Block RAM的IP，此处我们回顾一下。
+&emsp;&emsp;CPU复位时，PC被赋予了一个初始值，这个初始值就是CPU复位后执行的首条指令的地址。
 
-存储体调用Block RAM的IP核实现，因此，我们需要了解Block RAM的读时序。
+&emsp;&emsp;对于分支指令，需要通过计算，从而判断是否需要使用立即数来更新PC；对于其他指令，则PC的新值等于其旧值加4，如图3-5所示。
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svgcontent_0" height="216" width="800" viewBox="0 0 800 216" overflow="hidden" class="WaveDrom"><style type="text/css">text{font-size:11pt;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;fill-opacity:1;font-family:Helvetica}.muted{fill:#aaa}.warning{fill:#f6b900}.error{fill:#f60000}.info{fill:#0041c4}.success{fill:#00ab00}.h1{font-size:33pt;font-weight:bold}.h2{font-size:27pt;font-weight:bold}.h3{font-size:20pt;font-weight:bold}.h4{font-size:14pt;font-weight:bold}.h5{font-size:11pt;font-weight:bold}.h6{font-size:8pt;font-weight:bold}.s1{fill:none;stroke:#000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none}.s2{fill:none;stroke:#000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none}.s3{color:#000;fill:none;stroke:#000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1, 3;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s4{color:#000;fill:none;stroke:#000;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible}.s5{fill:#fff;stroke:none}.s6{fill:#000;fill-opacity:1;stroke:none}.s7{color:#000;fill:#fff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s8{color:#000;fill:#ffffb4;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s9{color:#000;fill:#ffe0b9;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s10{color:#000;fill:#b9e0ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s11{color:#000;fill:#ccfdfe;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s12{color:#000;fill:#cdfdc5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s13{color:#000;fill:#f0c1fb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s14{color:#000;fill:#f5c2c0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate}.s15{fill:#0041c4;fill-opacity:1;stroke:none}.s16{fill:none;stroke:#0041c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none}</style><defs><g id="socket"><rect y="15" x="6" height="20" width="20"/></g><g id="pclk"><path d="M0,20 0,0 20,0" class="s1"/></g><g id="nclk"><path d="m0,0 0,20 20,0" class="s1"/></g><g id="000"><path d="m0,20 20,0" class="s1"/></g><g id="0m0"><path d="m0,20 3,0 3,-10 3,10 11,0" class="s1"/></g><g id="0m1"><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="0mx"><path d="M3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 5,20" class="s2"/><path d="M20,0 4,16" class="s2"/><path d="M15,0 6,9" class="s2"/><path d="M10,0 9,1" class="s2"/><path d="m0,20 20,0" class="s1"/></g><g id="0md"><path d="m8,20 10,0" class="s3"/><path d="m0,20 5,0" class="s1"/></g><g id="0mu"><path d="m0,20 3,0 C 7,10 10.107603,0 20,0" class="s1"/></g><g id="0mz"><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="111"><path d="M0,0 20,0" class="s1"/></g><g id="1m0"><path d="m0,0 3,0 6,20 11,0" class="s1"/></g><g id="1m1"><path d="M0,0 3,0 6,10 9,0 20,0" class="s1"/></g><g id="1mx"><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 6,9" class="s2"/><path d="M10,0 5,5" class="s2"/><path d="M3.5,1.5 5,0" class="s2"/></g><g id="1md"><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/></g><g id="1mu"><path d="M0,0 5,0" class="s1"/><path d="M8,0 18,0" class="s3"/></g><g id="1mz"><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/></g><g id="xxx"><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/><path d="M0,5 5,0" class="s2"/><path d="M0,10 10,0" class="s2"/><path d="M0,15 15,0" class="s2"/><path d="M0,20 20,0" class="s2"/><path d="M5,20 20,5" class="s2"/><path d="M10,20 20,10" class="s2"/><path d="m15,20 5,-5" class="s2"/></g><g id="xm0"><path d="M0,0 4,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/><path d="M0,5 4,1" class="s2"/><path d="M0,10 5,5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 7,13" class="s2"/><path d="M5,20 8,17" class="s2"/></g><g id="xm1"><path d="M0,0 20,0" class="s1"/><path d="M0,20 4,20 9,0" class="s1"/><path d="M0,5 5,0" class="s2"/><path d="M0,10 9,1" class="s2"/><path d="M0,15 7,8" class="s2"/><path d="M0,20 5,15" class="s2"/></g><g id="xmx"><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/><path d="M0,5 5,0" class="s2"/><path d="M0,10 10,0" class="s2"/><path d="M0,15 15,0" class="s2"/><path d="M0,20 20,0" class="s2"/><path d="M5,20 20,5" class="s2"/><path d="M10,20 20,10" class="s2"/><path d="m15,20 5,-5" class="s2"/></g><g id="xmd"><path d="m0,0 4,0 c 3,10 6,20 16,20" class="s1"/><path d="m0,20 20,0" class="s1"/><path d="M0,5 4,1" class="s2"/><path d="M0,10 5.5,4.5" class="s2"/><path d="M0,15 6.5,8.5" class="s2"/><path d="M0,20 8,12" class="s2"/><path d="m5,20 5,-5" class="s2"/><path d="m10,20 2.5,-2.5" class="s2"/></g><g id="xmu"><path d="M0,0 20,0" class="s1"/><path d="m0,20 4,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,5 5,0" class="s2"/><path d="M0,10 10,0" class="s2"/><path d="M0,15 10,5" class="s2"/><path d="M0,20 6,14" class="s2"/></g><g id="xmz"><path d="m0,0 4,0 c 6,10 11,10 16,10" class="s1"/><path d="m0,20 4,0 C 10,10 15,10 20,10" class="s1"/><path d="M0,5 4.5,0.5" class="s2"/><path d="M0,10 6.5,3.5" class="s2"/><path d="M0,15 8.5,6.5" class="s2"/><path d="M0,20 11.5,8.5" class="s2"/></g><g id="ddd"><path d="m0,20 20,0" class="s3"/></g><g id="dm0"><path d="m0,20 10,0" class="s3"/><path d="m12,20 8,0" class="s1"/></g><g id="dm1"><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="dmx"><path d="M3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 5,20" class="s2"/><path d="M20,0 4,16" class="s2"/><path d="M15,0 6,9" class="s2"/><path d="M10,0 9,1" class="s2"/><path d="m0,20 20,0" class="s1"/></g><g id="dmd"><path d="m0,20 20,0" class="s3"/></g><g id="dmu"><path d="m0,20 3,0 C 7,10 10.107603,0 20,0" class="s1"/></g><g id="dmz"><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="uuu"><path d="M0,0 20,0" class="s3"/></g><g id="um0"><path d="m0,0 3,0 6,20 11,0" class="s1"/></g><g id="um1"><path d="M0,0 10,0" class="s3"/><path d="m12,0 8,0" class="s1"/></g><g id="umx"><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 6,9" class="s2"/><path d="M10,0 5,5" class="s2"/><path d="M3.5,1.5 5,0" class="s2"/></g><g id="umd"><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/></g><g id="umu"><path d="M0,0 20,0" class="s3"/></g><g id="umz"><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s4"/></g><g id="zzz"><path d="m0,10 20,0" class="s1"/></g><g id="zm0"><path d="m0,10 6,0 3,10 11,0" class="s1"/></g><g id="zm1"><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="zmx"><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 6.5,8.5" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="zmd"><path d="m0,10 7,0 c 3,5 8,10 13,10" class="s1"/></g><g id="zmu"><path d="m0,10 7,0 C 10,5 15,0 20,0" class="s1"/></g><g id="zmz"><path d="m0,10 20,0" class="s1"/></g><g id="gap"><path d="m7,-2 -4,0 c -5,0 -5,24 -10,24 l 4,0 C 2,22 2,-2 7,-2 z" class="s5"/><path d="M-7,22 C -2,22 -2,-2 3,-2" class="s1"/><path d="M-3,22 C 2,22 2,-2 7,-2" class="s1"/></g><g id="Pclk"><path d="M-3,12 0,3 3,12 C 1,11 -1,11 -3,12 z" class="s6"/><path d="M0,20 0,0 20,0" class="s1"/></g><g id="Nclk"><path d="M-3,8 0,17 3,8 C 1,9 -1,9 -3,8 z" class="s6"/><path d="m0,0 0,20 20,0" class="s1"/></g><g id="0mv-2"><path d="M9,0 20,0 20,20 3,20 z" class="s7"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-2"><path d="M2.875,0 20,0 20,20 9,20 z" class="s7"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-2"><path d="M9,0 20,0 20,20 3,20 z" class="s7"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-2"><path d="M3,0 20,0 20,20 9,20 z" class="s7"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-2"><path d="M20,20 0,20 0,0 20,0" class="s7"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-2"><path d="M0,20 0,0 3,0 9,20" class="s7"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-2"><path d="M0,0 0,20 3,20 9,0" class="s7"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-2"><path d="M0,0 0,20 3,20 6,10 3,0" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-2"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s7"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-2"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s7"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-2"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s7"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-3"><path d="M9,0 20,0 20,20 3,20 z" class="s8"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-3"><path d="M2.875,0 20,0 20,20 9,20 z" class="s8"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-3"><path d="M9,0 20,0 20,20 3,20 z" class="s8"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-3"><path d="M3,0 20,0 20,20 9,20 z" class="s8"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-3"><path d="M20,20 0,20 0,0 20,0" class="s8"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-3"><path d="M0,20 0,0 3,0 9,20" class="s8"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-3"><path d="M0,0 0,20 3,20 9,0" class="s8"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-3"><path d="M0,0 0,20 3,20 6,10 3,0" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-3"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s8"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-3"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s8"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-3"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s8"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-4"><path d="M9,0 20,0 20,20 3,20 z" class="s9"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-4"><path d="M2.875,0 20,0 20,20 9,20 z" class="s9"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-4"><path d="M9,0 20,0 20,20 3,20 z" class="s9"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-4"><path d="M3,0 20,0 20,20 9,20 z" class="s9"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-4"><path d="M20,20 0,20 0,0 20,0" class="s9"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-4"><path d="M0,20 0,0 3,0 9,20" class="s9"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-4"><path d="M0,0 0,20 3,20 9,0" class="s9"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-4"><path d="M0,0 0,20 3,20 6,10 3,0" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-4"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s9"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-4"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s9"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-4"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s9"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-5"><path d="M9,0 20,0 20,20 3,20 z" class="s10"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-5"><path d="M2.875,0 20,0 20,20 9,20 z" class="s10"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-5"><path d="M9,0 20,0 20,20 3,20 z" class="s10"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-5"><path d="M3,0 20,0 20,20 9,20 z" class="s10"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-5"><path d="M20,20 0,20 0,0 20,0" class="s10"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-5"><path d="M0,20 0,0 3,0 9,20" class="s10"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-5"><path d="M0,0 0,20 3,20 9,0" class="s10"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-5"><path d="M0,0 0,20 3,20 6,10 3,0" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-5"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s10"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-5"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s10"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-5"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s10"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-6"><path d="M9,0 20,0 20,20 3,20 z" class="s11"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-6"><path d="M2.875,0 20,0 20,20 9,20 z" class="s11"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-6"><path d="M9,0 20,0 20,20 3,20 z" class="s11"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-6"><path d="M3,0 20,0 20,20 9,20 z" class="s11"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-6"><path d="M20,20 0,20 0,0 20,0" class="s11"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-6"><path d="M0,20 0,0 3,0 9,20" class="s11"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-6"><path d="M0,0 0,20 3,20 9,0" class="s11"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-6"><path d="M0,0 0,20 3,20 6,10 3,0" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-6"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s11"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-6"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s11"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-6"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s11"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-7"><path d="M9,0 20,0 20,20 3,20 z" class="s12"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-7"><path d="M2.875,0 20,0 20,20 9,20 z" class="s12"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-7"><path d="M9,0 20,0 20,20 3,20 z" class="s12"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-7"><path d="M3,0 20,0 20,20 9,20 z" class="s12"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-7"><path d="M20,20 0,20 0,0 20,0" class="s12"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-7"><path d="M0,20 0,0 3,0 9,20" class="s12"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-7"><path d="M0,0 0,20 3,20 9,0" class="s12"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-7"><path d="M0,0 0,20 3,20 6,10 3,0" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-7"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s12"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-7"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s12"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-7"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s12"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-8"><path d="M9,0 20,0 20,20 3,20 z" class="s13"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-8"><path d="M2.875,0 20,0 20,20 9,20 z" class="s13"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-8"><path d="M9,0 20,0 20,20 3,20 z" class="s13"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-8"><path d="M3,0 20,0 20,20 9,20 z" class="s13"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-8"><path d="M20,20 0,20 0,0 20,0" class="s13"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-8"><path d="M0,20 0,0 3,0 9,20" class="s13"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-8"><path d="M0,0 0,20 3,20 9,0" class="s13"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-8"><path d="M0,0 0,20 3,20 6,10 3,0" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-8"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s13"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-8"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s13"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-8"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s13"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="0mv-9"><path d="M9,0 20,0 20,20 3,20 z" class="s14"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="1mv-9"><path d="M2.875,0 20,0 20,20 9,20 z" class="s14"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="xmv-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,5 3.5,1.5" class="s2"/><path d="M0,10 4.5,5.5" class="s2"/><path d="M0,15 6,9" class="s2"/><path d="M0,20 4,16" class="s2"/></g><g id="dmv-9"><path d="M9,0 20,0 20,20 3,20 z" class="s14"/><path d="M3,20 9,0 20,0" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="umv-9"><path d="M3,0 20,0 20,20 9,20 z" class="s14"/><path d="m3,0 6,20 11,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="zmv-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="m6,10 3,10 11,0" class="s1"/><path d="M0,10 6,10 9,0 20,0" class="s1"/></g><g id="vvv-9"><path d="M20,20 0,20 0,0 20,0" class="s14"/><path d="m0,20 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vm0-9"><path d="M0,20 0,0 3,0 9,20" class="s14"/><path d="M0,0 3,0 9,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vm1-9"><path d="M0,0 0,20 3,20 9,0" class="s14"/><path d="M0,0 20,0" class="s1"/><path d="M0,20 3,20 9,0" class="s1"/></g><g id="vmx-9"><path d="M0,0 0,20 3,20 6,10 3,0" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/><path d="m20,15 -5,5" class="s2"/><path d="M20,10 10,20" class="s2"/><path d="M20,5 8,17" class="s2"/><path d="M20,0 7,13" class="s2"/><path d="M15,0 7,8" class="s2"/><path d="M10,0 9,1" class="s2"/></g><g id="vmd-9"><path d="m0,0 0,20 20,0 C 10,20 7,10 3,0" class="s14"/><path d="m0,0 3,0 c 4,10 7,20 17,20" class="s1"/><path d="m0,20 20,0" class="s1"/></g><g id="vmu-9"><path d="m0,0 0,20 3,0 C 7,10 10,0 20,0" class="s14"/><path d="m0,20 3,0 C 7,10 10,0 20,0" class="s1"/><path d="M0,0 20,0" class="s1"/></g><g id="vmz-9"><path d="M0,0 3,0 C 10,10 15,10 20,10 15,10 10,10 3,20 L 0,20" class="s14"/><path d="m0,0 3,0 c 7,10 12,10 17,10" class="s1"/><path d="m0,20 3,0 C 10,10 15,10 20,10" class="s1"/></g><g id="vmv-2-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-2"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s7"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-3"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s8"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-4"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s9"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-5"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s10"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-6"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s11"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-7"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s12"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-8"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s13"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-2-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s7"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-3-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s8"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-4-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s9"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-5-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s10"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-6-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s11"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-7-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s12"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-8-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s13"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="vmv-9-9"><path d="M9,0 20,0 20,20 9,20 6,10 z" class="s14"/><path d="M3,0 0,0 0,20 3,20 6,10 z" class="s14"/><path d="m0,0 3,0 6,20 11,0" class="s1"/><path d="M0,20 3,20 9,0 20,0" class="s1"/></g><g id="arrow0"><path d="m-12,-3 9,3 -9,3 c 1,-2 1,-4 0,-6 z" class="s15"/><path d="M0,0 -15,0" class="s16"/></g><marker id="arrowhead" style="fill:#0041c4" markerHeight="7" markerWidth="10" markerUnits="strokeWidth" viewBox="0 -4 11 8" refX="15" refY="0" orient="auto"><path d="M0 -4 11 0 0 4z"/></marker><marker id="arrowtail" style="fill:#0041c4" markerHeight="7" markerWidth="10" markerUnits="strokeWidth" viewBox="-11 -4 11 8" refX="-15" refY="0" orient="auto"><path d="M0 -4 -11 0 0 4z"/></marker></defs><g id="waves_0"><g id="lanes_0" transform="translate(60.5, 46.5)"><g id="gmarks_0"><g style="stroke:#888;stroke-width:0.5;stroke-dasharray:1,3"><line id="gmark_0_0" x1="0" y1="0" x2="0" y2="150"/><line id="gmark_1_0" x1="80" y1="0" x2="80" y2="150"/><line id="gmark_2_0" x1="160" y1="0" x2="160" y2="150"/><line id="gmark_3_0" x1="240" y1="0" x2="240" y2="150"/><line id="gmark_4_0" x1="320" y1="0" x2="320" y2="150"/><line id="gmark_5_0" x1="400" y1="0" x2="400" y2="150"/><line id="gmark_6_0" x1="480" y1="0" x2="480" y2="150"/><line id="gmark_7_0" x1="560" y1="0" x2="560" y2="150"/><line id="gmark_8_0" x1="640" y1="0" x2="640" y2="150"/><line id="gmark_9_0" x1="720" y1="0" x2="720" y2="150"/></g><text x="360" y="-13" fill="#000" text-anchor="middle" xml:space="preserve"><tspan>Block RAM读写时序（Write first mode）</tspan></text><g class="muted" text-anchor="middle" xml:space="preserve"><text x="0" y="165">0</text><text x="80" y="165">1</text><text x="160" y="165">2</text><text x="240" y="165">3</text><text x="320" y="165">4</text><text x="400" y="165">5</text><text x="480" y="165">6</text><text x="560" y="165">7</text><text x="640" y="165">8</text><text x="720" y="165">9</text></g></g><g id="wavelane_0_0" transform="translate(0,5)"><text x="-10" y="15" class="info" text-anchor="end" xml:space="preserve"><tspan>clka</tspan></text><g id="wavelane_draw_0_0" transform="translate(0, 0)"><use xlink:href="#pclk" transform="translate(0)"/><use xlink:href="#111" transform="translate(20)"/><use xlink:href="#nclk" transform="translate(40)"/><use xlink:href="#000" transform="translate(60)"/><use xlink:href="#pclk" transform="translate(80)"/><use xlink:href="#111" transform="translate(100)"/><use xlink:href="#nclk" transform="translate(120)"/><use xlink:href="#000" transform="translate(140)"/><use xlink:href="#pclk" transform="translate(160)"/><use xlink:href="#111" transform="translate(180)"/><use xlink:href="#nclk" transform="translate(200)"/><use xlink:href="#000" transform="translate(220)"/><use xlink:href="#pclk" transform="translate(240)"/><use xlink:href="#111" transform="translate(260)"/><use xlink:href="#nclk" transform="translate(280)"/><use xlink:href="#000" transform="translate(300)"/><use xlink:href="#pclk" transform="translate(320)"/><use xlink:href="#111" transform="translate(340)"/><use xlink:href="#nclk" transform="translate(360)"/><use xlink:href="#000" transform="translate(380)"/><use xlink:href="#pclk" transform="translate(400)"/><use xlink:href="#111" transform="translate(420)"/><use xlink:href="#nclk" transform="translate(440)"/><use xlink:href="#000" transform="translate(460)"/><use xlink:href="#pclk" transform="translate(480)"/><use xlink:href="#111" transform="translate(500)"/><use xlink:href="#nclk" transform="translate(520)"/><use xlink:href="#000" transform="translate(540)"/><use xlink:href="#pclk" transform="translate(560)"/><use xlink:href="#111" transform="translate(580)"/><use xlink:href="#nclk" transform="translate(600)"/><use xlink:href="#000" transform="translate(620)"/><use xlink:href="#pclk" transform="translate(640)"/><use xlink:href="#111" transform="translate(660)"/><use xlink:href="#nclk" transform="translate(680)"/><use xlink:href="#000" transform="translate(700)"/></g></g><g id="wavelane_1_0" transform="translate(0,35)"><text x="-10" y="15" class="info" text-anchor="end" xml:space="preserve"><tspan>addra</tspan></text><g id="wavelane_draw_1_0" transform="translate(0, 0)"><use xlink:href="#xxx" transform="translate(0)"/><use xlink:href="#xxx" transform="translate(20)"/><use xlink:href="#xxx" transform="translate(40)"/><use xlink:href="#xxx" transform="translate(60)"/><use xlink:href="#xmv-3" transform="translate(80)"/><use xlink:href="#vvv-3" transform="translate(100)"/><use xlink:href="#vvv-3" transform="translate(120)"/><use xlink:href="#vvv-3" transform="translate(140)"/><use xlink:href="#vmv-3-4" transform="translate(160)"/><use xlink:href="#vvv-4" transform="translate(180)"/><use xlink:href="#vvv-4" transform="translate(200)"/><use xlink:href="#vvv-4" transform="translate(220)"/><use xlink:href="#vmv-4-5" transform="translate(240)"/><use xlink:href="#vvv-5" transform="translate(260)"/><use xlink:href="#vvv-5" transform="translate(280)"/><use xlink:href="#vvv-5" transform="translate(300)"/><use xlink:href="#vmx-5" transform="translate(320)"/><use xlink:href="#xxx" transform="translate(340)"/><use xlink:href="#xxx" transform="translate(360)"/><use xlink:href="#xxx" transform="translate(380)"/><use xlink:href="#xmx" transform="translate(400)"/><use xlink:href="#xxx" transform="translate(420)"/><use xlink:href="#xxx" transform="translate(440)"/><use xlink:href="#xxx" transform="translate(460)"/><use xlink:href="#xmv-6" transform="translate(480)"/><use xlink:href="#vvv-6" transform="translate(500)"/><use xlink:href="#vvv-6" transform="translate(520)"/><use xlink:href="#vvv-6" transform="translate(540)"/><use xlink:href="#vmx-6" transform="translate(560)"/><use xlink:href="#xxx" transform="translate(580)"/><use xlink:href="#xxx" transform="translate(600)"/><use xlink:href="#xxx" transform="translate(620)"/><use xlink:href="#xmx" transform="translate(640)"/><use xlink:href="#xxx" transform="translate(660)"/><use xlink:href="#xxx" transform="translate(680)"/><use xlink:href="#xxx" transform="translate(700)"/><text x="126" y="15" text-anchor="middle" xml:space="preserve"><tspan>addr0</tspan></text><text x="206" y="15" text-anchor="middle" xml:space="preserve"><tspan>addr1</tspan></text><text x="286" y="15" text-anchor="middle" xml:space="preserve"><tspan>addr2</tspan></text><text x="526" y="15" text-anchor="middle" xml:space="preserve"><tspan>addr3</tspan></text></g></g><g id="wavelane_2_0" transform="translate(0,65)"><text x="-10" y="15" class="info" text-anchor="end" xml:space="preserve"><tspan>douta</tspan></text><g id="wavelane_draw_2_0" transform="translate(0, 0)"><use xlink:href="#xxx" transform="translate(0)"/><use xlink:href="#xxx" transform="translate(20)"/><use xlink:href="#xxx" transform="translate(40)"/><use xlink:href="#xxx" transform="translate(60)"/><use xlink:href="#xxx" transform="translate(80)"/><use xlink:href="#xxx" transform="translate(100)"/><use xlink:href="#xxx" transform="translate(120)"/><use xlink:href="#xxx" transform="translate(140)"/><use xlink:href="#xmv-3" transform="translate(160)"/><use xlink:href="#vvv-3" transform="translate(180)"/><use xlink:href="#vvv-3" transform="translate(200)"/><use xlink:href="#vvv-3" transform="translate(220)"/><use xlink:href="#vmv-3-4" transform="translate(240)"/><use xlink:href="#vvv-4" transform="translate(260)"/><use xlink:href="#vvv-4" transform="translate(280)"/><use xlink:href="#vvv-4" transform="translate(300)"/><use xlink:href="#vmv-4-5" transform="translate(320)"/><use xlink:href="#vvv-5" transform="translate(340)"/><use xlink:href="#vvv-5" transform="translate(360)"/><use xlink:href="#vvv-5" transform="translate(380)"/><use xlink:href="#vmx-5" transform="translate(400)"/><use xlink:href="#xxx" transform="translate(420)"/><use xlink:href="#xxx" transform="translate(440)"/><use xlink:href="#xxx" transform="translate(460)"/><use xlink:href="#xxx" transform="translate(480)"/><use xlink:href="#xxx" transform="translate(500)"/><use xlink:href="#xxx" transform="translate(520)"/><use xlink:href="#xxx" transform="translate(540)"/><use xlink:href="#xmv-6" transform="translate(560)"/><use xlink:href="#vvv-6" transform="translate(580)"/><use xlink:href="#vvv-6" transform="translate(600)"/><use xlink:href="#vvv-6" transform="translate(620)"/><use xlink:href="#vmx-6" transform="translate(640)"/><use xlink:href="#xxx" transform="translate(660)"/><use xlink:href="#xxx" transform="translate(680)"/><use xlink:href="#xxx" transform="translate(700)"/><text x="206" y="15" text-anchor="middle" xml:space="preserve"><tspan>data0</tspan></text><text x="286" y="15" text-anchor="middle" xml:space="preserve"><tspan>data1</tspan></text><text x="366" y="15" text-anchor="middle" xml:space="preserve"><tspan>data2</tspan></text><text x="606" y="15" text-anchor="middle" xml:space="preserve"><tspan>data3</tspan></text></g></g><g id="wavelane_3_0" transform="translate(0,95)"><text x="-10" y="15" class="info" text-anchor="end" xml:space="preserve"><tspan>dina</tspan></text><g id="wavelane_draw_3_0" transform="translate(0, 0)"><use xlink:href="#xxx" transform="translate(0)"/><use xlink:href="#xxx" transform="translate(20)"/><use xlink:href="#xxx" transform="translate(40)"/><use xlink:href="#xxx" transform="translate(60)"/><use xlink:href="#xxx" transform="translate(80)"/><use xlink:href="#xxx" transform="translate(100)"/><use xlink:href="#xxx" transform="translate(120)"/><use xlink:href="#xxx" transform="translate(140)"/><use xlink:href="#xxx" transform="translate(160)"/><use xlink:href="#xxx" transform="translate(180)"/><use xlink:href="#xxx" transform="translate(200)"/><use xlink:href="#xxx" transform="translate(220)"/><use xlink:href="#xxx" transform="translate(240)"/><use xlink:href="#xxx" transform="translate(260)"/><use xlink:href="#xxx" transform="translate(280)"/><use xlink:href="#xxx" transform="translate(300)"/><use xlink:href="#xxx" transform="translate(320)"/><use xlink:href="#xxx" transform="translate(340)"/><use xlink:href="#xxx" transform="translate(360)"/><use xlink:href="#xxx" transform="translate(380)"/><use xlink:href="#xxx" transform="translate(400)"/><use xlink:href="#xxx" transform="translate(420)"/><use xlink:href="#xxx" transform="translate(440)"/><use xlink:href="#xxx" transform="translate(460)"/><use xlink:href="#xmv-6" transform="translate(480)"/><use xlink:href="#vvv-6" transform="translate(500)"/><use xlink:href="#vvv-6" transform="translate(520)"/><use xlink:href="#vvv-6" transform="translate(540)"/><use xlink:href="#vmx-6" transform="translate(560)"/><use xlink:href="#xxx" transform="translate(580)"/><use xlink:href="#xxx" transform="translate(600)"/><use xlink:href="#xxx" transform="translate(620)"/><use xlink:href="#xxx" transform="translate(640)"/><use xlink:href="#xxx" transform="translate(660)"/><use xlink:href="#xxx" transform="translate(680)"/><use xlink:href="#xxx" transform="translate(700)"/><text x="526" y="15" text-anchor="middle" xml:space="preserve"><tspan>data3</tspan></text></g></g><g id="wavelane_4_0" transform="translate(0,125)"><text x="-10" y="15" class="info" text-anchor="end" xml:space="preserve"><tspan>wea</tspan></text><g id="wavelane_draw_4_0" transform="translate(0, 0)"><use xlink:href="#000" transform="translate(0)"/><use xlink:href="#000" transform="translate(20)"/><use xlink:href="#000" transform="translate(40)"/><use xlink:href="#000" transform="translate(60)"/><use xlink:href="#000" transform="translate(80)"/><use xlink:href="#000" transform="translate(100)"/><use xlink:href="#000" transform="translate(120)"/><use xlink:href="#000" transform="translate(140)"/><use xlink:href="#000" transform="translate(160)"/><use xlink:href="#000" transform="translate(180)"/><use xlink:href="#000" transform="translate(200)"/><use xlink:href="#000" transform="translate(220)"/><use xlink:href="#000" transform="translate(240)"/><use xlink:href="#000" transform="translate(260)"/><use xlink:href="#000" transform="translate(280)"/><use xlink:href="#000" transform="translate(300)"/><use xlink:href="#000" transform="translate(320)"/><use xlink:href="#000" transform="translate(340)"/><use xlink:href="#000" transform="translate(360)"/><use xlink:href="#000" transform="translate(380)"/><use xlink:href="#000" transform="translate(400)"/><use xlink:href="#000" transform="translate(420)"/><use xlink:href="#000" transform="translate(440)"/><use xlink:href="#000" transform="translate(460)"/><use xlink:href="#0m1" transform="translate(480)"/><use xlink:href="#111" transform="translate(500)"/><use xlink:href="#111" transform="translate(520)"/><use xlink:href="#111" transform="translate(540)"/><use xlink:href="#1m0" transform="translate(560)"/><use xlink:href="#000" transform="translate(580)"/><use xlink:href="#000" transform="translate(600)"/><use xlink:href="#000" transform="translate(620)"/><use xlink:href="#000" transform="translate(640)"/><use xlink:href="#000" transform="translate(660)"/><use xlink:href="#000" transform="translate(680)"/><use xlink:href="#000" transform="translate(700)"/></g></g><g id="wavearcs_0"/><g id="wavegaps_0"><g id="wavegap_0_0" transform="translate(0,5)"/><g id="wavegap_1_0" transform="translate(0,35)"/><g id="wavegap_2_0" transform="translate(0,65)"/><g id="wavegap_3_0" transform="translate(0,95)"/><g id="wavegap_4_0" transform="translate(0,125)"/></g></g><g id="groups_0"><g/></g></g></svg>
+<center><img src = "../assets/3-5.png" width = 250></center>
+<center>图3-5 PC原理图</center>
+
+&emsp;&emsp;在图3-5中，pc_sel信号来源于控制单元，用于选择PC的新值。
 
 
-- 读时序：上一周期给出地址，下一周期输出数据，可连续读取。（周期1，2，3）
+## 3. 存储器设计
 
-- 写时序：上一周期给数据、写地址，拉高wea信号，下一周期成功写入数据，刚刚写入的数据出现在dout口上。
+### 3.1 Distributed RAM
 
-!!! warning
-    Block RAM和我们上学期数字逻辑设计实验所使用的寄存器阵列`reg [width-1:0] A[nums-1:0]`不同
+&emsp;&emsp;我们在计算机组成原理的Cache实验中使用过Block RAM的IP核。该IP核采用同步读时序，即读数据比读地址延后一个时钟周期，而这种时序难以满足单周期CPU访问程序ROM的需求。因此，本实验使用Vivado中的Distrubuted RAM来完成存储器的设计。
 
-    - 寄存器阵列的读取为异步读，故给出地址，数据将马上输出。
-    
-    - Block RAM为同步读，数据不会马上输出，有一拍的延迟。
-    
-    在设计时请务必考虑到这一点！
+&emsp;&emsp;Distributed RAM由FPGA内部的LUT资源构成。当其被配置成ROM时，可支持数据的异步读取，即给出地址后马上输出数据，如图3-6所示。
 
-### 2.2 程序ROM
+<center><img src = "../assets/3-6.png" width = 450></center>
+<center>图3-6 Distrubuted RAM异步读时序</center>
 
-#### 2.2.1 定义程序ROM
-取指单元中包含了存放 MiniSys  程序指令的程序 ROM，由于整个设计是在 Xilinx 公司的 Vivado 环境下，因此，使用 Xilinx 公司已经设计好的存储器 IP 核
-Block Memory Generator 定义程序 ROM，该 IP 核的说明文档 [pay8-blk-mem-gen.pdf](https://www.xilinx.com/cgi-bin/docs/ipdoc?c=blk_mem_gen;v=v8_4;d=pg058-blk-mem-gen.pdf)
+&emsp;&emsp;当Distributed RAM被配置成RAM时，既支持异步读，也支持同步读和同步写。Distributed RAM的同步读和同步写时序与Block RAM类似，如图3-7所示。
 
-同时钟IP核的设置，在 Project Manager 下点击 IP Catalog。此时会打开 IP Catalog 对话框，展开 IP Catalog -> Memories & Storage Elements -> RAMs 
-& ROMs & BRAM -> Block Memory Generator （注意，不同版本的 vivado 可能位置略有不同，但应该都在 Memories & Storage Elements 中）,并双击 Block Memory Generator。
+<center><img src = "../assets/3-7.png" width = 640></center>
+<center>图3-7 Distributed RAM同步读写时序</center>
 
-![ROM](asset/mem/prgrom.png)
+### 3.2 程序ROM
 
-此时会打开 Block Memory Generator 对话框。在 Block Memory Generator 对话框中，如图所示，输入 ROM 部件名称 prgrom，存储器类型为 Native 单端口 ROM,不要 ECC校验，最小面积算法,即都是用默认配置。
-在Port A Options 选项中创建 64KB 的 ROM, 即配置数据宽度 32 位，16384（16K） 个数据单元，对应地址线 14 根(寻址空间是16K)，每个单元是32位即8个字节，所以总共是64KB大小，始终使能，写优先。取消勾选“Primitives Output Register”,
-不然会因为在输出插入寄存器导致输出多延迟一拍。点击ok会生成会在目录下生成pgrom.xci模块，此时ROM是没有初始化的，里面未存有任何数据。
+#### 3.2.1 定义程序ROM
 
-![ROM_PORTA](./asset/mem/prgrom_porta.png)
+&emsp;&emsp;取指单元包含了存放miniRV-1汇编程序的程序ROM (Instructioin ROM, IROM)。我们需要使用Vivado自带的存储IP核Distributed Memory Generator来定义IROM。该IP核的手册见Xilinx的在线文档《[pg063-dist-mem-gen.pdf](https://www.xilinx.com/support/documentation/ip_documentation/dist_mem_gen/v8_0/pg063-dist-mem-gen.pdf)》。
 
-需要将汇编代码汇编成的机器码作为指令文件加载到ROM中，参考coe文件格式用编辑器创建一个coe文件，将机器码复制过去，拷贝coe文件到项目xx.srcs\sources_1\ip\prgrom目录下，双击刚建立的prgrom IP 核，
-重新设置其为有初始化文件，并选择已经拷贝好的 xx.coe 文件，点击 OK，并重新生成程序 ROM IP 核。
+&emsp;&emsp;在Vivado的Project Manager下，点击IP Catalog。在搜索框中输入“distributed”，并双击Distributed Memory Generator以创建IROM，如图3-8所示。
 
-![ROM_INIT](./asset/mem/prgrom_init.png)
+<center><img src = "../assets/3-8.png"></center>
+<center>图3-8 创建IROM</center>
 
-.coe 文件的格式
-```angular2
-memory_initialization_radix = 16; // 表明是 16 进制形式
-memory_initialization_vector = // 下面放数据，要放满，以逗号分隔
+&emsp;&emsp;此时会打开Distributed Memory Generator的配置对话框。在该对话框中，更改部件名称位prgrom，设置数据深度和数据宽度，如图3-9所示。
+
+<center><img src = "../assets/3-9.png" width = 600></center>
+<center>图3-9 配置IROM</center>
+
+!!! IROM配置说明
+    本实验需要创建64KB大小的IROM，因此IROM共包含16384个数据单元 (数据位宽为32位)，对应地址线14根。
+
+&emsp;&emsp;配置完成后，依次点击“OK”按钮和“Generate”按钮。此时，Vivado将在当前工程中生成一个名为prgrom.xci的IROM模块。
+
+&emsp;&emsp;需要注意的是，此时的IROM尚未初始化，其内部不含有任何有效数据。为了让CPU运行汇编程序，我们需要将汇编器生成的机器码导入到IROM当中。
+
+&emsp;&emsp;Distributed Memory Generator的IP核支持通过.coe文件导入初始数据。这种初始化文件的语法格式如图3-10所示。
+
+``` makefile
+memory_initialization_radix = 16;  // 表明以下数据采用16进制 (支持2、8、10、16进制)
+memory_initialization_vector =     // 下面放数据, 可以不放满。数据单元之间用逗号分隔。
 3c01ffff,
 343cf000,
-3401ff0f, 
+3401ff0f,
 af810c04,
 8c020000,
 8c030004,
 00000000,
-……          
-00000000;   // 最后需要分号结尾
+......        
+00000000;   // 最后以分号结尾
 ```
+<center>图3-10 .coe文件语法</center>
 
-#### 2.2.2 从程序ROM取指令
+!!! IP核编址方式说明
+    以图3-10所示的.coe文件为例，0地址对应第1个数据3c01ffff，1地址对应第2个数据343cf000，依此类推。
 
-配置好所用 IP 核之后，还需要在取指单元设计文件中对 ROM 进行例化，例化的代码如下：
-```angular2
-//分配 64KB ROM，
-prgrom instmem(
-    .clka(clock), // input wire clka
-    .addra(PC[15:2]), // input wire [13 : 0] addra
-    .douta(Instruction) // output wire [31 : 0] douta
+&emsp;&emsp;按照图3-10所示的语法，将汇编器生成的机器码拷贝到.coe文件中，保存并关闭，再将其拷贝到所在工程的<font color = purple>**xxx.srcs\sources_1\ip\prgrom**</font>目录下。
+
+&emsp;&emsp;然后，在Vivado中双击prgrom的IP核，选择“RST & Initialization”标签页，导入.coe文件，如图3-11所示。
+
+<center><img src = "../assets/3-11.png"></center>
+<center>图3-11 导入程序到IROM</center>
+
+#### 3.2.2 从程序ROM取指令
+
+&emsp;&emsp;配置好所需的IP核之后，还需要在取指单元中对IROM进行例化，如图3-12所示。
+
+``` Verilog
+// 64KB IROM
+prgrom U0_irom (
+    .a      (PC[15:2]),     // input wire [13:0] a
+    .spo    (Instruction)   // output wire [31:0] spo
 );
 ```
+<center>图3-12 例化IROM</center>
 
-在例化中一定要将系统时钟 clock 带入到 ROM 模块中，.douta 是输出信号，也就是输出 ROM 内 32 位指令的数据出口。从 3 行可以看到，ROM 将在时钟（clock）的上升沿读取
-到指令。记住这点很重要，因为后面不断会谈到时序问题。
+&emsp;&emsp;miniRV-1的每条指令都是4个字节，因此PC的值是4的整数倍，即`PC[1:0]`恒等于`2'b00`。相应地，IROM的数据宽度是32位，则每个数据单元正好存放一条指令。因此，在图3-12中，使用`PC[15:2]`作为地址来访问IROM。
 
-这里要来解释一下.addra 这个信号的输入问题。由于 MiniSys  的指令都是定长的 32位指令，因此指令的地址应该是 4 的倍数，也就是地址的低 2 位始终为 0。
-而在将 PC 中的指令地址传给 prgrom 的.addra 输入端的时候作了除 4（右移 2 位）的处理，这样，低 2 位没
-有传递到 ROM 中，这样做的原因和 prgrom 的初始化文件格式有关。
+### 3.3 数据RAM
 
-在设置程序 ROM IP 核的时候指定了 ROM 的数据（指令）宽度为 32 位，也就是该 ROM
-一个数据单元是 4 个字节，因为总容量是 64KB，因此共需要 64KB/4B=16K 个数据单元，所以地址线的宽度是 14 位。MiniSys  系统只有 64KB 的 ROM，所以没有用 32 位地址线
-是因为，只需要 16 位地址线，为了减少地址译码电路的复杂度和延迟，高 20 位地址线不被使用。又由于存放 ROM 初始化数据的 prgmip32.coe 文件不是以字节编址，而是以一个
-数据单元（4 字节）编址的，一个数据单元宽度是 32 位，因此，64KB 的空间实际上只有16K 的数据单元，只需要 14 根地址线就行了。和字节编址的 16 位地址线相比，数据单元
-编址的 14 位地址线就是 16 位地址线的高 14 位。这就是第 4 行为什么这样写的原因。
+&emsp;&emsp;分析数据存储单元的功能，不难得出其接口如图3-13所示。
 
-
-### 2.3 数据RAM
-根据数据ram的功能分析，下面是完成数据RAM的所有端口和内部信号的定义示例：
-```angular2
-module dmemory32(read_data,address,write_data,Memwrite,clock);
-    output[31:0] read_data; // 从存储器中获得的数据
-    input[31:0] address; //来自 memorio 模块，源头是来自执行单元算出的
-    //alu_result
-    input[31:0] write_data; //来自译码单元的 read_data2
-    input Memwrite; //来自控制单元
-    input clock;
-    
-    wire clk;
-```
-#### 2.3.1 定义数据存储单元 RAM
-与指令 ROM 一样，数据 RAM 也使用 Xilinx 公司提供的 IP 核 Block Memory Generator来实现。设置数据存储单元的名称为 RAM，类型是 Native 单口 RAM，无 ECC 校验，最小
-面积算法。可看到有 5 组 I/O 引脚。其读写宽度均设置为 32 位，一共有 16384 个数据，形成 64KB 的 RAM。RAM初始化同ROM初始化，初始化的数据是用户自定义需要存储在RAM的内容。
-
-至此，数据存储 RAM 配置好了，接下来就是在存储单元中将其例化
-```angular2
-
-assign clk = !clock; // 因为使用芯片的固有延迟，RAM 的地址
-//线来不及在时钟上升沿准备好, 使得时钟上升沿数据读出有误，
-//所以采用反相时钟，使得读出数据比地址准备好要晚大约半个时钟，从而得到正确地址。
-
-// 分配 64KB RAM
-ram ram (
-    .clka(clk), // input wire clka
-    .wea(Memwrite), // input wire [0 : 0] wea
-    .addra(address[15:2]), // input wire [13 : 0] addra
-    .dina(write_data), // input wire [31 : 0] dina
-    .douta(read_data) // output wire [31 : 0] douta
+``` Verilog
+module dmemory32 (
+    input           clk_i,
+    input   [31:0]  addr_i,     // 来源于执行单元计算出的访存地址
+    output  [31:0]  rd_data_o,  // 从存储器中获得的数据
+    input           memwr_i,    // 来自控制单元的写使能信号
+    input   [31:0]  wr_data_i   // 来自译码单元的read_data2 (S型指令的rs2寄存器的值)
 );
-```
+    ......
 
-
-#### 2.3.2 模块仿真
-新建ram_sim.v测试文件，示例代码如下，设置为顶层文件，右键点击 ram_sim.v，在弹出的菜单中选择 Set as Top。
-
-```angular2
-`timescale 1ns / 1ps
-module ram_sim( );
-    // input
-    reg[31:0] address = 32'h00000010; //来自执行单元算出的 alu_result
-    reg[31:0] write_data = 32'ha0000000; //来自译码单元的 read_data2
-    reg Memwrite = 1'b0; //来自控制单元
-    reg clock = 1'b0; 
-    // output
-    wire[31:0] read_data;
-    
-    dmemory32 Uram(read_data,address,write_data,Memwrite,clock);
-    
-    initial begin
-    #200 begin write_data = 32'hA00000F5;Memwrite = 1'b1; end
-    #200 Memwrite = 1'b0;
-    end
-    always #50 clock = ~clock; 
 endmodule
 ```
+<center>图3-13 DRAM模块的接口</center>
 
-仿真顶层模块设置地址为 0x00000010，先从这个地址读出原始的数据为 0x00000000,然后设置 MemWrite 为高电平,并设置写数据 write_data 为 0xa00000f5。写完之后将 MenWrite
-设置为低电平，从 0x00000010 地址上读数据，读出的数据为 0xa00000f5。大家还可以在仿真文件中增加其他语句来仿真验证。
+#### 3.3.1 定义数据RAM
 
-RAM测试波形如图
-![RAM_TEST](./asset/mem/ram_test.png)
+&emsp;&emsp;与IROM一样，DRAM同样也使用Distributed Memory Generator来实现。
 
-## 3. 数据通路的主要功能部件  
+&emsp;&emsp;建立DRAM的操作大体上与IROM类似，但有2处不同：
 
-&emsp;&emsp;1） 指令存储器（Instruction Memory,IM）    
-   读数据：输入地址，输出数据（即指令）  
+&emsp;&emsp;一是需要将“Memory Type”设置成“Single Port RAM”，如图3-14所示。
 
-&emsp;&emsp;2） 数据存储器（Data Memory,DM）   
-   读数据：输入地址、输出数据  
-   写数据：输入地址&数据  
+<center><img src = "../assets/3-14.png" width = 600></center>
+<center>图3-14 配置存储器类型</center>
 
-&emsp;&emsp;3） 寄存器堆（Register File,RF）  
-   读寄存器：输入2个读寄存器编号，输出2个32位值  
-   写寄存器：输入写寄存器编号&32位值  
+&emsp;&emsp;二是需要在“Port config”标签页下，将输入端口配置成“Non Registered”，并将输出端口配置成“Registered”，如图3-15所示。
 
-&emsp;&emsp;4）PC  
+<center><img src = "../assets/3-15.png" width = 600></center>
+<center>图3-15 配置DRAM的端口属性</center>
 
-&emsp;&emsp;5）NPC（NextPC，NPC）
-计算下一个PC值：输入PC，输入Imm，输出计算结果）
+&emsp;&emsp;配置好DRAM后，需要在数据存储单元中将其例化，如图3-16所示。
 
-&emsp;&emsp;6）ALU（Arithmetic and Logic Unit，ALU）
+``` Verilog
+assign ram_clk = !clk_i; // 因为芯片的固有延迟，DRAM的地址线来不及在时钟上升沿准备好,
+// 使得时钟上升沿数据读出有误。所以采用反相时钟，使得读出数据比地址准备好要晚大约半个时钟,
+// 从而能够获得正确的数据。
 
-&emsp;&emsp;算数、逻辑、移位运算：输入2个操作数，输出计算结果
+// 64KB DRAM
+dram U_dram (
+    .clk    (clk_i),            // input wire clka
+    .a      (addr_i[15:2]),     // input wire [13:0] addra
+    .qspo   (rd_data_o),        // output wire [31:0] douta
+    .we     (memwr_i),          // input wire [0:0] wea
+    .d      (wr_data_i)         // input wire [31:0] dina
+);
+```
+<center>图3-16 DRAM实例化</center>
 
-&emsp;&emsp;数据通路主要部件
 
-![数据通路主要部件](./asset/data_path/data_path_module.png)
+## 4. 寄存器堆设计
+
+&emsp;&emsp;miniRV-1含有32个32位寄存器，详细说明见上一节“miniRV-1指令集”中的“miniRV-1通用寄存器”。
+
+&emsp;&emsp;从上一节可知，一条指令最多具有3个寄存器号，这决定了寄存器堆必须具有3个端口————2个读端口 (对应rs1和rs2)和1个写端口 (对应rd)，如图3-17所示。
+
+<center><img src = "../assets/3-17.png" width = 160></center>
+<center>图3-17 寄存器堆模块图</center>
+
+&emsp;&emsp;我们在数字逻辑设计的实验中已经设计过寄存器堆，此处不再赘述。
+
+
+## 5. ALU设计
+
+&emsp;&emsp;ALU是算术逻辑运算单元，负责完成CPU中的算术、逻辑、移位和比较等运算。因此，在设计ALU的时候，需要先设计完成各类运算的子部件，然后使用译码器来控制ALU在运行时使用的具体子部件，并使用多路选择器产生ALU输出，如图3-18所示。
+
+<center><img src = "../assets/3-18.png" width = 300></center>
+<center>图3-18 寄存器堆模块图</center>

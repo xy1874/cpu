@@ -14,7 +14,7 @@
 
 &emsp;&emsp;本实验要求同学们在Minisys开发板 (芯片型号：<font color = blue>**XC7A100TFGG484-1**</font>) 上实现miniRV-1指令集的单周期CPU。
 
-&emsp;&emsp;miniRV-1指令集如表1-1所示。其中，黑色字体的24条指令必做，蓝色字体的10条选做。
+&emsp;&emsp;miniRV-1指令集如表1-1所示。其中，黑色字体的25条指令必做，蓝色字体的10条选做。
 
 <center>表1-1 miniRV-1指令概述</center>
-<center><img src = "./assets/1-1.png" width = 600></center>
+<center><img src = "../assets/1-1.png" width = 600></center>

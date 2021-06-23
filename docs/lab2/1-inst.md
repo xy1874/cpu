@@ -1,6 +1,6 @@
 &emsp;&emsp;本实验要求同学们基于miniRV-1指令集实现单周期CPU。miniRV-1是RV32I的子集，因而兼容RISC-V。
 
-&emsp;&emsp;miniRV-1指令集共包含32个通用寄存器和34条指令 (含R型10条、I型13条、S型3条、B型6条、U型和J型各1条)。
+&emsp;&emsp;miniRV-1指令集共包含32个通用寄存器和35条指令 (含R型10条、I型13条、S型3条、B型6条、U型2条、J型1条)。
 
 
 
@@ -33,12 +33,19 @@
 
 
 
-## 2. miniRV-1指令总表
+## 2. miniRV-1指令格式
+
+&emsp;&emsp;miniRV-1指令集的指令格式与RISC-V完全相同，如图2-1所示。
+
+<center><img src = "../assets/2-1.png" width = 650></center>
+<center>图2-1 miniRV-1指令格式</center>
+
+## 3. miniRV-1指令总表
 
 &emsp;&emsp;miniRV-1指令的格式、功能、语法及解释汇总如表2-2所示。
 
 <center>表2-2 miniRV-1指令总表</center>
-<center><img src = "./assets/t2-2.png"></center>
+<center><img src = "../assets/t2-2.png"></center>
 
 &emsp;&emsp;下面对每条指令的格式、功能等给出详细解释，所使用的符号约定如表2-3所示。
 
@@ -61,9 +68,9 @@
 
 
 
-## 3. 指令详解
+## 4. 指令详解
 
-### 3.1 R型指令
+### 4.1 R型指令
 
 #### add
 
@@ -178,7 +185,7 @@ sltu s5, t1, s1    ; (s5) ← ((t1) < (s1)), (PC) ← (PC) + 4
 </center>
 
 
-### 3.2 I型指令
+### 4.2 I型指令
 #### addi  
 - 指令名：立即数加法  
 - 使用语法：addi rd, rs1, imm  
@@ -322,7 +329,7 @@ jalr ra, -4(t0)    ; t ← (PC) + 4, (PC) ← ((t0) - 4) & ~1, (ra) ← t
 ```
 </center>
 
-### 3.3 S型指令
+### 4.3 S型指令
 #### *sb* (<font color = DodgerBlue>**选**</font>)  
 - 指令名：存字节  
 - 使用语法：sb rs2, offset(rs1)  
@@ -357,7 +364,7 @@ sw t5, 4(fp)    ; Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4
 </center>
 
 
-### 3.4 B型指令
+### 4.4 B型指令
 
 #### beq  
 - 指令名：相等时分支  
@@ -426,11 +433,11 @@ bgeu t0, t1, 8    ; PC ← ((t0) >= (t1)) ? PC + 8 : PC + 4
 </center>
 
 
-### 3.5 U型指令
+### 4.5 U型指令
 #### lui  
 - 指令名：高位立即数加载  
 - 使用语法：lui rd, imm  
-- 功能描述：将符号扩展的20位立即数逻辑左移12位，写入寄存器rd中。  
+- 功能描述：将符号扩展的20位立即数逻辑左移12位，结果写入寄存器rd。  
 - 汇编例子：  
 <center>
 ``` asm
@@ -438,8 +445,19 @@ lui t0, 0xABCDE    ; (t0) ← 0xABCDE000, (PC) ← (PC) + 4
 ```
 </center>
 
+#### auipc  
+- 指令名：PC加立即数  
+- 使用语法：auipc rd, imm  
+- 功能描述：把符号扩展的20位立即数逻辑左移12位，再加到PC上，结果写入寄存器rd。  
+- 汇编例子：  
+<center>
+``` asm
+auipc t3, 0x2468A    ; (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4
+```
+</center>
 
-### 3.6 J型指令
+
+### 4.6 J型指令
 #### jal  
 - 指令名：跳转并链接  
 - 使用语法：jal rd, offset  
