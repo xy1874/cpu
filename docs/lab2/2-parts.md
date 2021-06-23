@@ -108,7 +108,7 @@ endmodule
 
 ``` makefile
 memory_initialization_radix = 16;  // 表明以下数据采用16进制 (支持2、8、10、16进制)
-memory_initialization_vector =     // 下面放数据, 可以不放满。数据单元之间用逗号分隔。
+memory_initialization_vector =     // 下面放数据, 可以不放满; 数据单元之间用逗号分隔
 3c01ffff,
 343cf000,
 3401ff0f,
@@ -156,7 +156,7 @@ module dmemory32 (
     input   [31:0]  addr_i,     // 来源于执行单元计算出的访存地址
     output  [31:0]  rd_data_o,  // 从存储器中获得的数据
     input           memwr_i,    // 来自控制单元的写使能信号
-    input   [31:0]  wr_data_i   // 来自译码单元的read_data2 (S型指令的rs2寄存器的值)
+    input   [31:0]  wr_data_i   // 来自译码单元的rd_data2 (S型指令的rs2寄存器的值)
 );
     ......
 
