@@ -1,46 +1,26 @@
-# 单周期CPU功能测试
+&emsp;&emsp;在数字逻辑设计的实验课程中，我们已经学习了如何使用时序仿真来对数字电路进行功能验证。所谓仿真，指的是基于软件模拟 (而非电路实测)的方法来验证电路功能，其基本原理如图7-1所示。
 
-本实验使用test_bench进行测试，相关文件见“单周期测试包”，所含文件如图，func目录下文件的作用可以查看"单周期测试包/func/Readme_firs.txt"。
+<center><img src = "../assets/7-1.png" width = 550></center>
+<center>图7-1 仿真原理</center>
 
-![测试文件](./asset/cpu_test/test_file_dir1.png)
+&emsp;&emsp;在图7-1中，我们给待验证电路 (DUT, Design Under Test) 添加一些特定的输入激励，然后观察DUT的输出结果是否符合我们的预期。其中，输入激励和输出结果的检查合称为test bench。
 
-测试文件参考龙芯杯竞赛提供的测试方法，单周期、多周期、流水等都可以使用，测试的原理是检测PC、寄存器写使能、写入寄存器号、写入寄存器的数据，这四者是否对应。
-所以需要正确引出debug_wb_pc、debug_wb_rf_wen、debug_wb_rf_wnum、debug_wb_rf_wdata这四根信号，才能使用该测试文件。同时，顶层文件中的CPU时钟命名为clock。
+&emsp;&emsp;显然，CPU也是数字电路，当然也可以采用时序仿真的方法对其进行功能验证，但验证效率较低。一方面，CPU的顶层模块通常只包含时钟、复位以及和存储芯片及外设进行交互的信号。仅通过对顶层模块进行验证，验证结果一旦出错，难以定位错误点。因此，只能分模块进行验证，或者借助外设输出相应的调试信息。另一方面，出错点很有可能在通过测试程序的逻辑路径传递很远之后，才能被发现。为了提高验证效率，可以将图7-1中的输入激励从物理信号更换成一段特定的指令序列，并通过观察程序执行结果来验证CPU功能。这种方法虽然大幅提高了验证效率，但无法解决难以定位错误点的问题。
 
-## 添加debug信号
-为支持指定tb，需要在顶层模块中共加入4个debug信号，具体信号如图所示，各信号功能参见对应注释。
+&emsp;&emsp;一种更好的验证方法是使用Trace比对，这也是本课程所使用的方法。所谓Trace，是指CPU执行指令序列时产生的信息 (包括PC和写寄存器的信息等)。
 
-![加入debug信号](./asset/cpu_test/debug_singal_code.png)
+&emsp;&emsp;Trace比对的基本原理如图7-2所示。
 
+<center><img src = "../assets/7-2.png" width = 500></center>
+<center>图7-2 Trace比对的基本原理</center>
 
-## 更新指令存储器中的程序
-运行simulation需要把提供的测试程序代码存入指令存储器中。如下图所示，将所给的"单周期测试包/inst_ram.coe"作为初始化文件加载到rom IP核。
-![加入debug信号](./asset/cpu_test/load_file.png)
+&emsp;&emsp;使用Trace比对进行CPU功能验证的基本方法是：
 
-## 添加测试相关文件
-添加全局的仿真文件mycpu_tb.v，方式同添加模块仿真文件，即右键"add sources"添加，内容参考所给的tb文件。 注意信号名是否与自己所写的模块是否一致，如不一致可以修改tb。
-另外所给mycpu_tb.v文件里的led2N4等信号在上板时才用到的，这里需要注释掉，即屏蔽tb文件中的下列信号
+&emsp;&emsp;(1) 用已知功能正确的CPU运行测试程序，记录Trace0 (Golden Trace)；
 
-![信号注释](./asset/cpu_test/signal_unmask.png)
+&emsp;&emsp;(2) 用待验证CPU运行相同的测试程序，产生Trace1；
 
-因mycpu_tb.v会从"golden_trace.txt"读取数据，需手动将该文件放在项目xx\minisys.sim\sim_1\behav\xsim目录下。
+&emsp;&emsp;(3) 将Trace1和Trace0进行实时比对，如果出现不同，立即报错并停止。
 
-## Run Simulation
-
-右键mycpu_tb.v进行"set as top"设置，执行"Run Simulation"，运行结束后会看到对应的波形，在tcl console窗口往上拉也可以看到是否通过的日志。
-
-执行"RUN ALL"可以看到tcl控制台的日志输出
-![run all](./asset/cpu_test/run_all.png)
-
-如果显示PASS则为通过
-![pass](./asset/cpu_test/test_success.png)
-
-## 根据提示查找错误
-如果不通过则结合日志信息和波形进行分析
-![failed](./asset/cpu_test/failed.png)
-
-波形分析时注意看pc地址变化时的值
-![波形分析](./asset/cpu_test/signal_info.png)
-
-inst_ram.coe机器码对应的汇编代码是"单周期测试包/func/obj/test.s"，可以根据PC值查看制定的代码。 
-![汇编文件](./asset/cpu_test/test_s_file.png)
+!!! PS
+    需要注意的是，Store指令执行时不存在寄存器写操作。这意味着如果Store指令出错，那么Trace比对法并不能立即发现并定位错误点，而只能在后续相关的Load指令出错 (并且一定会出错) 时报错并停止。

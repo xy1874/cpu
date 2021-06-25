@@ -445,7 +445,7 @@ lui t0, 0xABCDE    ; (t0) ← 0xABCDE000, (PC) ← (PC) + 4
 ```
 </center>
 
-#### auipc  
+#### *auipc* (<font color = DodgerBlue>**选**</font>)  
 - 指令名：PC加立即数  
 - 使用语法：auipc rd, imm  
 - 功能描述：把符号扩展的20位立即数逻辑左移12位，再加到PC上，结果写入寄存器rd。  

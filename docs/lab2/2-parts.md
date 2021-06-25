@@ -203,7 +203,7 @@ dram U_dram (
 
 &emsp;&emsp;miniRV-1含有32个32位寄存器，详细说明见上一节“miniRV-1指令集”中的“miniRV-1通用寄存器”。
 
-&emsp;&emsp;从上一节可知，一条指令最多具有3个寄存器号，这决定了寄存器堆必须具有3个端口————2个读端口 (对应rs1和rs2)和1个写端口 (对应rd)，如图3-17所示。
+&emsp;&emsp;从上一节可知，一条指令最多具有3个寄存器号，这决定了寄存器堆必须具有3个端口——2个读端口 (对应rs1和rs2)和1个写端口 (对应rd)，如图3-17所示。
 
 <center><img src = "../assets/3-17.png" width = 160></center>
 <center>图3-17 寄存器堆模块图</center>
@@ -216,4 +216,4 @@ dram U_dram (
 &emsp;&emsp;ALU是算术逻辑运算单元，负责完成CPU中的算术、逻辑、移位和比较等运算。因此，在设计ALU的时候，需要先设计完成各类运算的子部件，然后使用译码器来控制ALU在运行时使用的具体子部件，并使用多路选择器产生ALU输出，如图3-18所示。
 
 <center><img src = "../assets/3-18.png" width = 300></center>
-<center>图3-18 寄存器堆模块图</center>
+<center>图3-18 ALU模块图</center>

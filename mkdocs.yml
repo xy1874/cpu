@@ -49,22 +49,14 @@ nav:
     - 实验步骤: lab1/1-step.md
     - Logisim简介: lab1/2-logisim.md
   - 实验2：单周期CPU设计:
-    - 实验指导: lab2/0-guide.md
-    - 指令详解: lab2/1-inst.md
-    - 存储器设计: lab2/2-mem.md
-    - 时钟设计: lab2/3-clk.md
-    - 单周期时序: lab2/4-timing.md
-    - 单周期cpu功能测试: lab2/5-verify.md
-    - 宏定义使用: lab2/6-macros.md
-  - 实验2：单周期CPU设计:
     - 实验概述: lab2/0-overview.md
     - 实验原理:
       - miniRV-1指令集: lab2/1-inst.md
       - 功能部件设计: lab2/2-parts.md
       - 数据通路设计: lab2/3-datpth.md
-      - 控制器设计: lab2/4-ctrler.md
+      - 控制单元设计: lab2/4-ctrler.md
       - 单周期CPU时序: lab2/5-timing.md
-      - 功能测试: lab2/6-verify.md
+      - 功能验证: lab2/6-verify.md
       - 宏定义使用: lab2/7-macros.md
     - 实验步骤: lab2/8-step.md
   - 实验3：流水线CPU设计:
