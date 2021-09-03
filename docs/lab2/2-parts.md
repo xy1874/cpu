@@ -24,7 +24,7 @@
 <center><img src = "../assets/3-3.png"></center>
 <center>图3-3 时钟IP核的基本设置</center>
 
-&emsp;&emsp;点击切换到Output Clocks标签页，将clk_out1的输出频率设置为25MHz，并去掉Reset和Locked前的勾，点击OK，如图3-4所示。
+&emsp;&emsp;点击切换到Output Clocks标签页，将clk_out1的输出频率设置为25MHz，并去掉Reset前的勾，点击OK，如图3-4所示。
 
 <center><img src = "../assets/3-4.png"></center>
 <center>图3-4 设置时钟IP核的输出频率</center>
@@ -33,22 +33,32 @@
 
 ### 1.2 时钟模块仿真
 
-&emsp;&emsp;新建cpuclk_sim.v文件进行时钟仿真，示例代码如下，将cpuclk_sim 文件设置为顶层文件，右键点击cpuclk_sim.v，在弹出的菜单中选择Set as Top。
+&emsp;&emsp;新建cpuclk_sim.v文件进行时钟仿真，示例代码如下，将cpuclk_sim文件设置为顶层文件，右键点击cpuclk_sim.v，在弹出的菜单中选择Set as Top。
 
 ``` Verilog
 `timescale 1ns / 1ps
 module cpuclk_sim();
     // input
-    reg pclk = 0;
+    reg fpga_clk = 0;
     // output
-    wire clock;
+    wire clk_lock;
+    wire pll_clk;
+    wire cpu_clk;
+
+    always #5 fpga_clk = ~fpga_clk;
+
     cpuclk UCLK (
-        .clk_in1    (pclk),
-        .clk_out1   (clock)
+        .clk_in1    (fpga_clk),
+        .locked     (clk_lock),
+        .clk_out1   (pll_clk)
     );
-    always #5 pclk = ~pclk;
+
+    assign cpu_clk = pll_clk & clk_lock;
+
 endmodule
 ```
+
+&emsp;&emsp;需要注意的是，仿真时，需要按下快捷键Shift+F2以多运行5us，才能看到cpu_clk的仿真波形输出。
 
 
 ## 2. PC设计
@@ -133,16 +143,23 @@ af810c04,
 
 #### 3.2.2 从程序ROM取指令
 
-&emsp;&emsp;配置好所需的IP核之后，还需要在取指单元中对IROM进行例化，如图3-12所示。
+&emsp;&emsp;IP核配置完毕后，需要将其实例化，并使用PC从其中取出指令，如图3-12所示。
 
 ``` Verilog
-// 64KB IROM
-prgrom U0_irom (
-    .a      (PC[15:2]),     // input wire [13:0] a
-    .spo    (Instruction)   // output wire [31:0] spo
-);
+    ......
+
+    wire [31:0] instruction;
+
+    // 64KB IROM
+    prgrom U0_irom (
+        .a      (pc_i[15:2]),   // input wire [13:0] a
+        .spo    (instruction)   // output wire [31:0] spo
+    );
+
+    ......
+endmodule
 ```
-<center>图3-12 例化IROM</center>
+<center>图3-12 为IROM添加时钟信号</center>
 
 &emsp;&emsp;miniRV-1的每条指令都是4个字节，因此PC的值是4的整数倍，即`PC[1:0]`恒等于`2'b00`。相应地，IROM的数据宽度是32位，则每个数据单元正好存放一条指令。因此，在图3-12中，使用`PC[15:2]`作为地址来访问IROM。
 
@@ -175,18 +192,17 @@ endmodule
 <center><img src = "../assets/3-14.png" width = 600></center>
 <center>图3-14 配置存储器类型</center>
 
-&emsp;&emsp;二是需要在“Port config”标签页下，将输入端口配置成“Non Registered”，并将输出端口配置成“Registered”，如图3-15所示。
+&emsp;&emsp;二是需要在“Port config”标签页下，将输入输出端口都配置成“Non Registered”，如图3-15所示。
 
 <center><img src = "../assets/3-15.png" width = 600></center>
 <center>图3-15 配置DRAM的端口属性</center>
 
+!!! Ps
+    需要注意的是，按照图3-15配置后，DRAM的读时序是异步读取，写时序是同步写入。
+
 &emsp;&emsp;配置好DRAM后，需要在数据存储单元中将其例化，如图3-16所示。
 
 ``` Verilog
-assign ram_clk = !clk_i; // 因为芯片的固有延迟，DRAM的地址线来不及在时钟上升沿准备好,
-// 使得时钟上升沿数据读出有误。所以采用反相时钟，使得读出数据比地址准备好要晚大约半个时钟,
-// 从而能够获得正确的数据。
-
 // 64KB DRAM
 dram U_dram (
     .clk    (clk_i),            // input wire clka

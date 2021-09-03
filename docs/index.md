@@ -7,6 +7,13 @@
 !!! 提示
     在开始实验之前，请回顾《数字逻辑设计》《计算机组成原理》课程实验相关知识。
 
+&emsp;&emsp;
+
+# 课程资源下载
+
+- Gitee Link: [CompOrgan/stupkt](https://gitee.com/hitsz-cslab/organ/tree/2021-Summer/stupkt)
+
+&emsp;&emsp;
 
 # 课程信息
 

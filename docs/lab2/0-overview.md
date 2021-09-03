@@ -10,7 +10,7 @@
 
 &emsp;&emsp;
 
-## 2. 实验题目
+## 2. 实验内容
 
 &emsp;&emsp;本实验要求同学们在Minisys开发板 (芯片型号：<font color = blue>**XC7A100TFGG484-1**</font>) 上实现miniRV-1指令集的单周期CPU。
 

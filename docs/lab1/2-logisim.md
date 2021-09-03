@@ -1,6 +1,4 @@
-# 实验注意事项
-
-## Logisim运行环境
+## 1. Logisim运行环境
 
 &emsp;&emsp;运行logisim需要安装10.0以上的java运行环境，否则无法支持高分辨率屏幕。java SE下载链接如下：
 
@@ -12,7 +10,7 @@
 
 &emsp;&emsp;http://www.cburch.com/logisim/docs.html
 
-## Logisim使用技巧
+## 2. Logisim使用技巧
 
 - ctrl + r ： 电路复位  
 
@@ -27,8 +25,7 @@
 - 编辑工具（Edit Tool）：允许用户重新安排现有组件，修改组件属性并添加连线。
 
 
-
-## Logisim电路连线颜色区分
+## 3. Logisim电路连线颜色区分
 
 - 绿色：表示高电平
 

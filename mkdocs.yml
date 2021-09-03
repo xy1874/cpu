@@ -1,7 +1,7 @@
 site_name: 计算机设计与实践（2021夏季） | 哈工大（深圳）
 copyright: 'Copyright &copy; 2019 - 2021 哈尔滨工业大学（深圳）'
-repo_name: 'CPU'
-repo_url: 'https://gitee.com/hitsz-cslab/cpu'
+repo_name: 'CompOrgan'
+repo_url: 'https://gitee.com/hitsz-cslab/organ'
 
 markdown_extensions:
   - pymdownx.betterem:
@@ -48,6 +48,7 @@ nav:
     - 实验概述: lab1/0-overview.md
     - 实验步骤: lab1/1-step.md
     - Logisim简介: lab1/2-logisim.md
+    - 验收与提交: lab1/3-submit.md
   - 实验2：单周期CPU设计:
     - 实验概述: lab2/0-overview.md
     - 实验原理:
@@ -60,6 +61,25 @@ nav:
       - 宏定义使用: lab2/7-macros.md
     - 实验步骤: lab2/8-step.md
   - 实验3：流水线CPU设计:
-    - 实验指导: lab3/part1.md
-  - 实验提交:
-    - 实验提交: lab3/part2.md
+    - 实验概述: lab3/0-overview.md
+    - 实验原理:
+      - 流水线概述: lab3/1-pipeline.md
+      - 流水线冒险: lab3/2-hazard.md
+      - 冒险处理: lab3/3-handleHazard.md
+      - 分支预测: lab3/4-predict.md
+      - 异常和中断: lab3/5-exception.md
+      - 基本外设: lab3/6-peripheral.md
+    - 实验步骤: lab3/7-step.md
+  - 作业提交说明:
+    - 课程材料提交要求: submit/submit.md
+    - 提交系统说明: submit/operation.md
+  - Trace测试说明:
+    - Trace测试说明: trace.md
+  - CPU的调试与下板验证:
+    - 下板验证说明: verify/realtest.md
+    - CPU调试方法:
+      - 方法1：利用Trace调试: verify/trace-debug.md
+      - 方法2：FPGA在线调试: verify/online-debug.md
+  - Verilog代码规范:
+    - Verilog代码规范: codingstyle.md
+  

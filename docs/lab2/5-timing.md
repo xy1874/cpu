@@ -6,5 +6,21 @@
 
 &emsp;&emsp;因此，CPU在执行指令时，会存在寄存器输出延迟、IROM读延迟、控制单元输出延迟、ALU运算延迟、寄存器写延迟等，这些延迟统称为指令的执行延迟。对于ADD指令，其执行延迟及时序如图6-1所示。
 
-<center><img src = "../assets/6-1.png" width = 500></center>
+<center><img src = "../assets/6-1.png" width = 600></center>
 <center>图6-1 add指令执行延迟分析</center>
+
+&emsp;&emsp;事实上，PC和RF都是时序逻辑部件。因此，如果PC的更新和RF的寄存器读取都发生在时钟信号的上升沿，则由于PC存在寄存器输出延迟、IROM存在读延迟，导致RF在当前时钟上升沿时，读取的是上一条指令的rs1或rs2，使得当前指令在执行时使用了上一条指令的操作数，从而导致执行结果出错。
+
+&emsp;&emsp;为了解决这个问题，可以将PC的更新操作提前到RF的读操作之前。有以下3种实现方法：
+
+&emsp;&emsp;（1）在时钟的下降沿更新PC，在时钟的上升沿读取RF，如图6-2所示。
+
+<center><img src = "../assets/6-2.png" width = 570></center>
+<center>图6-2 下降沿更新PC，上升沿读RF</center>
+
+&emsp;&emsp;（2）在时钟的上升沿更新PC，在时钟的下降沿读取RF，如图6-3所示。
+
+<center><img src = "../assets/6-3.png" width = 575></center>
+<center>图6-3 上升沿更新PC，下降沿读RF</center>
+
+&emsp;&emsp;（3）将RF的读逻辑更改为组合逻辑，此时的时序与图6-1一致。
