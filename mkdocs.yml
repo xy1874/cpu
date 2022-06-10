@@ -1,7 +1,7 @@
-site_name: 计算机设计与实践（2021夏季） | 哈工大（深圳）
-copyright: 'Copyright &copy; 2019 - 2021 哈尔滨工业大学（深圳）'
+site_name: 计算机设计与实践（2022夏季） | 哈工大（深圳）
+copyright: 'Copyright &copy; 2019 - 2022 哈尔滨工业大学（深圳）'
 repo_name: 'CompOrgan'
-repo_url: 'https://gitee.com/hitsz-cslab/organ'
+repo_url: 'https://gitee.com/hitsz-cslab/cpu'
 
 markdown_extensions:
   - pymdownx.betterem:

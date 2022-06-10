@@ -11,7 +11,7 @@
 
 # 课程资源下载
 
-- Gitee Link: [CompOrgan/stupkt](https://gitee.com/hitsz-cslab/organ/tree/2021-Summer/stupkt)
+- Gitee Link: [CompOrgan/stupkt](https://gitee.com/hitsz-cslab/cpu/tree/master/stupkt)
 
 &emsp;&emsp;
 
@@ -19,7 +19,7 @@
 
 - 课程名称：计算机设计与实践
 
-- 学期：2021夏季
+- 学期：2022夏季
 
 - 实验授课方式：集中讲解、分班答疑
 
