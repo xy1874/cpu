@@ -1,6 +1,6 @@
 &emsp;&emsp;本实验要求同学们基于miniRV-1指令集实现单周期CPU。miniRV-1是RV32I的子集，因而兼容RISC-V。
 
-&emsp;&emsp;miniRV-1指令集共包含32个通用寄存器和35条指令 (含R型10条、I型13条、S型3条、B型6条、U型2条、J型1条)。
+&emsp;&emsp;miniRV-1指令集共包含32个通用寄存器和37条指令 (含R型10条、I型15条、S型3条、B型6条、U型2条、J型1条)。
 
 
 
@@ -72,8 +72,7 @@
 
 ### 4.1 R型指令
 
-#### add
-
+#### add  
 - 指令名：加法  
 - 使用语法：add rd, rs1, rs2  
 - 功能描述：把寄存器rs1加上寄存器rs2，结果写入寄存器rd。忽略算术溢出。  
@@ -84,8 +83,7 @@ add x4, x2, x3    ; (x4) ← (x2) + (x3), (PC) ← (PC) + 4
 ```
 </center>
 
-#### sub
-
+#### sub  
 - 指令名：减法  
 - 使用语法：sub rd, rs1, rs2  
 - 功能描述：从寄存器rs1减去寄存器rs2，结果写入寄存器rd。忽略算术溢出。  
@@ -96,7 +94,7 @@ sub x7, x5, x9    ; (x7) ← (x5) - (x9), (PC) ← (PC) + 4
 ```
 </center>
 
-#### and
+#### and  
 - 指令名：逻辑与  
 - 使用语法：and rd, rs1, rs2  
 - 功能描述：将寄存器rs1和寄存器rs2进行按位与，结果写入寄存器rd。  
@@ -107,7 +105,7 @@ and x6, x1, x0    ; (x6) ← (x1) & (x0), (PC) ← (PC) + 4
 ```
 </center>
 
-#### or
+#### or  
 - 指令名：逻辑或  
 - 使用语法：or rd, rs1, rs2  
 - 功能描述：将寄存器rs1和寄存器rs2进行按位或，结果写入寄存器rd。  
@@ -118,7 +116,7 @@ or x12, x13, x1    ; (x12) ← (x13) | (x1), (PC) ← (PC) + 4
 ```
 </center>
 
-#### xor
+#### xor  
 - 指令名：逻辑异或  
 - 使用语法：xor rd, rs1, rs2  
 - 功能描述：将寄存器rs1和寄存器rs2进行按位异或，结果写入寄存器rd。  
@@ -292,7 +290,18 @@ sltiu t3, t1, -1024    ; (t3) ← ((t1) < 0xC00), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lb t0, -3(fp)    ; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
+lb t0, -3(fp)    ; (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4
+```
+</center>
+
+#### *lbu* (<font color = DodgerBlue>**选**</font>)  
+- 指令名：无符号字节加载  
+- 使用语法：lbu rd, offset(rs1)  
+- 功能描述：从地址(rs1)+sext(offset)读取一个字节，并写入寄存器rd。  
+- 汇编例子：
+<center>
+``` asm
+lbu t0, -3(fp)    ; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -303,7 +312,18 @@ lb t0, -3(fp)    ; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lh t5, 6(fp)    ; (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4
+lh t5, 6(fp)    ; (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4
+```
+</center>
+
+#### *lhu* (<font color = DodgerBlue>**选**</font>)  
+- 指令名：无符号半字加载  
+- 使用语法：lhu rd, offset(rs1)  
+- 功能描述：从地址(rs1)+sext(offset)读取两个字节，并写入寄存器rd。  
+- 汇编例子：
+<center>
+``` asm
+lhu t5, 6(fp)    ; (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4
 ```
 </center>
 

@@ -1,6 +1,6 @@
 site_name: 计算机设计与实践（2022夏季） | 哈工大（深圳）
 copyright: 'Copyright &copy; 2019 - 2022 哈尔滨工业大学（深圳）'
-repo_name: 'CompOrgan'
+repo_name: 'HITSZ-ECEI-CS/CPUDesign'
 repo_url: 'https://gitee.com/hitsz-cslab/cpu'
 
 markdown_extensions:
@@ -29,12 +29,12 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
   # - mathjaxhelper.js
 
-
 theme:
   language: 'zh'
   name: material
   features:
     - navigation.tabs
+    - navigation.expand
   icon:
     logo: fontawesome/solid/microchip
     repo: fontawesome/brands/git-alt
@@ -42,8 +42,13 @@ theme:
   palette:
     primary: 'Cyan'
     accent: 'Cyan'
+
 nav:
-  - 实验须知: index.md
+  - 首页:
+    - 实验须知: index.md
+    - 作业提交说明:
+      # - 课程材料提交要求: submit/submit.md
+      - 作业系统指南: submit/operation.md
   - 实验1：RISC-V汇编程序设计: 
     - 实验概述: lab1/0-overview.md
     - 实验步骤: lab1/1-step.md
@@ -57,22 +62,19 @@ nav:
       - 数据通路设计: lab2/3-datpth.md
       - 控制单元设计: lab2/4-ctrler.md
       - 单周期CPU时序: lab2/5-timing.md
-      - 功能验证: lab2/6-verify.md
-      - 宏定义使用: lab2/7-macros.md
-    - 实验步骤: lab2/8-step.md
-  - 实验3：流水线CPU设计:
-    - 实验概述: lab3/0-overview.md
-    - 实验原理:
-      - 流水线概述: lab3/1-pipeline.md
-      - 流水线冒险: lab3/2-hazard.md
-      - 冒险处理: lab3/3-handleHazard.md
-      - 分支预测: lab3/4-predict.md
-      - 异常和中断: lab3/5-exception.md
-      - 基本外设: lab3/6-peripheral.md
-    - 实验步骤: lab3/7-step.md
-  - 作业提交说明:
-    - 课程材料提交要求: submit/submit.md
-    - 提交系统说明: submit/operation.md
+      - CPU功能验证: lab2/6-verify.md
+      - 系统总线: lab2/7-bus.md
+      - 接口与外设: lab2/8-peripheral.md
+      - Verilog宏定义使用: lab2/9-macros.md
+    - 实验步骤: lab2/10-step.md
+  # - 实验3：流水线CPU设计:
+  #   - 实验概述: lab3/0-overview.md
+  #   - 实验原理:
+  #     - 流水线概述: lab3/1-pipeline.md
+  #     - 流水线冒险: lab3/2-hazard.md
+  #     - 冒险处理: lab3/3-handleHazard.md
+  #     - 分支预测（选）: lab3/4-predict.md
+  #   - 实验步骤: lab3/5-step.md
   - Trace测试说明:
     - Trace测试说明: trace.md
   - CPU的调试与下板验证:
@@ -82,4 +84,3 @@ nav:
       - 方法2：FPGA在线调试: verify/online-debug.md
   - Verilog代码规范:
     - Verilog代码规范: codingstyle.md
-  

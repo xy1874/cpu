@@ -2,7 +2,7 @@
 
 ### 1.1 RARS简介
 
-&emsp;&emsp;RARS (RISC-V汇编程序和运行时模拟器) 是一个轻量级的交互式集成开发环境 (IDE)，用于使用RISC-V汇编语言进行编程，具有代码提示，模拟运行，调试，统计等功能，其基本界面如图2-1所示。
+&emsp;&emsp;RARS (RISC-V Assembler and Runtime Simulator) 是一个轻量级的交互式集成开发环境，用于使用RISC-V汇编语言进行编程，具有代码提示，模拟运行，调试，统计等功能，其基本界面如图2-1所示。
 
 <center><img src = "../assets/2-1.png" width = 500></center>
 <center>图2-1 RARS基本界面</center>
@@ -27,8 +27,8 @@
 <center>b) 选择导出格式</center>
 <center>图2-3 导出机器码</center>
 
-!!! 注意
-    .text是存储在指令存储器中，.data是存储在数据存储器中，需要分别存放到两个“**.hex”文件中。（注：如果汇编代码中没有定义.data，则不会生成.data段）
+!!! warning "注意 :gun:"
+    &emsp;&emsp;.text是存储在指令存储器中，.data是存储在数据存储器中，需要分别存放到两个“**.hex”文件中。（注：如果汇编代码中没有定义.data，则不会生成.data段）
 
 
 
@@ -56,9 +56,8 @@
 
 &emsp;&emsp;本实验采用I/O统一编制的方式，即将整个32位地址空间分成若干部分，其中高4KB用作I/O地址空间，如图2-6所示。
 
-<center><img src = "../assets/2-6.png" width = 190></center>
+<center><img src = "../assets/2-6.png" width = 180></center>
 <center>图2-6 地址空间分配</center>
-
 
 ### 2.3 程序测试
 
@@ -69,9 +68,9 @@
 
 &emsp;&emsp;然后，将刚才在RARS汇编软件汇编出来的“**.hex” (.text) 文件的内容粘贴到编辑器中，即将测试程序的汇编完成的指令存放到指令存储器中。（注：从0地址开始）。
 
-&emsp;&emsp;如果汇编程序中有存放在数据段（.data）的数据，也需要拷贝到数据存储器中。方法与指令存储器拷贝数据是一样的。在Logisim中打开RISCV-SoC的DMEM子电路，根据汇编程序数据的存储位置将“**.hex” (.data) 的内容拷贝到RAM/ROM中。RAM和ROM的主要区别是，当在Logisim中按Ctrl + R复位时，RAM中的数据会被清空，而ROM中的数据不会被清空。
+&emsp;&emsp;如果汇编程序中有存放在数据段（.data）的数据，也需要拷贝到数据存储器中。方法与指令存储器拷贝数据是一样的。在Logisim中打开RISCV-SoC的DMEM子电路，根据汇编程序数据的存储位置将“**.hex” (.data) 的内容拷贝到RAM/ROM中。RAM和ROM的主要区别是，当在Logisim中按`Ctrl + R`复位时，RAM中的数据会被清空，而ROM中的数据不会被清空。
 
-&emsp;&emsp;使用快捷键Ctrl + K：时钟连续；或者快捷键Ctrl + T：时钟单步，从而查看程序的执行情况，如图2-8所示。
+&emsp;&emsp;使用快捷键`Ctrl + K`进入连续时钟执行模式，再次`Ctrl + K`则暂停执行；使用快捷键`Ctrl + T`进入单步时钟执行模式，此模式可方便地查看程序的执行过程；使用快捷键`Ctrl + R`复位执行。程序执行时，电路的信号将实时发生变化，如图2-8所示。
 
 <center><img src = "../assets/2-8.png"></center>
 <center>图2-8 程序执行</center>

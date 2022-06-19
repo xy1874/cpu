@@ -1,14 +1,14 @@
 # 测试机制说明
 
-&emsp;&emsp;请参照“附录”导入虚拟机文件，如果 **在组成原理实验中已经导入过虚拟机的，可跳过**。
-
-&emsp;&emsp;下载地址：
+&emsp;&emsp;测试环境及相关工具下载地址：
 
 - 虚拟机镜像：[vm.ova - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb)
 
 - MobaXTerm和VirtualBox：[虚拟机工具.zip - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf)
 
-## 0. 了解测试框架
+&emsp;&emsp;下载后，请参照本页后的“附录”导入虚拟机。
+
+## 1. 了解测试框架
 
 &emsp;&emsp;请在终端下输入命令：
 
@@ -57,11 +57,11 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 
 
 
-## 1. 添加自己的代码
+## 2. 添加自己的代码
 
 &emsp;&emsp;`mycpu`目录中包含了你实现的CPU，以及顶层模块对外的连线，你需要将自己实现的CPU代码复制到该目录下，模块的层次结构如下图所示：
 
-![image-20210704012532405](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704012532405.png)
+<center><img src = "https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704012532405.png" width = 500></center>
 
 &emsp;&emsp;需要注意的是：
 
@@ -105,7 +105,9 @@ endmodule
     
     **以上设置错误会导致Trace比对失败！**
 
-## 2. 运行测试
+
+
+## 3. 运行测试
 
 &emsp;&emsp;进入文件夹，输入命令：
 
@@ -117,7 +119,7 @@ make
 
 ![image-20210704012833242](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704012833242.png)
 
-### 2.1 运行单个测试
+### 3.1 运行单个测试
 
 &emsp;&emsp;如果你对你CPU没有充足的信心，你可以选择单个测试运行，所有的测试用例都位于`bin`文件夹下，输入命令
 
@@ -143,7 +145,7 @@ make run TEST=sltu
 
 &emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。
 
-### 2.2 打开波形
+### 3.2 打开波形
 
 &emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令
 
@@ -155,7 +157,7 @@ gtkwave auipc.vcd > /dev/null 2>&1 &
 
 ![image-20210704014403857](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704014403857.png)
 
-### 2.3 查看反汇编
+### 3.3 查看反汇编
 
 &emsp;&emsp;反汇编文件在`asm`文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察`auipc.dump`文件，可以找到出错点。
 
@@ -163,7 +165,7 @@ gtkwave auipc.vcd > /dev/null 2>&1 &
 
 &emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。
 
-### 2.4 批量运行测试
+### 3.4 批量运行测试
 
 &emsp;&emsp;如果你对你的实现有足够的信心，直接使用命令进行自动化测试。
 
@@ -184,15 +186,13 @@ python3 run_all_tests.py
 
 ## 附录：虚拟机使用
 
-### 导入虚拟机
-
-&emsp;&emsp;虚拟机镜像下载地址：
+### 1. 导入虚拟机
 
 &emsp;&emsp;推荐使用VirtualBox。下载完毕后，请在Virtualbox中导入：管理->导入虚拟电脑，选择对应OVF文件。
 
 ![image-20210704155051556](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704155051556.png)
 
-### 配置虚拟网卡
+### 2. 配置虚拟网卡
 
 &emsp;&emsp;VirtualBox中对于虚拟网卡，需要稍微配置一下才可以使用，具体的配置如下：
 
@@ -202,7 +202,7 @@ python3 run_all_tests.py
 
 ![image-20210704153948742](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704153948742.png)        
 
-### 使用MobaXTerm
+### 3. 使用MobaXTerm
 
 &emsp;&emsp;为了更好的使用体验，推荐使用MobaXTerm通过ssh连接到本地的虚拟机进行进一步的操作。压缩包里提供了MobaXTerm。
 

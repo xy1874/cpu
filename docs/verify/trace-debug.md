@@ -1,6 +1,6 @@
 &emsp;&emsp;在CPU下板测试中，如果数码管显示卡在某一个功能点，没有继续计数，一种方法是可以采用Trace来进一步定位错误点。
 
-- ***Step1***：将[download_test.zip](https://gitee.com/hitsz-cslab/organ/blob/2021-Summer/stupkt/download_test.zip)中的`start.bin`上传到Trace虚拟机的`cdp-test/bin`目录中；
+- ***Step1***：将[download_test.zip](https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip)中的`start.bin`上传到Trace虚拟机的`cdp-test/bin`目录中；
 
 - ***Step2***：找到`cdp-test/golden_model/include`目录下的cpu.h文件，将`#define MEM_PADDR_BITS 10`改成`#define MEM_PADDR_BITS 16`；
 
