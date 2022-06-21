@@ -1,5 +1,3 @@
-# 测试机制说明
-
 &emsp;&emsp;测试环境及相关工具下载地址：
 
 - 虚拟机镜像：[vm.ova - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb)
@@ -61,7 +59,7 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 
 &emsp;&emsp;`mycpu`目录中包含了你实现的CPU，以及顶层模块对外的连线，你需要将自己实现的CPU代码复制到该目录下，模块的层次结构如下图所示：
 
-<center><img src = "https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704012532405.png" width = 500></center>
+<center><img src = "../assets/trace-1.png" width = 500></center>
 
 &emsp;&emsp;需要注意的是：
 
@@ -117,7 +115,7 @@ make
 
 &emsp;&emsp;将会编译你的Verilog代码，生成可执行的仿真模型。
 
-![image-20210704012833242](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704012833242.png)
+![image-20210704012833242](assets/trace-2.png)
 
 ### 3.1 运行单个测试
 
@@ -135,13 +133,13 @@ ls bin
 make run TEST=sltu
 ```
 
-![image-20210704013056368](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704013056368.png)
+![image-20210704013056368](assets/trace-3.png)
 
 &emsp;&emsp;打印出Test Point Pass之后，就代表这条指令测试通过了。
 
 &emsp;&emsp;如果发生了错误，就会打印如下所示的信息：
 
-![image-20210704013210584](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704013210584.png)
+![image-20210704013210584](assets/trace-4.png)
 
 &emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。
 
@@ -155,13 +153,13 @@ gtkwave auipc.vcd > /dev/null 2>&1 &
 
 &emsp;&emsp;弹出波形窗口。（`auipc`替换成需要打开的文件名）
 
-![image-20210704014403857](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704014403857.png)
+![image-20210704014403857](assets/trace-5.png)
 
 ### 3.3 查看反汇编
 
 &emsp;&emsp;反汇编文件在`asm`文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察`auipc.dump`文件，可以找到出错点。
 
-![image-20210704013720885](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704013720885.png)
+![image-20210704013720885](assets/trace-6.png)
 
 &emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。
 
@@ -174,44 +172,10 @@ python3 run_all_tests.py
 ```
 
 !!! Warning
-    执行这条命令之前，需要保证之前已经`make`过了。
+    &emsp;&emsp;执行这条命令之前，需要保证之前已经`make`过了。
 
 &emsp;&emsp;在很长的滚屏之后，会出现一个测试报告，告诉你哪些测试通过，哪些测试不通过。所有测试点的波形文件都在`waveform`文件夹中，你可以打开对应的文件结合反汇编和在SUMMARY之前输出的报错信息进行调试。
 
-![image-20210704014045871](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704014045871.png)
+![image-20210704014045871](assets/trace-7.png)
 
-![image-20210704013913901](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704013913901.png)
-
-
-
-## 附录：虚拟机使用
-
-### 1. 导入虚拟机
-
-&emsp;&emsp;推荐使用VirtualBox。下载完毕后，请在Virtualbox中导入：管理->导入虚拟电脑，选择对应OVF文件。
-
-![image-20210704155051556](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704155051556.png)
-
-### 2. 配置虚拟网卡
-
-&emsp;&emsp;VirtualBox中对于虚拟网卡，需要稍微配置一下才可以使用，具体的配置如下：
-
-![image-20210704153913729](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704153913729.png)
-
-![image-20210704153926882](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704153926882.png)        
-
-![image-20210704153948742](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704153948742.png)        
-
-### 3. 使用MobaXTerm
-
-&emsp;&emsp;为了更好的使用体验，推荐使用MobaXTerm通过ssh连接到本地的虚拟机进行进一步的操作。压缩包里提供了MobaXTerm。
-
-&emsp;&emsp;在MobaXTerm中，点击左上角“会话”。
-
-&emsp;&emsp;在弹出窗口中，点击”SSH“，按如下内容填写（“远程主机”地址需要自己查询）。填写完毕后，点击“好 的”。输入虚拟机密码123456。
-
-![image-20210704155500960](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704155500960.png)
-
-&emsp;&emsp;连接完毕之后，虚拟机可最小化到后台，在命令行中进行操作。左侧可以与虚拟机的文件交互（上传、 下载），右侧可以输入命令。
-
-![image-20210704155702840](https://cdn.jsdelivr.net/gh/Bohan-hu/img/image-20210704155702840.png)
+![image-20210704013913901](assets/trace-8.png)

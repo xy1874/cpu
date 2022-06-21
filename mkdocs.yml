@@ -76,7 +76,8 @@ nav:
   #     - 分支预测（选）: lab3/4-predict.md
   #   - 实验步骤: lab3/5-step.md
   - Trace测试说明:
-    - Trace测试说明: trace.md
+    - 测试机制说明: trace/trace.md
+    - 附录：虚拟机使用: trace/vm.md
   - CPU的调试与下板验证:
     - 下板验证说明: verify/realtest.md
     - CPU调试方法:
