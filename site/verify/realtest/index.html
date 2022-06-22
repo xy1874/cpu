@@ -1138,8 +1138,8 @@
 <center>从解压的目录中添加已综合的DRAM IP核</center></p>
 <h2 id="3">3. 顶层模块端口定义</h2>
 <div class="highlight"><pre><span></span><code><span class="k">module</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">clk</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">rst_n</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">clk_i</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="n">rst_i</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">led0_en_o</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">led1_en_o</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">led2_en_o</span><span class="p">,</span><span class="w"></span>
@@ -1157,7 +1157,13 @@
 <span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">led_cg_o</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">wire</span><span class="w"> </span><span class="n">led_dp_o</span><span class="w"></span>
 <span class="p">);</span><span class="w"></span>
+
+<span class="kt">wire</span><span class="w"> </span><span class="n">rst_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">rst_i</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">注意 <img alt="🔫" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f52b.svg" title=":gun:" /></p>
+<p>&emsp;&emsp;板上的复位信号（按键开关<code>S6</code>，即<code>P20</code>引脚）默认输出低电平，按下时输出高电平，因此<code>rst_i</code>是高电平复位。</p>
+</div>
 <h2 id="4">4. 下板结果说明</h2>
 <p>&emsp;&emsp;每通过一个测试点，数码管显示的数值会加1，直至测试完毕。测试完毕时，数码管将以16进制形式显示通过测试的指令数 (例如，如果实现了单周期的35条指令并通过了测试，则数码管将显示0x23)。</p>
 <p>&emsp;&emsp;需要注意的是，对于测试不通过的情形，如果数码管显示的值停在n，则表示第n+1条指令的测试失败。测试失败时，可查看start.dump的测试代码以定位出错指令，并进行相应的调试。</p>

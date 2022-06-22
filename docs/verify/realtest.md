@@ -61,8 +61,8 @@ dram U_dram (
 
 ``` Verilog
 module top (
-    input  wire clk,
-    input  wire rst_n,
+    input  wire clk_i,
+    input  wire rst_i,
     output wire led0_en_o,
     output wire led1_en_o,
     output wire led2_en_o,
@@ -80,8 +80,12 @@ module top (
     output wire led_cg_o,
     output wire led_dp_o
 );
+
+wire rst_n = !rst_i;
 ```
 
+!!! warning "注意 :gun:"
+    &emsp;&emsp;板上的复位信号（按键开关`S6`，即`P20`引脚）默认输出低电平，按下时输出高电平，因此`rst_i`是高电平复位。
 
 
 ## 4. 下板结果说明
