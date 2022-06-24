@@ -2,8 +2,8 @@
 
 &emsp;&emsp;（2）根据给出的控制信号表示例，完成控制信号表，在数据通路图上添加控制信号，完成单周期CPU设计结构图;
 
-&emsp;&emsp;（3）划分模块，使用Verilog HDL描述实现各模块 (芯片型号：<font color=blue>**XC7A100TFGG484-1**</font>);
+&emsp;&emsp;（3）划分模块，新建`.v`源文件并使用Verilog HDL实现各模块 (芯片型号：<font color=blue>**XC7A100TFGG484-1**</font>);
 
-&emsp;&emsp;（4）编写仿真程序，测试设计正确性，至少完成2个模块的仿真程序，代码和截图加入实验报告;
+&emsp;&emsp;（4）编写仿真程序和使用Trace验证方法，测试设计的正确性;
 
-&emsp;&emsp;（5）设计优化。
+&emsp;&emsp;（5）下板调试及设计优化。
