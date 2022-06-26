@@ -1,10 +1,21 @@
-&emsp;&emsp;测试环境及相关工具下载地址：
+## 0. 关于实验环境
 
-- 虚拟机镜像：[vm.ova - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb)
+&emsp;&emsp;Trace测试使用Linux系统部署测试环境，我们提供了三种实验环境供同学们选择：
 
-- MobaXTerm和VirtualBox：[虚拟机工具.zip - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf)
+**（1）远程实验平台**
 
-&emsp;&emsp;下载后，请参照本页后的“附录”导入虚拟机。
+&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见[远程实验环境使用指南](remote_env.md)。
+
+!!! info 温馨提示
+    &emsp;&emsp;虽然我们已经做了一些方案保证远程环境的可靠性，但在某些特殊情况下，也不能确保不出故障，为安全起见，建议同学们将代码及时上传到git仓库或者下载到本地保存。
+
+**（2）本地虚拟机**
+  
+&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见[虚拟机使用指南](vm.md)。
+
+**（3）自行部署实验环境**
+
+&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见[实验环境部署指南](env_bymyself.md)。
 
 ## 1. 了解测试框架
 
@@ -12,10 +23,11 @@
 
 ``` bash
 cd ~
-git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
+git clone https://github.com/HITSZ-CDP/cdp-tests.git
+git checkout peri
 ```
 
-&emsp;&emsp;拉取测试框架代码。
+&emsp;&emsp;拉取测试框架代码，并切换至peri分支。
 
 ```
 .
@@ -107,9 +119,12 @@ endmodule
 
 ## 3. 运行测试
 
-&emsp;&emsp;进入文件夹，输入命令：
+&emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见[使用MobaXterm](remote_env.md#13-使用mobaxterm)，虚拟机的MobaXterm用法详见[使用MobaXTerm](vm.md#3-使用mobaxterm)）
+
+&emsp;&emsp;首先进入cdp-tests文件夹，输入命令：
 
 ``` bash
+cd cdp-tests
 make
 ```
 
@@ -147,6 +162,10 @@ make run TEST=sltu
 
 &emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令
 
+!!! warning 提示
+    &emsp;&emsp;如果你要通过VSCode工具自带的终端查看波形，你需要在你自己的电脑上安装vcxsrv，此外还需要在VSCode安装remote X11插件，安装完成后就可以查看波形了。
+    如果你用MobaXterm就不需要那么麻烦，直接输入命令就可以查看波形：）
+
 ``` bash
 gtkwave auipc.vcd > /dev/null 2>&1 &  
 ```
@@ -165,7 +184,9 @@ gtkwave auipc.vcd > /dev/null 2>&1 &
 
 ### 3.4 批量运行测试
 
-&emsp;&emsp;如果你对你的实现有足够的信心，直接使用命令进行自动化测试。
+&emsp;&emsp;如果你对你的实现有足够的信心，可以采用以下两种方式来自动化测试。
+
+**（1）使用python脚本自动测试**
 
 ``` bash
 python3 run_all_tests.py
@@ -179,3 +200,19 @@ python3 run_all_tests.py
 ![image-20210704014045871](assets/trace-7.png)
 
 ![image-20210704013913901](assets/trace-8.png)
+
+**（2）使用start测试程序自动测试**
+
+&emsp;&emsp;输入以下命令:
+
+``` bash
+make run TEST=start
+```
+
+如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
+
+![trace9](assets/trace-9.png)
+
+如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。
+
+![trace10](assets/trace-10.png)

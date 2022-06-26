@@ -1,3 +1,14 @@
+## 0. 下载虚拟机
+
+&emsp;&emsp;测试环境及相关工具下载地址：
+
+- 虚拟机镜像：[vm.ova - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb)
+
+- MobaXTerm和VirtualBox：[虚拟机工具.zip - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf)
+
+&emsp;&emsp;下载后，请参照本页后的“附录”导入虚拟机。
+
+
 ## 1. 导入虚拟机
 
 &emsp;&emsp;推荐使用VirtualBox。下载完毕后，请在Virtualbox中导入：管理->导入虚拟电脑，选择对应OVF文件。

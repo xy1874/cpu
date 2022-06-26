@@ -757,8 +757,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../../trace/remote_env/" class="md-nav__link">
+        附录1：远程平台使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../trace/vm/" class="md-nav__link">
-        附录：虚拟机使用
+        附录2：虚拟机使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trace/env_bymyself/" class="md-nav__link">
+        附录3：实验环境部署指南
       </a>
     </li>
   
@@ -973,23 +1001,9 @@
   <h1>方法1：利用Trace调试</h1>
 
 <p>&emsp;&emsp;在CPU下板测试中，如果数码管显示卡在某一个功能点，没有继续计数，一种方法是可以采用Trace来进一步定位错误点。</p>
-<ul>
-<li>
-<p><strong><em>Step1</em></strong>：将<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip">download_test.zip</a>中的<code>start.bin</code>上传到Trace虚拟机的<code>cdp-test/bin</code>目录中；</p>
-</li>
-<li>
-<p><strong><em>Step2</em></strong>：找到<code>cdp-test/golden_model/include</code>目录下的cpu.h文件，将<code>#define MEM_PADDR_BITS 10</code>改成<code>#define MEM_PADDR_BITS 16</code>；</p>
-</li>
-<li>
-<p><strong><em>Step3</em></strong>：找到<code>cdp-test/golden_model</code>目录下的emu.c文件，将<code>uint32_t memory[4096];</code>改成<code>uint32_t memory[4096 * 16];</code>；</p>
-</li>
-<li>
-<p><strong><em>Step4</em></strong>：将你自己的Verilog代码拷贝到<code>cdp-test/mycpu</code>目录；</p>
-</li>
-</ul>
 <div class="admonition ps">
 <p class="admonition-title">Ps</p>
-<p><strong>Trace测试时，DRAM地址不需要减去0x4000；上板测试时，DRAM地址才需要减去0x4000。</strong></p>
+<p><strong>Trace测试时，DRAM地址不需要减去0x4000；下板测试时，DRAM地址才需要减去0x4000。</strong></p>
 <div class="highlight"><pre><span></span><code><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">waddr_tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waddr</span><span class="p">;</span><span class="c1">// - 16&#39;h4000;</span>
 
 <span class="n">data_mem</span><span class="w"> </span><span class="n">dmem</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
@@ -1003,10 +1017,10 @@
 </div>
 <ul>
 <li>
-<p><strong><em>Step5</em></strong>：进入<code>cdp-test</code>目录，输入<code>make</code>命令以重新编译；</p>
+<p><strong><em>Step1</em></strong>：进入<code>cdp-test</code>目录，输入<code>make</code>命令以重新编译；</p>
 </li>
 <li>
-<p><strong><em>Step6</em></strong>：输入<code>make run TEST=start</code>以运行start测试。</p>
+<p><strong><em>Step2</em></strong>：输入<code>make run TEST=start</code>以运行start测试。</p>
 </li>
 </ul>
 <p>&emsp;&emsp;例如，某次测试时报错，<code>debug_wb_pc</code>显示了<code>0x000018f8</code>，如下图所示。</p>

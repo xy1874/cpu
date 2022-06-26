@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#0" class="md-skip">
           跳转至
         </a>
       
@@ -780,6 +780,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    0. 关于实验环境
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     1. 了解测试框架
   </a>
@@ -849,8 +856,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../remote_env/" class="md-nav__link">
+        附录1：远程平台使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../vm/" class="md-nav__link">
-        附录：虚拟机使用
+        附录2：虚拟机使用指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../env_bymyself/" class="md-nav__link">
+        附录3：实验环境部署指南
       </a>
     </li>
   
@@ -1045,6 +1080,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    0. 关于实验环境
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     1. 了解测试框架
   </a>
@@ -1115,22 +1157,25 @@
 
   <h1>测试机制说明</h1>
 
-<p>&emsp;&emsp;测试环境及相关工具下载地址：</p>
-<ul>
-<li>
-<p>虚拟机镜像：<a href="https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb">vm.ova - 飞书文档 (feishu.cn)</a></p>
-</li>
-<li>
-<p>MobaXTerm和VirtualBox：<a href="https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf">虚拟机工具.zip - 飞书文档 (feishu.cn)</a></p>
-</li>
-</ul>
-<p>&emsp;&emsp;下载后，请参照本页后的“附录”导入虚拟机。</p>
+<h2 id="0">0. 关于实验环境</h2>
+<p>&emsp;&emsp;Trace测试使用Linux系统部署测试环境，我们提供了三种实验环境供同学们选择：</p>
+<p><strong>（1）远程实验平台</strong></p>
+<p>&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见<a href="../remote_env/">远程实验环境使用指南</a>。</p>
+<div class="admonition info 温馨提示">
+<p class="admonition-title">Info</p>
+<p>&emsp;&emsp;虽然我们已经做了一些方案保证远程环境的可靠性，但在某些特殊情况下，也不能确保不出故障，为安全起见，建议同学们将代码及时上传到git仓库或者下载到本地保存。</p>
+</div>
+<p><strong>（2）本地虚拟机</strong></p>
+<p>&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见<a href="../vm/">虚拟机使用指南</a>。</p>
+<p><strong>（3）自行部署实验环境</strong></p>
+<p>&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见<a href="../env_bymyself/">实验环境部署指南</a>。</p>
 <h2 id="1">1. 了解测试框架</h2>
 <p>&emsp;&emsp;请在终端下输入命令：</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~
-git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
+git clone https://github.com/HITSZ-CDP/cdp-tests.git
+git checkout peri
 </code></pre></div>
-<p>&emsp;&emsp;拉取测试框架代码。</p>
+<p>&emsp;&emsp;拉取测试框架代码，并切换至peri分支。</p>
 <div class="highlight"><pre><span></span><code>.
 ├── bin（指令测试用例，用于初始化内存）
 │   ├── add.bin
@@ -1209,8 +1254,10 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 <p><strong>以上设置错误会导致Trace比对失败！</strong></p>
 </div>
 <h2 id="3">3. 运行测试</h2>
-<p>&emsp;&emsp;进入文件夹，输入命令：</p>
-<div class="highlight"><pre><span></span><code>make
+<p>&emsp;&emsp;推荐使用 <strong>MobaXterm运行测试</strong> （远程实验平台的MobaXterm用法详见<a href="../remote_env/#13-使用mobaxterm">使用MobaXterm</a>，虚拟机的MobaXterm用法详见<a href="../vm/#3-使用mobaxterm">使用MobaXTerm</a>）</p>
+<p>&emsp;&emsp;首先进入cdp-tests文件夹，输入命令：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> cdp-tests
+make
 </code></pre></div>
 <p>&emsp;&emsp;将会编译你的Verilog代码，生成可执行的仿真模型。</p>
 <p><img alt="image-20210704012833242" src="../assets/trace-2.png" /></p>
@@ -1229,6 +1276,11 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 <p>&emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。</p>
 <h3 id="32">3.2 打开波形</h3>
 <p>&emsp;&emsp;在执行完某个测试之后，所生成的波形会在<code>waveform</code>文件夹中，如果要查看<code>auipc</code>测试点的波形，进入<code>waveform</code>文件夹，输入命令</p>
+<div class="admonition warning 提示">
+<p class="admonition-title">Warning</p>
+<p>&emsp;&emsp;如果你要通过VSCode工具自带的终端查看波形，你需要在你自己的电脑上安装vcxsrv，此外还需要在VSCode安装remote X11插件，安装完成后就可以查看波形了。
+如果你用MobaXterm就不需要那么麻烦，直接输入命令就可以查看波形：）</p>
+</div>
 <div class="highlight"><pre><span></span><code>gtkwave auipc.vcd &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>  
 </code></pre></div>
 <p>&emsp;&emsp;弹出波形窗口。（<code>auipc</code>替换成需要打开的文件名）</p>
@@ -1238,7 +1290,8 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 <p><img alt="image-20210704013720885" src="../assets/trace-6.png" /></p>
 <p>&emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。</p>
 <h3 id="34">3.4 批量运行测试</h3>
-<p>&emsp;&emsp;如果你对你的实现有足够的信心，直接使用命令进行自动化测试。</p>
+<p>&emsp;&emsp;如果你对你的实现有足够的信心，可以采用以下两种方式来自动化测试。</p>
+<p><strong>（1）使用python脚本自动测试</strong></p>
 <div class="highlight"><pre><span></span><code>python3 run_all_tests.py
 </code></pre></div>
 <div class="admonition warning">
@@ -1248,6 +1301,14 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
 <p>&emsp;&emsp;在很长的滚屏之后，会出现一个测试报告，告诉你哪些测试通过，哪些测试不通过。所有测试点的波形文件都在<code>waveform</code>文件夹中，你可以打开对应的文件结合反汇编和在SUMMARY之前输出的报错信息进行调试。</p>
 <p><img alt="image-20210704014045871" src="../assets/trace-7.png" /></p>
 <p><img alt="image-20210704013913901" src="../assets/trace-8.png" /></p>
+<p><strong>（2）使用start测试程序自动测试</strong></p>
+<p>&emsp;&emsp;输入以下命令:</p>
+<div class="highlight"><pre><span></span><code>make run <span class="nv">TEST</span><span class="o">=</span>start
+</code></pre></div>
+<p>如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。</p>
+<p><img alt="trace9" src="../assets/trace-9.png" /></p>
+<p>如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。</p>
+<p><img alt="trace10" src="../assets/trace-10.png" /></p>
 
               
             </article>
@@ -1279,13 +1340,13 @@ git clone https://github.com/HITSZ-CDP-SU2021/cdp-tests.git
       
       
         
-        <a href="../vm/" class="md-footer__link md-footer__link--next" aria-label="下一页: 附录：虚拟机使用" rel="next">
+        <a href="../remote_env/" class="md-footer__link md-footer__link--next" aria-label="下一页: 附录1：远程平台使用指南" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              附录：虚拟机使用
+              附录1：远程平台使用指南
             </div>
           </div>
           <div class="md-footer__button md-icon">
