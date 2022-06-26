@@ -207,7 +207,7 @@ endmodule
 dram U_dram (
     .clk    (clk_i),            // input wire clka
     .a      (addr_i[15:2]),     // input wire [13:0] addra
-    .qspo   (rd_data_o),        // output wire [31:0] douta
+    .spo    (rd_data_o),        // output wire [31:0] douta
     .we     (memwr_i),          // input wire [0:0] wea
     .d      (wr_data_i)         // input wire [31:0] dina
 );
