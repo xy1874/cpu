@@ -1087,7 +1087,7 @@
 
   <h1>1 pipeline</h1>
 
-<p>&emsp;&emsp;流水线（Pipeline）技术是指在程序执行时，将多条指令的操作在时间上进行重叠，从而提高指令级并行度（Instruction-Level Parallelism，ILP）的一种技术手段。IBM在1961年推出的IBM 7030 Stretch超级计算机是世界上最早使用流水线技术的计算机。流水线技术现已广泛应用在现代处理器当中。</p>
+<p>&emsp;&emsp;流水线（Pipeline）技术是指在程序执行时，将多条指令的执行操作在时间上进行重叠，从而提高指令级并行度（Instruction-Level Parallelism，ILP）的一种技术手段。IBM在1961年推出的IBM 7030 Stretch超级计算机是世界上最早使用流水线技术的计算机。流水线技术现已广泛应用在现代处理器当中。</p>
 <p>&emsp;&emsp;流水线技术的基本原理是，在CPU中利用多个不同功能的电路单元组成一条指令处理流水线，然后将一条指令的执行过程切分成多个阶段，并由这些电路单元分别依次执行，一方面能够实现在一个时钟周期内同时执行多条指令，提高各电路单元的利用率，另一方面有利于提高CPU主频，从而提高CPU的运算速度。</p>
 <p>&emsp;&emsp;令<script type="math/tex">T_{non-Pipeline}</script>表示程序的非流水式执行时间，<script type="math/tex">T_{Pipeline}</script>表示程序的流水式执行时间，<script type="math/tex">N</script>表示流水线级数，则在理想情况下，流水线处理器的执行执行时间可用以下公式计算：</p>
 <p>

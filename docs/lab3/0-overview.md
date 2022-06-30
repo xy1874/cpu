@@ -2,7 +2,7 @@
 
 &emsp;&emsp;（1）理解流水线CPU工作过程；
 
-&emsp;&emsp;（2）熟悉miniRV-1指令集；
+&emsp;&emsp;（2）理解流水线冲突产生的原因及其解决方法；
 
 &emsp;&emsp;（3）掌握流水线CPU设计与实现方法。
 

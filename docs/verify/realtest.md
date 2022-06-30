@@ -37,7 +37,7 @@ dram U_dram (
 
 &emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。
 
-&emsp;&emsp;首先，从指导书网站[下载download_test.zip压缩包](https://gitee.com/hitsz-cslab/organ/blob/2021-Summer/stupkt/download_test.zip)文件并解压到无中文路径下。
+&emsp;&emsp;首先，从指导书网站[下载download_test.zip压缩包](https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip)文件并解压到无中文路径下。
 
 &emsp;&emsp;然后，备份原工程，按照上一节所述修改RTL代码，并删除已实例化的IROM和DRAM IP核。
 

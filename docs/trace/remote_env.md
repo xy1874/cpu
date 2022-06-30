@@ -1,17 +1,17 @@
 
 !!! warning 通知
-    严禁使用远程实验环境做与教学无关事宜，杜绝使用公共资源挖矿等，一经发现将严肃处理，感谢配合！
+    &emsp;&emsp;严禁使用远程实验环境做与教学无关事宜，杜绝使用公共资源挖矿等，一经发现将严肃处理，感谢配合！
 
 ## 0. 速查信息
 
 &emsp;&emsp;远程实验平台IP地址： **10.249.12.98** ，端口号： **6666**
 
 !!! info 提示
-    用户名和初始密码都是 **你的学号** ，出于安全考虑，建议你初次登录后修改初始密码。
+    &emsp;&emsp;用户名和初始密码都是 **你的学号** ，出于安全考虑，建议你初次登录后修改初始密码。
 
 &emsp;&emsp;远程实验平台共有8个计算节点，每一个计算节点都提供相同的服务，可能你每次登录的计算节点会不一样，但无须担心，你看到的文件都是一样的。
 
-![登录界面](assets/remote-1.png)
+<center><img src = "../assets/remote-1.png" width = 400></center>
 
 ## 1. 快速入门
 
@@ -37,7 +37,7 @@
 &emsp;&emsp;左侧边栏应该会多出一个这样的图标：![图标:](assets/icon.png)
 点击这个图标，选择SSH TARGETS右侧的`+`号：
 
-![增加host](assets/ssh_add_host.png)
+<center><img src = "../assets/ssh_add_host.png" width = 400></center>
 
 &emsp;&emsp;这会在屏幕上方中央弹出输入框，要求输入ssh指令。在这里输入`ssh 你的学号@计算节点IP -p 6666`，例如`ssh 200110101@10.249.11.143 -p 6666`就是学号为200110101的同学链接到远程实验平台，端口号为6666。
 
@@ -49,7 +49,7 @@
 
 &emsp;&emsp;现在，SSH Target添加成功，左侧SSH Target中应该增加了一栏。将鼠标移上去，点击这一栏右侧的小图标：
 
-![连接1](assets/connect1.png)
+<center><img src = "../assets/connect1.png" width = 320></center>
 
 &emsp;&emsp;这会打开一个新的VS Code窗口。新打开的窗口会要求你选择目标机器的平台，选择Linux，按下回车：
 
@@ -79,7 +79,7 @@ passwd
 
 &emsp;&emsp;此时，它会要求你输入旧密码。旧密码（即默认密码）为你的学号。完成后回车。随后，它会要求你输入新密码，并进行确认。
 
-![change password](assets/passwd.png)
+<center><img src = "../assets/passwd.png" width = 350></center>
 
 ### 1.3 下载trace测试包
 
@@ -133,7 +133,7 @@ git checkout peri
 
 &emsp;&emsp;打开MobaXterm，单击打开工具Session（位于左上角）选择New sessions打开新建窗口，选择SSH，输入远程服务器的IP地址、登陆用户名及端口（ **端口号：6666** ），点击OK。
 
-![mobaxterm1](assets/mobaxterm-1.png)
+<center><img src = "../assets/mobaxterm-1.png" width = 600></center>
 
 &emsp;&emsp;在弹出的对话框中，选择SSH
 
@@ -219,7 +219,7 @@ vi ~/.ssh/authorized_keys
 
 &emsp;&emsp;确保你输入的是正常的半角英文字符与英文标点符号，如图所示：
 
-![全半角](assets/char.png)
+<center><img src = "../assets/char.png" width = 600></center>
 
 &emsp;&emsp;这可以通过一起按下shift+空格，或者切换到英文输入法解决。**永远不要在中文输入法下输入命令！**
 
