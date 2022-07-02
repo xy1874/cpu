@@ -73,8 +73,8 @@ nav:
   #     - 流水线概述: lab3/1-pipeline.md
   #     - 理想流水线: lab3/2-perfectpl.md
   #     - 数据相关与流水线冒险: lab3/3-hazard.md
-  #     - 数据冒险的处理: lab3/4-handleHazard.md
-  #     - 分支预测（选）: lab3/5-predict.md
+  #     - 数据冒险的处理: lab3/4-handleDH.md
+  #     - 控制冒险的处理: lab3/5-handleCH.md
   #   - 实验步骤: lab3/6-step.md
   - Trace测试说明:
     - 测试机制说明: trace/trace.md

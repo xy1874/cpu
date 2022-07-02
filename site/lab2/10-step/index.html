@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -704,9 +709,38 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          实验步骤
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         实验步骤
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    · 添加约束文件
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -984,6 +1018,21 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    · 添加约束文件
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1002,7 +1051,33 @@
 <p>&emsp;&emsp;（2）根据给出的控制信号表示例，完成控制信号表，在数据通路图上添加控制信号，完成单周期CPU设计结构图;</p>
 <p>&emsp;&emsp;（3）划分模块，新建<code>.v</code>源文件并使用Verilog HDL实现各模块 (芯片型号：<font color=blue><strong>XC7A100TFGG484-1</strong></font>);</p>
 <p>&emsp;&emsp;（4）编写仿真程序和使用Trace验证方法，测试设计的正确性;</p>
-<p>&emsp;&emsp;（5）下板调试及设计优化。</p>
+<p>&emsp;&emsp;（5）设计总线桥和I/O接口（必做外设接口：数码管、拨码开关、按键开关、LED）；</p>
+<p>&emsp;&emsp;（6）添加约束文件，下板调试及设计优化。</p>
+<h2 id="_1"><strong>·</strong> 添加约束文件</h2>
+<p>&emsp;&emsp;下板前，需编写引脚约束文件（.xdc），以将顶层模块的接口信号与Minisys开发板上的FPGA芯片引脚连接起来。</p>
+<p>&emsp;&emsp;在Vivado中，右键点击<code>Project Manager</code>下面<code>Sources</code>中的<code>Constraints</code>，在弹出的菜单中选择<code>Add Source…</code>，并按照图11-1所示的设置点击<code>Next</code>。</p>
+<p><center><img src="../assets/11-1.png"></center>
+<center>图11-1 添加或创建约束文件</center></p>
+<p>&emsp;&emsp;约束文件初始为空，其基本语法如图11-2所示。</p>
+<p><div class="highlight"><pre><span></span><code>1| # 语法格式为set_property PACKAGE_PIN (pin location) [get_ports (port name)]
+2| set_property PACKAGE_PIN P5 [get_ports sw_i[0]]
+3| set_property PACKAGE_PIN F6 [get_ports led_o[0]]
+4|
+5| # 语法格式为set_property IOSTANDARD (level:LVDS,LVCMOS18,LVCMOS33 etc.) [get_ports (port name)]
+6| set_property IOSTANDARD LVCMOS33 [get_ports sw_i[0]]
+7| set_property IOSTANDARD LVCMOS33 [get_ports led_o[0]]
+</code></pre></div>
+<center>图11-2 约束文件基本语法</center></p>
+<p>&emsp;&emsp;约束文件主要包含两部分内容，第一部分是信号和FPGA芯片引脚的对应关系，比如第1行是将FPGA芯片的<code>P5</code>引脚和信号<code>sw_i[0]</code>信号绑定。第二部分是引脚的电气属性设置，<code>IOSTANDARD</code>全部设置成<code>LVCMOS33</code>，表示该IO电平标准是<code>CMOS 3.3v</code>（即高电平对应3.3V，低电平对应0.0V）。</p>
+<div class="admonition info">
+<p class="admonition-title">PS <img alt="📣" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f4e3.svg" title=":mega:" /></p>
+<p>&emsp;&emsp;图11-2所示的引脚约束代码也可写成：</p>
+<div class="highlight"><pre><span></span><code>1| set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN P5 } [get_ports sw_i[0]]
+2| set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN F6 } [get_ports led_o[0]]
+</code></pre></div>
+</div>
+<p>&emsp;&emsp;引脚分配既可以参考<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/Minisys%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf">Minisys开发板手册</a>，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“<code>SW0-W4</code>”，表示拨码开关SW0对应FPGA的<code>W4</code>引脚。</p>
+<p>&emsp;&emsp;约束文件除了对物理引脚进行约束，还可以对时序进行约束。感兴趣的同学们可以阅读参考资料《<a href="http://xilinx.eetrend.com/blog/2019/100018252.html">约束功能概述</a>》。</p>
 
               
             </article>

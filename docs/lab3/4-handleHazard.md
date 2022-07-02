@@ -4,7 +4,7 @@
 
 &emsp;&emsp;下面以图4-1为例介绍RAW冒险三种情形的检测方法。
 
-<center><img src = "../assets/4-1.png" width = 600></center>
+<center><img src = "../assets/4-1.png" width = 530></center>
 <center>图4-1 RAW数据冒险的三种情形</center>
 
 ### 1.1 RAW情形A检测
@@ -13,19 +13,18 @@
 
 &emsp;&emsp;流水线CPU中，与情形A有关的数据通路如图4-2所示。
 
-<center><img src = "../assets/4-2.png" width = 700></center>
+<center><img src = "../assets/4-2.png" width = 600></center>
 <center>图4-2 RAW情形A有关的流水线数据通路</center>
 
 &emsp;&emsp;分析图4-2所示的数据通路，不难发现RAW情形A的判断方法/检测逻辑如下：
 
 <center>
-( REG~**EX/MEM**~.RD == ID.RS1 ) || ( REG~**EX/MEM**~.RD == ID.RS2 )
+( REG~**ID/EX**~.RD == ID.RS1 ) || ( REG~**ID/EX**~.RD == ID.RS2 )
 </center>
 
-&emsp;&emsp;其中，REG~EX/MEM~表示执行阶段和访存阶段之间的流水线寄存器，下同；REG~EX/MEM~.RD表示EX/MEM流水线寄存器的RD字段，观察图4-2可知该字段暂存的是从ID级传递而来的目标寄存器的寄存器号。
+&emsp;&emsp;其中，REG~ID/EX~表示译码阶段和执行阶段之间的流水线寄存器，下同；REG~ID/EX~.RD表示ID/EX流水线寄存器的RD字段，观察图4-2可知该字段暂存的是从ID级传递而来的目标寄存器的寄存器号。
 
-!!! info "补充说明 :mega:"
-    &emsp;&emsp;对于图4-1中的情形A，有REG~EX/MEM~.RD == ID.RS1 == `5'd19`。
+&emsp;&emsp;显然，对于图4-1中的情形A，有REG~ID/EX~.RD == ID.RS1 == `5'd19`。
 
 ### 1.2 RAW情形B检测
 
@@ -33,17 +32,16 @@
 
 &emsp;&emsp;流水线CPU中，与情形B有关的数据通路如图4-3所示。
 
-<center><img src = "../assets/4-3.png" width = 700></center>
+<center><img src = "../assets/4-3.png" width = 600></center>
 <center>图4-3 RAW情形B有关的流水线数据通路</center>
 
 &emsp;&emsp;分析图4-3所示的数据通路，不难发现RAW情形B的判断方法/检测逻辑如下：
 
 <center>
-( REG~**MEM/WB**~.RD == ID.RS1 ) || ( REG~**MEM/WB**~.RD == ID.RS2 )
+( REG~**EX/MEM**~.RD == ID.RS1 ) || ( REG~**EX/MEM**~.RD == ID.RS2 )
 </center>
 
-!!! info "补充说明 :mega:"
-    &emsp;&emsp;对于图4-1中的情形B，有REG~MEM/WB~.RD == ID.RS1 == `5'd19`。
+&emsp;&emsp;显然，对于图4-1中的情形B，有REG~EX/MEM~.RD == ID.RS1 == `5'd19`。
 
 ### 1.3 RAW情形C检测
 
@@ -51,19 +49,16 @@
 
 &emsp;&emsp;流水线CPU中，与情形C有关的数据通路如图4-4所示。
 
-<center><img src = "../assets/4-4.png" width = 700></center>
+<center><img src = "../assets/4-4.png" width = 690></center>
 <center>图4-4 RAW情形C有关的流水线数据通路</center>
 
 &emsp;&emsp;分析图4-4所示的数据通路，不难发现RAW情形C的判断方法/检测逻辑如下：
 
 <center>
-( WB.RD == ID.RS1 ) || ( WB.RD == ID.RS2 )
+( REG~**MEM/WB**~.RD == ID.RS1 ) || ( REG~**MEM/WB**~.RD == ID.RS2 )
 </center>
 
-&emsp;&emsp;其中，WB.RD表示写回阶段的目标寄存器的寄存器号。
-
-!!! info "补充说明 :mega:"
-    &emsp;&emsp;对于图4-1中的情形C，有WB.RD == ID.RS1 == `5'd19`。
+&emsp;&emsp;显然，对于图4-1中的情形C，有REG~MEM/WB~.RD == ID.RS1 == `5'd19`。
 
 !!! hint "参考实现 :sparkles:"
     &emsp;&emsp;对于RAW情形C，给出检测逻辑的参考实现代码：
@@ -88,10 +83,13 @@
 
 ### 2.1 流水线暂停
 
-&emsp;&emsp;即在流水线中插入暂停周期，如图3-15所示。
+&emsp;&emsp;流水线发生数据冒险时，最朴素的解决方法就是暂停后续的指令，等待前面的指令执行完成，再重新让后续的指令执行。
 
-<center><img src = "../assets/3-15.png" width = 600></center>
-<center>图3-15 流水线暂停</center>
+!!! example "举栗说明 :chestnut:"
+    &emsp;&emsp;对于如图4-1所示的RAW情形A，可让第二条指令暂停3个时钟周期，等待第一条指令写回后，再继续执行，如图4-6所示。
+
+    <center><img src = "../assets/4-6.png" width = 500></center>
+    <center>图4-6 流水线暂停</center>
 
 - 实现方法：  
 1）保持取值地址PC的值不变；  
