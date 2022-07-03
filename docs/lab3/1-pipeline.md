@@ -131,15 +131,15 @@ $$T_{Pipeline} = \frac{T_{non-Pipeline}}{N}$$
 &emsp;&emsp;IF/ID流水寄存器的参考RTL实现如图1-5所示。
 
 ``` Verilog
-always @ (posedge clk or negedge rst_n) begin
-    if (~rst_n) id_pc <= 32'h0;
-    else        id_pc <= if_pc;
-end
-
-always @ (posedge clk or negedge rst_n) begin
-    if (~rst_n) id_inst <= 32'h0;
-    else        id_inst <= if_inst;
-end
+1|    always @ (posedge clk or negedge rst_n) begin
+2|        if (~rst_n) id_pc <= 32'h0;
+3|        else        id_pc <= if_pc;
+4|    end
+5| 
+6|    always @ (posedge clk or negedge rst_n) begin
+7|        if (~rst_n) id_inst <= 32'h0;
+8|        else        id_inst <= if_inst;
+9|    end
 ```
 
 <center>图1-5 IF/ID流水寄存器参考实现</center>

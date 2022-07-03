@@ -67,7 +67,7 @@
 !!! question "思考题 :triangular_ruler:"
     &emsp;&emsp;RISC经典五级流水“IF-ID-EX-MEM-WB”是否存在WAR和WAW的数据冒险？为什么？
 
-&emsp;&emsp;数据冒险可通过[流水线暂停](../4-handleHazard/#21)、[数据前推](../4-handleHazard/#22)或[乱序执行](../4-handleHazard/#23)等技术解决。
+&emsp;&emsp;数据冒险可通过[流水线暂停](../4-handleDH/#21)、[数据前递](../4-handleDH/#22)或[乱序执行](../4-handleDH/#23)等技术解决。
 
 ### 2.3 控制冒险
 
@@ -79,4 +79,4 @@
     <center><img src = "../assets/3-2.png" width = 550></center>
     <center>图3-2 控制冒险示意图</center>
 
-&emsp;&emsp;控制冒险可通过[流水线暂停](../4-handleHazard/#21)或引入[分支预测](../5-predict/)机制来解决，详见后续章节。
+&emsp;&emsp;控制冒险可通过[流水线暂停](../4-handleDH/#21)或引入[分支预测](../5-handleCH/)机制等方法解决。

@@ -13,7 +13,7 @@
     
     
       
-        <title>5 predict - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
+        <title>控制冒险的处理 - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5 predict
+              控制冒险的处理
             
           </span>
         </div>
@@ -209,6 +209,24 @@
     <li class="md-tabs__item">
       <a href="../../lab2/0-overview/" class="md-tabs__link">
         实验2：单周期CPU设计
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0-overview/" class="md-tabs__link md-tabs__link--active">
+        实验3：流水线CPU设计
       </a>
     </li>
   
@@ -718,23 +736,270 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
       
         <label class="md-nav__link" for="__nav_4">
+          实验3：流水线CPU设计
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验3：流水线CPU设计" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          实验3：流水线CPU设计
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0-overview/" class="md-nav__link">
+        实验概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          实验原理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验原理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          实验原理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-pipeline/" class="md-nav__link">
+        流水线概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-perfectpl/" class="md-nav__link">
+        理想流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-hazard/" class="md-nav__link">
+        数据相关与流水线冒险
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-handleDH/" class="md-nav__link">
+        数据冒险的处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          控制冒险的处理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        控制冒险的处理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 静态预测方法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 动态预测方法
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 动态预测方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-bht" class="md-nav__link">
+    2.1 基于BHT的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 基于全局历史的分支预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 基于局部历史的分支预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 分支预测的实现
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
           Trace测试说明
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Trace测试说明" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Trace测试说明
         </label>
@@ -813,18 +1078,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           CPU的调试与下板验证
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="CPU的调试与下板验证" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           CPU的调试与下板验证
         </label>
@@ -853,18 +1118,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_2">
+        <label class="md-nav__link" for="__nav_6_2">
           CPU调试方法
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="CPU调试方法" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_2">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
           CPU调试方法
         </label>
@@ -922,18 +1187,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_7">
           Verilog代码规范
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Verilog代码规范" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Verilog代码规范
         </label>
@@ -1024,6 +1289,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 分支预测的实现
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1038,43 +1310,60 @@
                 
 
 
-  <h1>5 predict</h1>
+  <h1>控制冒险的处理</h1>
 
+<p>&emsp;&emsp;控制冒险最简单的解决方法是，在译码阶段检测到当前执行的是分支指令时，采用上一小节中的<a href="../4-handleDH/#21">流水线暂停</a>方法，将分支指令后续的指令暂时冻结，直到分支跳转的方向以及目标地址被确定。此法的优点是其简单性，缺点是造成了流水线性能的损失。</p>
+<p>&emsp;&emsp;为了尽可能保持流水线的性能，一种思路是参考乱序执行的做法，在分支指令后方插入若干条无关指令，使得流水线的所有阶段始终处于工作状态，被插入的指令称为分支延迟槽指令；另一种思路是在分支结果产生之前，预测其可能的跳转方向和跳转目标地址，然后提前执行分支目标处的指令。</p>
+<p>&emsp;&emsp;分支延迟槽一定程度上降低了汇编程序的可读性。此外，随着流水线深度的增加，延迟槽的实现也变得更加复杂，但其带来的性能提升较为有限。为了简化设计和节省芯片面积，RISC-V ISA没有设置分支延迟槽，而是直接通过分支预测解决控制冒险问题。</p>
 <h2 id="1">1. 静态预测方法</h2>
 <p>&emsp;&emsp;最简单的静态分支预测方法是预测分支指令总是跳转，或预测总是不跳转。显然，使用这种方法对不同的程序进行分支预测时，预测准确率会有很大差异。一种改进的预测方法是若分支指令是往回跳的就预测跳转，否则预测不跳转，这种方法对单循环的预测效果较好。</p>
 <p>&emsp;&emsp;静态分支预测的优点是实现简单、硬件开销较小、预测速度较快，但预测准确度相对较低，不能满足通用处理器对性能日益增长的需求。</p>
 <h2 id="2">2. 动态预测方法</h2>
 <p>&emsp;&emsp;动态分支预测根据分支指令的过去表现来预测其将来的行为。如果分支行为发生变化，那么分支预测的结果也相应地发生改变。因此，动态分支预测与静态分支预测相比具有更好的预测准确率和适应性。</p>
 <h3 id="21-bht">2.1 基于BHT的分支预测</h3>
-<p>&emsp;&emsp;基于BHT（Branch History Table）的分支预测方法使用分支历史表来记录分支指令的历史行为。BHT的基础结构如图3-21所示。</p>
-<p><center><img src = "../assets/3-21.png" width = 350></center>
-<center>图3-21 基础BHT的结构</center></p>
+<p>&emsp;&emsp;基于BHT（Branch History Table）的分支预测方法使用分支历史表来记录分支指令的历史行为。BHT的基础结构如图5-1所示。</p>
+<p><center><img src = "../assets/5-1.png" width = 320></center>
+<center>图5-1 基础BHT的结构</center></p>
 <p>&emsp;&emsp;其中，Tag字段类似于Cache的Tag，是指令地址的一部分；分支历史由若干个2bit饱和计数器组成。预测时，取分支指令的地址去查BHT的Tag字段，然后根据BHT当前行的分支历史，对分支的跳转方向进行预测。如果BHT只记录各分支指令最近1次的分支历史，则只需使用1bit的饱和计数器。理论上，可使用任意位宽的饱和计数器来记录分支历史。有研究表明，2bit饱和计数器的预测性能与更高位宽的预测性能差不多。因此在实践中，通常使用2bit饱和计数器。</p>
-<p>&emsp;&emsp;基于2bit饱和计数器进行分支预测的原理如图3-22所示。</p>
-<p><center><img src = "../assets/3-22.png" width = 450></center>
-<center>图3-22 基于2bit饱和计数器的分支预测</center></p>
-<p>&emsp;&emsp;完整的分支预测过程包含预测和更新2个步骤。预测时，用分支指令的地址查BHT，获得相应的饱和计数器值。若饱和计数器的最高位为1，预测分支跳转，否则预测分支不跳转。当分支指令的实际跳转方向被确定时，不管预测是否正确，都根据图3-22对BHT中的饱和计数器进行更新，从而达到动态调整分支预测结果的目的。</p>
+<p>&emsp;&emsp;基于2bit饱和计数器进行分支预测的原理如图5-2所示。</p>
+<p><center><img src = "../assets/5-2.png" width = 440></center>
+<center>图5-2 基于2bit饱和计数器的分支预测</center></p>
+<p>&emsp;&emsp;完整的分支预测过程包含预测和更新2个步骤。预测时，用分支指令的地址查BHT，获得相应的饱和计数器值。若饱和计数器的最高位为1，预测分支跳转，否则预测分支不跳转。当分支指令的实际跳转方向被确定时，不管预测是否正确，都根据图5-2对BHT中的饱和计数器进行更新，从而达到动态调整分支预测结果的目的。</p>
 <h3 id="22">2.2 基于全局历史的分支预测</h3>
 <p>&emsp;&emsp;基于BHT的分支预测方法忽视了分支指令之间的关联性。为此，基于全局历史的分支预测方法在BHT的基础上增加了GHR（Global History Register，全局历史寄存器）来将所有分支指令关联起来。</p>
 <p>&emsp;&emsp;基于全局历史的分支预测方法使用一个k比特的GHR来记录所有最近k条分支指令的历史跳转方向，并使用PHT（Pattern History Table，模式历史表）来记录各分支指令的分支历史。其中，PHT的结构类似于BHT。</p>
-<p>&emsp;&emsp;预测时，首先将分支指令的地址和GHR进行异或，再用异或操作的结果来查PHT，然后根据PHT当前行的分支历史和分支目标地址，对该分支指令的分支跳转方向和分支目标地址进行预测，如图3-23所示。</p>
-<p><center><img src = "../assets/3-23.png" width = 520></center>
-<center>图3-23 基于全局历史的分支预测</center></p>
+<p>&emsp;&emsp;预测时，首先将分支指令的地址和GHR进行异或，再用异或操作的结果来查PHT，然后根据PHT当前行的分支历史和分支目标地址，对该分支指令的分支跳转方向和分支目标地址进行预测，如图5-3所示。</p>
+<p><center><img src = "../assets/5-3.png" width = 500></center>
+<center>图5-3 基于全局历史的分支预测</center></p>
 <p>&emsp;&emsp;当分支指令的实际跳转行为被确定时，GHR通过移位的方式进行更新——若指令跳转，则GHR = (GHR &lt;&lt; 1) | 1，否则GHR = (GHR &lt;&lt; 1) | 0。</p>
 <h3 id="23">2.3 基于局部历史的分支预测</h3>
 <p>&emsp;&emsp;基于全局历史的分支预测方法将所有分支指令都关联到一起。然而事实上，并非所有的分支指令都具有关联性。为此，基于局部历史的分支预测方法使用LHT（Local History Table，局部历史表）来代替全局历史预测中的GHR。</p>
 <p>&emsp;&emsp;LHT一般具有64条记录，每条记录均包含Tag和局部转移历史2个字段。其中，Tag字段是分支指令地址的一部分，局部转移历史字段则是k比特的移位寄存器，其作用等同于GHR。</p>
-<p>&emsp;&emsp;预测时，首先用分支指令的地址查LHT，得到分支指令的局部转移历史LHT[i]；然后将分支指令的地址和LHT[i]进行异或，再用异或操作的结果来查PHT；最后根据PHT当前行的分支历史和分支目标地址，对该分支指令的分支跳转方向和分支目标地址进行预测，如图3-24所示。</p>
-<p><center><img src = "../assets/3-24.png" width = 650></center>
-<center>图3-24 基于局部历史的分支预测</center></p>
+<p>&emsp;&emsp;预测时，首先用分支指令的地址查LHT，得到分支指令的局部转移历史LHT[i]；然后将分支指令的地址和LHT[i]进行异或，再用异或操作的结果来查PHT；最后根据PHT当前行的分支历史和分支目标地址，对该分支指令的分支跳转方向和分支目标地址进行预测，如图5-4所示。</p>
+<p><center><img src = "../assets/5-4.png" width = 600></center>
+<center>图5-4 基于局部历史的分支预测</center></p>
 <p>&emsp;&emsp;当分支指令的实际跳转行为被确定时，LHT[i]和GHR一样，也通过移位的方式进行更新——若指令跳转，则LHT[i] = (LHT[i] &lt;&lt; 1) | 1，否则LHT[i] = (LHT[i] &lt;&lt; 1) | 0。</p>
-<p>&emsp;&emsp;添加了数据分支预测的数据通路框图如图3-25所示：</p>
-<p><center><img src = "../assets/3-25.png"></center>
-<center>图3-25 增加分支预测的数据流图</center></p>
-<ul>
-<li>RTL实现（IF/ID流水寄存器Flush操作）</li>
-</ul>
-<p><center><img src = "../assets/rtl5.png" width = 500></center></p>
+<h2 id="3">3. 分支预测的实现</h2>
+<p>&emsp;&emsp;CPU执行指令的过程中，检测到当前的指令是分支指令后，对分支结果进行预测，并根据预测结果继续后续的取指操作。需要注意的是，当分支预测失败时，需要清空分支指令之后的流水线中的指令，并修改PC以重新取指。</p>
+<p>&emsp;&emsp;添加了分支预测功能的流水线CPU数据通路形如如图5-5所示。</p>
+<p><center><img src = "../assets/5-5.png"></center>
+<center>图5-5 支持分支预测的流水线CPU数据通路</center></p>
+<p>&emsp;&emsp;分支指令在执行阶段即可得出分支结果。因此，分支失败时，最多只需清空执行阶段之前的流水级。所谓清空流水级，就是把相应的相应的寄存器清零，如图5-6所示。</p>
+<p><div class="highlight"><pre><span></span><code><span class="w"> </span><span class="mh">1</span><span class="o">|</span><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w"> </span><span class="mh">2</span><span class="o">|</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="mh">3</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flush_pipeline</span><span class="p">)</span><span class="w"> </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="mh">4</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w">                     </span><span class="p">......</span><span class="w"></span>
+<span class="w"> </span><span class="mh">5</span><span class="o">|</span><span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="w"> </span><span class="mh">6</span><span class="o">|</span><span class="w"></span>
+<span class="w"> </span><span class="mh">7</span><span class="o">|</span><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="w"> </span><span class="mh">8</span><span class="o">|</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="mh">9</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flush_pipeline</span><span class="p">)</span><span class="w"> </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">id_inst</span><span class="p">;</span><span class="w"></span>
+<span class="mh">10</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w">                     </span><span class="p">......</span><span class="w"></span>
+<span class="mh">11</span><span class="o">|</span><span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="mh">12</span><span class="o">|</span><span class="w">    </span>
+<span class="mh">13</span><span class="o">|</span><span class="w">    </span><span class="p">......</span><span class="w"></span>
+</code></pre></div>
+<center>图5-6 清空IF/ID寄存器的RTL参考实现</center></p>
 
               
             </article>
@@ -1085,6 +1374,42 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../4-handleDH/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 数据冒险的处理" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              数据冒险的处理
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../6-step/" class="md-footer__link md-footer__link--next" aria-label="下一页: 实验步骤" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              实验步骤
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

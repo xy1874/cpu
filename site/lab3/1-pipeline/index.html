@@ -13,7 +13,7 @@
     
     
       
-        <title>1 pipeline - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
+        <title>流水线概述 - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1 pipeline
+              流水线概述
             
           </span>
         </div>
@@ -209,6 +209,24 @@
     <li class="md-tabs__item">
       <a href="../../lab2/0-overview/" class="md-tabs__link">
         实验2：单周期CPU设计
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0-overview/" class="md-tabs__link md-tabs__link--active">
+        实验3：流水线CPU设计
       </a>
     </li>
   
@@ -718,23 +736,310 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
       
         <label class="md-nav__link" for="__nav_4">
+          实验3：流水线CPU设计
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验3：流水线CPU设计" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          实验3：流水线CPU设计
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0-overview/" class="md-nav__link">
+        实验概述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          实验原理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="实验原理" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          实验原理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          流水线概述
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        流水线概述
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 流水线划分
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 流水线划分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 流水级的划分原则
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 流水级的划分原则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    1.1.1 按功能划分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    1.1.2 按延时划分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    1.1.3 按位宽划分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 流水线实例
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 流水线实例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-risc" class="md-nav__link">
+    1.2.1 RISC经典五级流水线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-arm10" class="md-nav__link">
+    1.2.2 ARM10六级流水线
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-arm11" class="md-nav__link">
+    1.2.3 ARM11八级流水线
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 流水线的段寄存器
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-perfectpl/" class="md-nav__link">
+        理想流水线
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-hazard/" class="md-nav__link">
+        数据相关与流水线冒险
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-handleDH/" class="md-nav__link">
+        数据冒险的处理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-handleCH/" class="md-nav__link">
+        控制冒险的处理
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-step/" class="md-nav__link">
+        实验步骤
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
           Trace测试说明
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Trace测试说明" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_5">
           <span class="md-nav__icon md-icon"></span>
           Trace测试说明
         </label>
@@ -813,18 +1118,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           CPU的调试与下板验证
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="CPU的调试与下板验证" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           CPU的调试与下板验证
         </label>
@@ -853,18 +1158,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_2">
+        <label class="md-nav__link" for="__nav_6_2">
           CPU调试方法
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="CPU调试方法" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_2">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
           CPU调试方法
         </label>
@@ -922,18 +1227,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_6">
+        <label class="md-nav__link" for="__nav_7">
           Verilog代码规范
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Verilog代码规范" data-md-level="1">
-        <label class="md-nav__title" for="__nav_6">
+        <label class="md-nav__title" for="__nav_7">
           <span class="md-nav__icon md-icon"></span>
           Verilog代码规范
         </label>
@@ -1085,7 +1390,7 @@
                 
 
 
-  <h1>1 pipeline</h1>
+  <h1>流水线概述</h1>
 
 <p>&emsp;&emsp;流水线（Pipeline）技术是指在程序执行时，将多条指令的执行操作在时间上进行重叠，从而提高指令级并行度（Instruction-Level Parallelism，ILP）的一种技术手段。IBM在1961年推出的IBM 7030 Stretch超级计算机是世界上最早使用流水线技术的计算机。流水线技术现已广泛应用在现代处理器当中。</p>
 <p>&emsp;&emsp;流水线技术的基本原理是，在CPU中利用多个不同功能的电路单元组成一条指令处理流水线，然后将一条指令的执行过程切分成多个阶段，并由这些电路单元分别依次执行，一方面能够实现在一个时钟周期内同时执行多条指令，提高各电路单元的利用率，另一方面有利于提高CPU主频，从而提高CPU的运算速度。</p>
@@ -1220,15 +1525,15 @@
 <p><center><img src = "../assets/1-4.png" width = 110></center>
 <center>图1-4 IF/ID流水寄存器</center></p>
 <p>&emsp;&emsp;IF/ID流水寄存器的参考RTL实现如图1-5所示。</p>
-<div class="highlight"><pre><span></span><code><span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="p">(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w">        </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">if_pc</span><span class="p">;</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-
-<span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="p">(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w">        </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">if_inst</span><span class="p">;</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="mh">1</span><span class="o">|</span><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="p">(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="mh">2</span><span class="o">|</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
+<span class="mh">3</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w">        </span><span class="n">id_pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">if_pc</span><span class="p">;</span><span class="w"></span>
+<span class="mh">4</span><span class="o">|</span><span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="mh">5</span><span class="o">|</span><span class="w"> </span>
+<span class="mh">6</span><span class="o">|</span><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@</span><span class="w"> </span><span class="p">(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span><span class="w"></span>
+<span class="mh">7</span><span class="o">|</span><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">32&#39;h0</span><span class="p">;</span><span class="w"></span>
+<span class="mh">8</span><span class="o">|</span><span class="w">        </span><span class="k">else</span><span class="w">        </span><span class="n">id_inst</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">if_inst</span><span class="p">;</span><span class="w"></span>
+<span class="mh">9</span><span class="o">|</span><span class="w">    </span><span class="k">end</span><span class="w"></span>
 </code></pre></div>
 <p><center>图1-5 IF/ID流水寄存器参考实现</center></p>
 <div class="admonition hint">
@@ -1267,6 +1572,42 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../0-overview/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 实验概述" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              实验概述
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2-perfectpl/" class="md-footer__link md-footer__link--next" aria-label="下一页: 理想流水线" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              理想流水线
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
