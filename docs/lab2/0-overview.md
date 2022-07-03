@@ -14,6 +14,8 @@
 
 &emsp;&emsp;本实验要求同学们在Minisys开发板 (芯片型号：<font color = blue>**XC7A100TFGG484-1**</font>) 上实现支持miniRV-1指令集的单周期CPU。
 
+&emsp;&emsp;要求所实现单周期CPU的时钟频率<u>不低于25MHz</u>。
+
 &emsp;&emsp;miniRV-1指令集如表1-1所示。其中，黑色字体的24条指令必做，蓝色字体的13条选做。
 
 <center>表1-1 miniRV-1指令概述</center>
