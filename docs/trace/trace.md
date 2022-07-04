@@ -24,6 +24,7 @@
 ``` bash
 cd ~
 git clone https://github.com/HITSZ-CDP/cdp-tests.git
+cd cdp-tests
 git checkout peri
 ```
 
