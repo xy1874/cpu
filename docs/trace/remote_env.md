@@ -2,7 +2,7 @@
 !!! warning 通知
     &emsp;&emsp;严禁使用远程实验环境做与教学无关事宜，杜绝使用公共资源挖矿等，一经发现将严肃处理，感谢配合！
 
-## 0. 速查信息
+## 1. 速查信息
 
 &emsp;&emsp;远程实验平台IP地址： **10.249.12.98** ，端口号： **6666**
 
@@ -13,22 +13,22 @@
 
 <center><img src = "../assets/remote-1.png" width = 400></center>
 
-## 1. 快速入门
+## 2. 快速入门
 
-### 1.1 环境准备
+### 2.1 环境准备
 
 &emsp;&emsp;需要配合远程实验平台使用的软件：
 
 - Visual Studio Code
 - MobaXterm
 
-### 1.2 Visual Studio Code
+### 2.2 Visual Studio Code
 
-#### 1.2.1 如何安装Visual Studio Code？
+#### 2.2.1 如何安装Visual Studio Code？
 
 &emsp;&emsp;打开Visual Studio Code的[官方网站](https://code.visualstudio.com/)，点击中间的“Download for Windows”下载它的安装包。双击运行安装包，并完成安装即可。你可以从开始菜单找到新安装上的Visual Studio Code。
 
-### 1.2.2 将Visual Studio Code连接到实验平台
+#### 2.2.2 将Visual Studio Code连接到实验平台
 
 &emsp;&emsp;Visual Studio Code安装完成后，从开始菜单打开它。我们需要安装Remote - SSH插件。点击VS Code左侧扩展(extension)按钮，在搜索框中键入“remote ssh”，点击Remote - SSH插件，并安装。
 
@@ -81,7 +81,10 @@ passwd
 
 <center><img src = "../assets/passwd.png" width = 350></center>
 
-### 1.3 下载trace测试包
+!!! warning "注意事项 :loudspeaker:"
+    &emsp;&emsp;如果VSCode出现`bad owner or permission`报错，解决方法可参考：https://cloud.tencent.com/developer/article/1643437。
+
+### 2.3 下载trace测试包
 
 &emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。 在终端中键入以下内容，并回车：
 
@@ -125,9 +128,9 @@ git checkout peri
 
 ![连接9](assets/connect9.png)
 
-### 1.3 使用MobaXterm
+### 2.4 使用MobaXterm
 
-### 1.3.1 SSH登录 
+#### 2.4.1 SSH登录 
 
 &emsp;&emsp;MobaXterm 是一款远程控制工具，支持创建SSH、Telnet、Rsh、Xdmc、RDP、VNC、FTP、 SFTP、串口(Serial COM)、本地Shell、Mosh、Aws、WSL(微软子系统)等超多连接功能。MobaXterm 提供了人性化的操作界面，支持与主流的操作系统连接进行控制和管理操作，功能十分强大。
 
@@ -151,13 +154,16 @@ git checkout peri
 
 ![mobaxterm5](assets/mobaxterm-5.png)
 
-### 1.3.2 ftp文件传输
+#### 2.4.2 ftp文件传输
 
 &emsp;&emsp;SSH远程登录完毕，双击左下角的Sftp，就出现了远程服务器的文件目录。
 
 ![mobaxterm6](assets/mobaxterm-6.png)
 
 &emsp;&emsp;接下来在可以点击按钮“Upload to current folder”或者“Download selected files”，在windows系统和远程实验平台之间上传或下载文件。
+
+!!! warning "注意事项 :loudspeaker:"
+    &emsp;&emsp;使用完毕后，需在MobaXterm中输入`exit`命令退出！
 
 ## 3. 一些进阶指引
 
