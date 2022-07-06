@@ -46,6 +46,7 @@ theme:
 nav:
   - 首页:
     - 实验须知: index.md
+    - 开发板使用须知: board/minisys.md
     - 作业提交说明:
       # - 课程材料提交要求: submit/submit.md
       - 作业系统指南: submit/operation.md
