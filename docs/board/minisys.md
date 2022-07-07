@@ -50,6 +50,8 @@
 <center><img src = "../assets/4.png" width = 350></center>
 <center>图4 开发板的正确装袋方式</center>
 
+&emsp;:star: **禁止将USB线和开发板同时装入防静电袋！** 袋中应只装开发板，USB线应单独存放。
+
 &emsp;:star::star: 对于T2507和T2608，请 **将电源适配器和USB线单独放在** 大纸箱旁边的 **小纸箱**！
 
 &emsp;:star::star::star: <u>老版Minisys的Micro USB接口牢固性比较差</u>，**插拔USB线时请温柔操作，否则可能损坏接口！**
