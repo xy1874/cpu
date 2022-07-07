@@ -13,7 +13,7 @@
     
     
       
-        <title>系统总线 - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
+        <title>附录：添加约束 - 计算机设计与实践（2022夏季） | 哈工大（深圳）</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              系统总线
+              附录：添加约束
             
           </span>
         </div>
@@ -571,14 +571,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
       
       
       
@@ -683,62 +681,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          系统总线
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../7-bus/" class="md-nav__link">
         系统总线
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    1. 总线概述
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-dram" class="md-nav__link">
-    2. DRAM总线
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    3. 总线桥
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -797,11 +744,62 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../11-constr/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          附录：添加约束
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         附录：添加约束
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 添加/创建约束文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-io" class="md-nav__link">
+    2. I/O引脚约束
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 时钟约束
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1251,21 +1249,21 @@
       
         <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
-    1. 总线概述
+    1. 添加/创建约束文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-dram" class="md-nav__link">
-    2. DRAM总线
+  <a href="#2-io" class="md-nav__link">
+    2. I/O引脚约束
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#3" class="md-nav__link">
-    3. 总线桥
+    3. 时钟约束
   </a>
   
 </li>
@@ -1284,68 +1282,46 @@
                 
 
 
-  <h1>系统总线</h1>
+  <h1>附录：添加约束</h1>
 
-<h2 id="1">1. 总线概述</h2>
-<p>&emsp;&emsp;总线是连接多个部件或设备的用于信息传输的一组公共信号线。按照总线所连接的部件类型，可将总线分为片内总线、系统总线和通信总线3种。</p>
-<p>&emsp;&emsp;片内总线指的是芯片内部的用于连接多个元器件的总线，功能一般较为单一，是最为微观层面的总线。<u>系统总线指的是计算机系统内部的用于连接CPU、主存、I/O设备的主要部件的总线，通常由控制总线、地址总线和数据总线组成</u>。通信总线则指的是计算机之间或计算机与其他系统之间的用于通信的总线，通常只由数据总线和控制信号线组成。</p>
-<h2 id="2-dram">2. DRAM总线</h2>
-<p>&emsp;&emsp;目前为止，我们所设计的myCPU直接通过Distributed RAM IP核的固有接口连接到主存，其顶层模块结构形如图8-1所示。</p>
-<p><center><img src = "../assets/8-1.png" width = 230></center>
-<center>图8-1 myCPU顶层模块结构图</center></p>
-<p>&emsp;&emsp;在大部分现实的计算机系统中，CPU通过系统总线与主存、外设等进行连接和交互。出于便捷性考虑，我们可以<u>直接选取Distributed RAM IP核的接口信号总线作为我们的系统总线</u>，我们不妨将这样的系统总线称为DRAM总线（“D”代表“Distributed”）。</p>
-<p>&emsp;&emsp;显然，DRAM总线包含以下信号：</p>
-<p><center>表8-1 DRAM总线接口信号</center></p>
-<p><center></p>
-<table>
-<thead>
-<tr>
-<th align="center">信号名</th>
-<th align="center">位宽</th>
-<th align="center">方向</th>
-<th align="center">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">clk</td>
-<td align="center">1</td>
-<td align="center">master-&gt;slave</td>
-<td align="center">时钟信号</td>
-</tr>
-<tr>
-<td align="center">addr</td>
-<td align="center">14</td>
-<td align="center">master-&gt;slave</td>
-<td align="center">地址信号</td>
-</tr>
-<tr>
-<td align="center">rdata</td>
-<td align="center">32</td>
-<td align="center">slave-&gt;master</td>
-<td align="center">读数据信号</td>
-</tr>
-<tr>
-<td align="center">wen</td>
-<td align="center">1</td>
-<td align="center">master-&gt;slave</td>
-<td align="center">写使能信号</td>
-</tr>
-<tr>
-<td align="center">wdata</td>
-<td align="center">32</td>
-<td align="center">master-&gt;slave</td>
-<td align="center">写数据信号</td>
-</tr>
-</tbody>
-</table>
-<p></center></p>
-<h2 id="3">3. 总线桥</h2>
-<p>&emsp;&emsp;虽然DRAM总线将myCPU与指令ROM、数据RAM连接在了一起，但显然指令ROM、数据RAM与myCPU之间仍然是一对一通信的关系。如果想要为myCPU连接更多的部件或设备，单纯增加myCPU的DRAM总线接口数量显然不是一个好方法。此时，需要为myCPU设计总线桥，并将图8-1所示的顶层模块结构改造成如图8-2所示。</p>
-<p><center><img src = "../assets/8-2.png" width = 500></center>
-<center>图8-2 带有总线桥的myCPU顶层模块结构图</center></p>
-<p>&emsp;&emsp;总线桥是一个特殊的接口部件，其主要功能是作为总线操作的 <strong>中转机构</strong> 和 <strong>控制机构</strong>。当CPU访问数据RAM或其他设备时，总线桥将把接收到的访问请求转发给相应的从设备。此外，若存在多个部件或设备同时请求总线的情形，总线桥还需进行总线仲裁。</p>
-<p>&emsp;&emsp;</p>
+<p>&emsp;&emsp;下板前，需编写引脚约束文件（.xdc），以将顶层模块的接口信号与Minisys开发板上的FPGA芯片引脚连接起来。</p>
+<h2 id="1">1. 添加/创建约束文件</h2>
+<p>&emsp;&emsp;在Vivado中，右键点击<code>Project Manager</code>下面<code>Sources</code>中的<code>Constraints</code>，在弹出的菜单中选择<code>Add Source…</code>，并按照图11-1所示的设置点击<code>Next</code>。</p>
+<p><center><img src="../assets/11-1.png"></center>
+<center>图11-1 添加或创建约束文件</center></p>
+<h2 id="2-io">2. I/O引脚约束</h2>
+<p>&emsp;&emsp;约束文件初始为空，其基本语法如图11-2所示。</p>
+<p><div class="highlight"><pre><span></span><code>1| # 语法格式为set_property PACKAGE_PIN (pin location) [get_ports (port name)]
+2| set_property PACKAGE_PIN P5 [get_ports sw_i[0]]
+3| set_property PACKAGE_PIN F6 [get_ports led_o[0]]
+4|
+5| # 语法格式为set_property IOSTANDARD (level:LVDS,LVCMOS18,LVCMOS33 etc.) [get_ports (port name)]
+6| set_property IOSTANDARD LVCMOS33 [get_ports sw_i[0]]
+7| set_property IOSTANDARD LVCMOS33 [get_ports led_o[0]]
+</code></pre></div>
+<center>图11-2 约束文件基本语法</center></p>
+<p>&emsp;&emsp;约束文件主要包含两部分内容，第一部分是信号和FPGA芯片引脚的对应关系，比如第1行是将FPGA芯片的<code>P5</code>引脚和信号<code>sw_i[0]</code>信号绑定。第二部分是引脚的电气属性设置，<code>IOSTANDARD</code>全部设置成<code>LVCMOS33</code>，表示该IO电平标准是<code>CMOS 3.3v</code>（即高电平对应3.3V，低电平对应0.0V）。</p>
+<div class="admonition info">
+<p class="admonition-title">PS <img alt="📣" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f4e3.svg" title=":mega:" /></p>
+<p>&emsp;&emsp;图11-2所示的引脚约束代码也可写成如图11-3所示的语句。</p>
+<p><div class="highlight"><pre><span></span><code>1| set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN P5 } [get_ports sw_i[0]]
+2| set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN F6 } [get_ports led_o[0]]
+</code></pre></div>
+<center>图11-3 约束语句的另一种写法</center></p>
+</div>
+<p>&emsp;&emsp;引脚分配既可以参考<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/Minisys%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf">Minisys开发板手册</a>，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“<code>SW0-W4</code>”，表示拨码开关SW0对应FPGA的<code>W4</code>引脚。</p>
+<h2 id="3">3. 时钟约束</h2>
+<p>&emsp;&emsp;约束文件除了对物理引脚进行约束，还可以对时序进行约束。感兴趣的同学们可以阅读参考资料《<a href="http://xilinx.eetrend.com/blog/2019/100018252.html">约束功能概述</a>》。</p>
+<p>&emsp;&emsp;如果Vivado工程需要使用时钟信号，为了方便后续时序分析，以及为了让工具能够根据给定的频率进行逻辑优化，则需要添加始终约束文件。</p>
+<div class="admonition info">
+<p class="admonition-title">PS <img alt="📣" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f4e3.svg" title=":mega:" /></p>
+<p>&emsp;&emsp;在工程中，除了顶层模块I/O引脚的约束文件外，还可以新建一个始终约束文件<code>clock.xdc</code>，在其中添加如图11-4所示的约束代码。</p>
+<p><div class="highlight"><pre><span></span><code>1| # 语法格式为create_clock -name (clock name) -period (time) [get_ports (port name)]
+2| create_clock -name fpga_clk -period 10 [get_ports fpga_clk]
+</code></pre></div>
+<center>图11-4 时钟约束</center></p>
+<p>&emsp;&emsp;其中，<code>-period</code>项表示时钟信号的周期大小（单位：ns）。比如Minisys的板上时钟为100MHz，则时钟周期为10ns，因此是<code>-period 10</code>。</p>
+</div>
 
               
             </article>
@@ -1361,7 +1337,7 @@
     <nav class="md-footer__inner md-grid" aria-label="页脚" >
       
         
-        <a href="../6-verify/" class="md-footer__link md-footer__link--prev" aria-label="上一页: CPU功能验证" rel="prev">
+        <a href="../10-step/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 实验步骤" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1370,20 +1346,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              CPU功能验证
+              实验步骤
             </div>
           </div>
         </a>
       
       
         
-        <a href="../8-peripheral/" class="md-footer__link md-footer__link--next" aria-label="下一页: 接口与外设" rel="next">
+        <a href="../../lab3/0-overview/" class="md-footer__link md-footer__link--next" aria-label="下一页: 实验概述" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              接口与外设
+              实验概述
             </div>
           </div>
           <div class="md-footer__button md-icon">
