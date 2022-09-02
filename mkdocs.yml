@@ -45,10 +45,10 @@ theme:
 
 nav:
   - 首页:
-    - 实验须知: home/index.md
+    - 实验须知: index.md
     - 开发板使用须知: home/minisys.md
     - Verilog代码规范: home/codingstyle.md
-    # - 常见问题汇总: home/problems.md
+    - 常见问题汇总: home/problems.md
     - 作业提交说明:
       - 【重要!】课程提交要求: home/submit.md
       - 作业系统指南: home/operation.md
