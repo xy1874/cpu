@@ -64,6 +64,10 @@
 
 &emsp;&emsp;理论上做完单周期CPU和SoC刚好能及格，但前提是其他都拿满分（包括作业、出勤、课程报告）。尽量做下去，实现流水线。
 
+#### 1.9 选做指令只做了一部分，可以加分吗？
+
+&emsp;&emsp;选做指令要全部正确实现才能加分。
+
 
 
 ## 2. Trace验证
@@ -84,23 +88,27 @@
 
 &emsp;&emsp;关闭防火墙和杀毒软件，重启电脑。
 
-#### 2.4 build的时候报错`Timescale missing on this module`
+#### 2.4 VSCode连接远程Trace平台，报错`Bad owner or permissions on .ssh/config`
+
+&emsp;&emsp;解决方法可参考[https://cloud.tencent.com/developer/article/1643437](https://cloud.tencent.com/developer/article/1643437)。
+
+#### 2.5 build的时候报错`Timescale missing on this module`
 
 &emsp;&emsp;在相应的`.v文件`里加上`/* verilator lint_off TIMESCALEMOD */`或删除所有文件里的``timescale 1ns / 1ps`语句。
 
-#### 2.5 明明在虚拟机里修改过代码了，但波形还是原来的波形
+#### 2.6 明明在虚拟机里修改过代码了，但波形还是原来的波形
 
 &emsp;&emsp;尝试在`make`前先执行`make clean`命令。
 
-#### 2.6 Trace验证时，所有指令都显示Time out
+#### 2.7 Trace验证时，所有指令都显示Time out
 
 &emsp;&emsp;仔细按照[Trace测试说明](../../trace/trace/#2)逐一检查debug信号、模块名、存储器参数设置等是否符合要求。
 
-#### 2.7 复位信号到底是低电平还是高电平？
+#### 2.8 复位信号到底是低电平还是高电平？
 
 &emsp;&emsp;Trace验证时提供的复位信号是低电平复位，下板时板上的复位按钮是高电平复位。
 
-#### 2.8 Trace验证时，`REFERENCE`的PC和`MYCPU`的PC不一致
+#### 2.9 Trace验证时，`REFERENCE`的PC和`MYCPU`的PC不一致
 
 &emsp;&emsp;检查复位逻辑，务必保证复位后取第一条指令的PC为`32'h0`。
 
@@ -108,19 +116,19 @@
 
 &emsp;&emsp;检查程序是否出现了错误的跳转，或检查PC的更新逻辑是否有bug。
 
-#### 2.9 输入命令查看波形，结果没反应？
+#### 2.10 输入命令查看波形，结果没反应？
 
 &emsp;&emsp;不要使用root账户。
 
-#### 2.10 Trace验证中的`simple`是什么指令？
+#### 2.11 Trace验证中的`simple`是什么指令？
 
 &emsp;&emsp;`simple`只给出数据段和代码段定义，且代码段内没有测试内容，不能算是测试指令。
 
-#### 2.11 Trace测试用例的汇编代码在哪里可以找到？
+#### 2.12 Trace测试用例的汇编代码在哪里可以找到？
 
 &emsp;&emsp;看这里：[GITHUB/HITSZ-CDP/cdp-tests/asm](https://github.com/HITSZ-CDP/cdp-tests/tree/main/asm)。
 
-#### 2.12 仿真Trace通过所有指令，但下板卡在某一条指令的测例
+#### 2.13 仿真Trace通过所有指令，但下板卡在某一条指令的测例
 
 &emsp;&emsp;检查CPU和DRAM是否使用不同的时钟。
 
