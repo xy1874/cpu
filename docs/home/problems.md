@@ -13,11 +13,11 @@
 
 #### 1.2 Verilog如何正确添加头文件？
 
-&emsp;&emsp;在工程中新建文件时，选择`Verilog Header`类型，并在其上右键选择`Set Global Include`。
+&emsp;&emsp;在工程中新建文件时，文件类型选择`Verilog Header`。新建完成后，在`Sources`窗口找到`.vh文件`并在其上右键选择`Set Global Include`。
 
 #### 1.3 定义了宏，但报错显示未定义？
 
-&emsp;&emsp;如果定义了头文件，首先确保头文件被正确include。此外，引用宏定义时需在前面加上 **``` ` ```** 符号。例如，`#define MACRO1 111`，则引用时应该是````MACRO1```。
+&emsp;&emsp;如果定义了头文件，首先确保头文件被正确添加（见[1.2](./#12-verilog)）。此外，引用宏定义时需在前面加上 **``` ` ```** 符号。例如，`#define MACRO1 111`，则引用时应该是````MACRO1```。
 
 #### 1.4 移位运算的移位位数超过`'d32`，或者是个负数，怎么办？
 
