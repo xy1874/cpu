@@ -82,7 +82,7 @@
 
 #### 2.2 虚拟机导入后，打开报错
 
-&emsp;&emsp;可能是需要管理员权限打开VirtualBox或是需要进BIOS打开VT-x等等，可以搜索报错信息里的32位16进制错误码。
+&emsp;&emsp;可能是需要管理员权限打开VirtualBox或是需要进BIOS打开VT-x等等，可在网上搜索报错信息里的16进制错误码，并按照搜索到的解决方案尝试解决。
 
 #### 2.3 MobaXTerm连接时一直报错`Network error, connect refused`
 
