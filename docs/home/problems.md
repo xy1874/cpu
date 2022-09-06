@@ -9,7 +9,7 @@
 
 #### 1.1 数据通路图用什么软件画？
 
-&emsp;&emsp;可以使用Visio、PPT等。
+&emsp;&emsp;可以使用Visio、[Visual Paradigm](https://online.visual-paradigm.com/drive/#infoart:proj=0&dashboard)、[ioDraw](https://www.iodraw.com/)、[draw.io](https://app.diagrams.net/)、[ProcessOn](https://www.processon.com/?utm_source=baidu&utm_medium=sem&utm_term=120470957204&utm_content=49530906908&uc_pagenum=1&uc_adposition=cl2&bd_vid=7544670811206821952)等。
 
 #### 1.2 Verilog如何正确添加头文件？
 
