@@ -1724,7 +1724,8 @@
 <p>&emsp;&emsp;检查是否同时使用了时钟信号的上升沿和下降沿。</p>
 <h4 id="17-cpu">1.7 如何提高CPU主频？</h4>
 <p>&emsp;&emsp;<u>优化措施需要针对瓶颈展开，才能事半功倍</u>。从理论上分析，单周期CPU的频率取决于执行最耗时的指令，流水线CPU的频率取决于最耗时的流水线阶段。因此，想要提高频率，需要找出数据通路中最耗时的部分。</p>
-<p>&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟。具体的操作步骤如下：</p>
+<p>&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟，详情可参考<a href="https://blog.csdn.net/dengfenglai123/article/details/115598250?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-115598250-blog-126041215.pc_relevant_multi_platform_featuressortv2dupreplace&amp;spm=1001.2101.3001.4242.2&amp;utm_relevant_index=4">FPGA时序分析之关键路径-CSDN Blog</a>。</p>
+<p>&emsp;&emsp;使用Vivado查看关键路径的操作步骤如下：</p>
 <p>&emsp;&emsp;<strong>Step1</strong>：更改时钟IP核设置（或修改分频器参数），提高CPU主时钟的频率至期望值；</p>
 <p>&emsp;&emsp;<strong>Step2</strong>：通过快捷键<code>F11</code>或GUI操作，对工程进行综合（Synthesis）；</p>
 <p>&emsp;&emsp;<strong>Step3</strong>：综合完成后，在Vivado默认界面左侧的<code>Flow Navigator</code>下，找到并展开<code>SYNTHESIS</code>下的<code>Open Synthesized Design</code>，点击<code>Report Timing Summary</code>，如下图所示。</p>
@@ -1740,7 +1741,7 @@
 <p>&emsp;&emsp;Step1并非必须 —— 当CPU主频较低时，工程中不存在时序违例，此时Step3的时序报告仍会显示关键路径，但并非以红色字显示。</p>
 </div>
 <h4 id="18">1.8 只做完单周期能不能及格？</h4>
-<p>&emsp;&emsp;理论上做完单周期CPU和SoC刚好能及格，但前提是其他都拿满分（包括作业、出勤、课程报告）。尽量做下去，实现流水线。</p>
+<p>&emsp;&emsp;如果只做完单周期CPU和SoC，但其他都拿满分（包括作业、出勤、课程报告），那么刚好能及格。实际上，如果只做了单周期CPU及SoC，报告是拿不到满分的，所以尽量做下去，实现流水线。</p>
 <h4 id="19">1.9 选做指令只做了一部分，可以加分吗？</h4>
 <p>&emsp;&emsp;选做指令要全部正确实现才能加分。</p>
 <h2 id="2-trace">2. Trace验证</h2>
