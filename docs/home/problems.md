@@ -35,9 +35,9 @@
 
 &emsp;&emsp;<u>优化措施需要针对瓶颈展开，才能事半功倍</u>。从理论上分析，单周期CPU的频率取决于执行最耗时的指令，流水线CPU的频率取决于最耗时的流水线阶段。因此，想要提高频率，需要找出数据通路中最耗时的部分。
 
-&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟，详情可参考[FPGA时序分析之关键路径-CSDN Blog](https://blog.csdn.net/dengfenglai123/article/details/115598250?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-115598250-blog-126041215.pc_relevant_multi_platform_featuressortv2dupreplace&spm=1001.2101.3001.4242.2&utm_relevant_index=4)。
+&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟，详情可参考《[FPGA时序分析之关键路径-CSDN Blog](https://blog.csdn.net/dengfenglai123/article/details/115598250?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-115598250-blog-126041215.pc_relevant_multi_platform_featuressortv2dupreplace&spm=1001.2101.3001.4242.2&utm_relevant_index=4)》。
 
-&emsp;&emsp;使用Vivado查看关键路径的操作步骤如下：
+&emsp;&emsp;使用Vivado查看关键路径的具体操作步骤如下：
 
 &emsp;&emsp;**Step1**：更改时钟IP核设置（或修改分频器参数），提高CPU主时钟的频率至期望值；
 
