@@ -33,11 +33,11 @@
     ```
     <center>图11-3 约束语句的另一种写法</center>
 
-&emsp;&emsp;引脚分配既可以参考[Minisys开发板手册](https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/Minisys%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf)，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“`SW0-W4`”，表示拨码开关SW0对应FPGA的`W4`引脚。
+&emsp;&emsp;引脚分配既可以参考<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/Minisys%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf" target="_blank">Minisys开发板手册</a>，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“`SW0-W4`”，表示拨码开关SW0对应FPGA的`W4`引脚。
 
 ## 3. 时钟约束
 
-&emsp;&emsp;约束文件除了对物理引脚进行约束，还可以对时序进行约束。感兴趣的同学们可以阅读参考资料《[约束功能概述](http://xilinx.eetrend.com/blog/2019/100018252.html)》。
+&emsp;&emsp;约束文件除了对物理引脚进行约束，还可以对时序进行约束。感兴趣的同学们可以阅读参考资料《<a href="http://xilinx.eetrend.com/blog/2019/100018252.html" target="_blank">约束功能概述</a>》。
 
 &emsp;&emsp;如果Vivado工程需要使用时钟信号，为了方便后续时序分析，以及为了让工具能够根据给定的频率进行逻辑优化，则需要添加始终约束文件。
 

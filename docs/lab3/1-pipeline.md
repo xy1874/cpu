@@ -69,7 +69,7 @@ $$T_{Pipeline} = \frac{T_{non-Pipeline}}{N}$$
 
 #### 1.2.3 ARM11八级流水线
 
-&emsp;&emsp;[ARM11处理器](https://developer.arm.com/documentation/ddi0360/f/?lang=en)将指令的执行过程划分成八级流水线。流水线的前端包括取指1、取指2、译码和分派四个阶段；流水线后端则分成了ALU、MAC（Multiply-ACcumulate，乘累加）和访存三条不同的子流水线，如图1-2所示。
+&emsp;&emsp;<a href="https://developer.arm.com/documentation/ddi0360/f/?lang=en" target="_blank">ARM11处理器</a>将指令的执行过程划分成八级流水线。流水线的前端包括取指1、取指2、译码和分派四个阶段；流水线后端则分成了ALU、MAC（Multiply-ACcumulate，乘累加）和访存三条不同的子流水线，如图1-2所示。
 
 <center><img src = "../assets/1-2.png"></center>
 <center>图1-2 ARM11八级流水线结构</center>

@@ -20,7 +20,6 @@
 
 - 学期：2022夏季
 
-- 实验包下载：[CPUDesign/stupkt](https://gitee.com/hitsz-cslab/cpu/tree/master/stupkt)
+- 实验包下载：<a href="https://gitee.com/hitsz-cslab/cpu/tree/master/stupkt" target="_blank">CPUDesign/stupkt</a>
 
-- **线上答疑平台**：[Piazza/COMP2012](https://piazza.com/hitsz/summer2022/comp2012)，Access Code：comp2012
-
+- **线上答疑平台**：<a href="https://piazza.com/hitsz/summer2022/comp2012" target="_blank">Piazza/COMP2012</a>，Access Code：comp2012

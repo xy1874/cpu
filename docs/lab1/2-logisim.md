@@ -1,31 +1,28 @@
 ## 1. Logisim运行环境
 
-&emsp;&emsp;运行logisim需要安装10.0以上的java运行环境，否则无法支持高分辨率屏幕。java SE下载链接如下：
+&emsp;&emsp;运行Logisim需要安装10.0以上的Java运行环境，否则无法支持高分辨率屏幕。
 
-&emsp;&emsp;https://www.oracle.com/java/technologies/javase-downloads.html
+&emsp;&emsp;Java SE下载链接：<a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank">Java Downloads-ORACLE</a>。
 
-## Logisim使用教程
+## 2. Logisim使用教程
 
-&emsp;&emsp;Logisim使用教程可以参考如下链接：
+&emsp;&emsp;Logisim使用教程可以参考链接：<a href="http://www.cburch.com/logisim/docs.html" target="_blank">Logisim Documentation</a>。
 
-&emsp;&emsp;http://www.cburch.com/logisim/docs.html
+## 3. Logisim使用技巧
 
-## 2. Logisim使用技巧
+- `Ctrl` + `R`：电路复位
 
-- ctrl + r ： 电路复位  
+- `Ctrl` + `T`：时钟单步
 
-- ctrl + t ： 时钟单步  
+- `Ctrl` + `K`：时钟连续
 
-- ctrl + k ： 时钟连续  
-
-- 方向键 ： 改变组件朝向
+- 方向键：改变组件朝向
 
 - 戳工具（Poke Tool）：点击组件可以直接查看组件的值，如引脚的值、寄存器的值等。使用戳工具单击连线段可显示连线当前的值。此外，利用戳工具点击标签连接的线路，所有联通在一起的线路都会显示出来，可以很方便找到同名的标签。
 
 - 编辑工具（Edit Tool）：允许用户重新安排现有组件，修改组件属性并添加连线。
 
-
-## 3. Logisim电路连线颜色区分
+## 4. Logisim电路连线颜色区分
 
 - 绿色：表示高电平
 

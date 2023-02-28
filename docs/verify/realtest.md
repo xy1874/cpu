@@ -2,9 +2,11 @@
 
 ### 1.1 DRAM访存地址修改
 
-&emsp;&emsp;用于下板测试的汇编程序采用不同的编址方案，因此首先要对原DRAM的访存地址进行修改：
+&emsp;&emsp;本实验提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://github.com/HITSZ-CDP/cdp-tests/blob/peri/asm/start.dump" target="_blank">`cdp-tests`/`asm`/`start.dump`</a>
 
-&emsp;&emsp;原DRAM代码：
+&emsp;&emsp;对于哈佛结构的CPU，汇编程序的代码段和数据段应当分别存放在IROM和DRAM。DRAM的基地址为`0x0000_0000`，而start.dump程序的数据段基地址为`0x0000_4000`。因此，为了使得CPU能够正确运行start.dump程序，我们需要将测试程序访问DRAM的地址减去`0x0000_4000`，即：
+
+&emsp;&emsp;原DRAM实例化代码：
 
 ``` Verilog
 1|    dram U_dram (
@@ -16,10 +18,10 @@
 7|    );
 ```
 
-&emsp;&emsp;修改后的DRAM代码：
+&emsp;&emsp;修改后的DRAM实例化代码：
 
 ``` Verilog
-1|    wire [31:0] waddr_tmp = waddr - 16'h4000;
+1|    wire [31:0] waddr_tmp = waddr - 32'h4000;
 2|    
 3|    dram U_dram (
 4|        .clk    (cpu_clk),
@@ -37,7 +39,7 @@
 
 &emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。
 
-&emsp;&emsp;首先，从指导书网站[下载download_test.zip压缩包](https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip)文件并解压到无中文路径下。
+&emsp;&emsp;首先，从指导书网站<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip" target="_blank">下载download_test.zip压缩包</a>文件并解压到无中文路径下。
 
 &emsp;&emsp;然后，备份原工程，按照上一节所述修改RTL代码，并删除已实例化的IROM和DRAM IP核。
 

@@ -4,7 +4,7 @@
 
 &emsp;&emsp;下面以图4-1为例介绍RAW冒险三种情形的检测方法。
 
-<center><img src = "../assets/4-1.png" width = 530></center>
+<center><img src = "../assets/4-1.png" width = 600></center>
 <center>图4-1 RAW数据冒险的三种情形</center>
 
 ### 1.1 RAW情形A检测
@@ -89,7 +89,7 @@
 !!! example "举栗说明 :chestnut:"
     &emsp;&emsp;对于如图4-1所示的RAW情形A，可让第二条指令暂停3个时钟周期，等待第一条指令写回后，再继续执行，如图4-7所示。
 
-    <center><img src = "../assets/4-7.png" width = 500></center>
+    <center><img src = "../assets/4-7.png" width = 600></center>
     <center>图4-7 流水线暂停</center>
 
 &emsp;&emsp;流水线暂停除了可以解决数据冒险问题，还可以用于实现复杂操作指令，如乘除法指令。
@@ -154,7 +154,7 @@
 
     &emsp;&emsp;对于图4-1所示的RAW冒险，可采用数据前递方法解决 —— 将执行阶段、访存阶段或写回阶段的中间结果前递给译码阶段，并让前递而来的数据参与到指令译码时的源操作数选择，如图4-12所示。
 
-    <center><img src = "../assets/4-12.png" width = 500></center>
+    <center><img src = "../assets/4-12.png" width = 600></center>
     <center>图4-12 数据前递示意图</center>
 
     &emsp;&emsp;图4-12中，从EXE指向ID、从MEM指向ID以及从WB指向ID的三条紫色箭头，分别对应图4-1中RAW冒险的三种情形。第一条指令在执行阶段即可产生计算结果（x19寄存器的新值），此时通过执行阶段到译码阶段的数据前递，可让第二条指令在译码时获得x19的新值，从而在不需暂停流水线的情况下解决了第一、二条指令之间的RAW冒险。

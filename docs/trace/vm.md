@@ -1,21 +1,21 @@
-## 0. 下载虚拟机
+## 1. 下载虚拟机
 
 &emsp;&emsp;测试环境及相关工具下载地址：
 
-- 虚拟机镜像：[vm.ova - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb)
+- 虚拟机镜像：<a href="https://otuyernchr.feishu.cn/file/boxcnrClUmwkmCZz5JbPsf7QnCb" target="_blank">vm.ova</a>
 
-- MobaXTerm和VirtualBox：[虚拟机工具.zip - 飞书文档 (feishu.cn)](https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf)
+- MobaXTerm和VirtualBox：<a href="https://otuyernchr.feishu.cn/file/boxcnTjEReejhlrl0DlCte1Lrrf" target="_blank">虚拟机工具.zip</a>
 
 &emsp;&emsp;下载后，请参照本页后的“附录”导入虚拟机。
 
 
-## 1. 导入虚拟机
+## 2. 导入虚拟机
 
 &emsp;&emsp;推荐使用VirtualBox。下载完毕后，请在Virtualbox中导入：管理->导入虚拟电脑，选择对应OVF文件。
 
 ![image-20210704155051556](assets/vm-1.png)
 
-## 2. 配置虚拟网卡
+## 3. 配置虚拟网卡
 
 &emsp;&emsp;VirtualBox中对于虚拟网卡，需要稍微配置一下才可以使用，具体的配置如下：
 
@@ -25,7 +25,7 @@
 
 ![image-20210704153948742](assets/vm-4.png)
 
-## 3. 使用MobaXTerm
+## 4. 使用MobaXTerm
 
 &emsp;&emsp;为了更好的使用体验，推荐使用MobaXTerm通过ssh连接到本地的虚拟机进行进一步的操作。压缩包里提供了MobaXTerm。
 

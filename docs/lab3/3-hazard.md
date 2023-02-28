@@ -39,7 +39,7 @@
 !!! example "举栗说明 :chestnut:"
     &emsp;&emsp;假设某流水线处理器只有一个指令和数据共享的存储器，则访存阶段和取指阶段将同时访问存储器。若该存储器只有一个访问端口，则流水线将发生结构冒险，如图3-1所示。
 
-    <center><img src = "../assets/3-1.png" width = 550></center>
+    <center><img src = "../assets/3-1.png" width = 600></center>
     <center>图3-1 结构冒险示例</center>
 
     &emsp;&emsp;由单存储器引起的结构冒险可通过哈佛结构解决 —— 分别设置独立的指令存储器和数据存储器。
@@ -67,7 +67,7 @@
 !!! question "思考题 :triangular_ruler:"
     &emsp;&emsp;RISC经典五级流水“IF-ID-EX-MEM-WB”是否存在WAR和WAW的数据冒险？为什么？
 
-&emsp;&emsp;数据冒险可通过[流水线暂停](../4-handleDH/#21)、[数据前递](../4-handleDH/#22)或[乱序执行](../4-handleDH/#23)等技术解决。
+&emsp;&emsp;数据冒险可通过<a href="../4-handleDH/#21" target="_blank">流水线暂停</a>、<a href="../4-handleDH/#22" target="_blank">数据前递</a>和<a href="../4-handleDH/#23" target="_blank">乱序执行</a>等技术解决。
 
 ### 2.3 控制冒险
 
@@ -76,7 +76,7 @@
 !!! example "举栗说明 :chestnut:"
     &emsp;&emsp;在流水线处理器中，分支指令完成执行阶段之前，无法确定下一条应该执行什么指令，如图3-2所示。
 
-    <center><img src = "../assets/3-2.png" width = 550></center>
+    <center><img src = "../assets/3-2.png" width = 600></center>
     <center>图3-2 控制冒险示意图</center>
 
-&emsp;&emsp;控制冒险可通过[流水线暂停](../4-handleDH/#21)或引入[分支预测](../5-handleCH/)机制等方法解决。
+&emsp;&emsp;控制冒险可通过<a href="../4-handleDH/#21" target="_blank">流水线暂停</a>或引入<a href="../5-handleCH/" target="_blank">分支预测</a>机制等方法解决。

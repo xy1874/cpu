@@ -1,5 +1,5 @@
 site_name: 计算机设计与实践（2022夏季） | 哈工大（深圳）
-copyright: 'Copyright &copy; 2019 - 2022 哈尔滨工业大学（深圳）'
+copyright: 'Copyright &copy; 2019 - 2023 哈尔滨工业大学（深圳）'
 repo_name: 'HITSZ-ECEI-CS/CPUDesign'
 repo_url: 'https://gitee.com/hitsz-cslab/cpu'
 
@@ -40,8 +40,18 @@ theme:
     repo: fontawesome/brands/git-alt
     # favicon: fontawesome/solid/microchip
   palette:
-    primary: 'Cyan'
-    accent: 'Cyan'
+    - scheme: 'default'
+      primary: 'cyan'
+      accent: 'cyan'
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到夜晚模式
+    - scheme: 'slate'
+      primary: 'cyan'
+      accent: 'cyan'
+      toggle:
+        icon: material/weather-night
+        name: 切换到白天模式
 
 nav:
   - 首页:
@@ -84,7 +94,7 @@ nav:
     - 测试机制说明: trace/trace.md
     - 附录1：远程平台使用指南: trace/remote_env.md
     - 附录2：虚拟机使用指南: trace/vm.md
-    - 附录3：实验环境部署指南: trace/env_bymyself.md
+    - 附录3：实验环境部署指南: trace/env_diy.md
   - CPU的调试与下板验证:
     - 下板验证说明: verify/realtest.md
     - CPU调试方法:

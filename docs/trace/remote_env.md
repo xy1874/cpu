@@ -22,20 +22,19 @@
 - Visual Studio Code
 - MobaXterm
 
-### 2.2 Visual Studio Code
+### 2.2 使用VS Code
 
-#### 2.2.1 如何安装Visual Studio Code？
+#### 2.2.1 安装VS Code
 
-&emsp;&emsp;打开Visual Studio Code的[官方网站](https://code.visualstudio.com/)，点击中间的“Download for Windows”下载它的安装包。双击运行安装包，并完成安装即可。你可以从开始菜单找到新安装上的Visual Studio Code。
+&emsp;&emsp;打开<a href="https://code.visualstudio.com/" target="_blank">VS Code官网</a>，点击`Download for Windows`按钮下载安装包，然后双击安装包完成安装。你可以从开始菜单找到新安装上的VS  Code。
 
-#### 2.2.2 将Visual Studio Code连接到实验平台
+#### 2.2.2 将VS Code连接到实验平台
 
-&emsp;&emsp;Visual Studio Code安装完成后，从开始菜单打开它。我们需要安装Remote - SSH插件。点击VS Code左侧扩展(extension)按钮，在搜索框中键入“remote ssh”，点击Remote - SSH插件，并安装。
+&emsp;&emsp;打开VS Code，点击左侧的扩展(extension)按钮，在搜索框中键入`remote ssh`，点击`Remote - SSH`插件并安装，如下图所示。
 
 ![安装插件](assets/vscode_extension.png)
 
-&emsp;&emsp;左侧边栏应该会多出一个这样的图标：![图标:](assets/icon.png)
-点击这个图标，选择SSH TARGETS右侧的`+`号：
+&emsp;&emsp;左侧边栏将出现此图标：<img src = "../assets/icon.png" width = 30>。点击这个图标，选择`SSH TARGETS`右侧的`+`号，如下图所示。
 
 <center><img src = "../assets/ssh_add_host.png" width = 400></center>
 
@@ -78,22 +77,24 @@
 <center><img src = "../assets/passwd.png" width = 350></center>
 
 !!! warning "注意事项 :loudspeaker:"
-    &emsp;&emsp;如果VSCode出现`bad owner or permission`报错，解决方法可参考：https://cloud.tencent.com/developer/article/1643437。
+    &emsp;&emsp;如果VSCode出现`bad owner or permission`报错，解决方法可参考《<a href="https://cloud.tencent.com/developer/article/1643437" target="_blank">Win10下Bad owner or permissions on .ssh/config的解决办法-腾讯云</a>》。
 
 ### 2.3 下载trace测试包
 
-&emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。 在终端中键入以下内容，并回车：
+&emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。
+
+&emsp;&emsp;在终端中键入以下内容，并回车：
 
 ``` bash
-cd ~
-git clone https://github.com/HITSZ-CDP/cdp-tests.git
+ 1|cd ~
+ 2|git clone https://github.com/HITSZ-CDP/cdp-tests.git
 ```
 
 &emsp;&emsp;你应该会看到这样的输出：
 
 ``` bash
-Cloning into 'cdp-tests'...
-done.
+ 1|Cloning into 'cdp-tests'...
+ 2|done.
 ```
 
 &emsp;&emsp;这代表你已经将cdp-tests的副本下载到自己的工作空间了。
@@ -112,11 +113,13 @@ done.
 
 ![连接7](assets/connect7.png)
 
-&emsp;&emsp;你初步完成了对工作区的设置。接下来，我们可以测试cdp-tests能否编译。 如果下方未显示终端，点击上方菜单“查看”-“终端”，或者按下Ctrl-`（注意：`不是‘（单引号），是键盘左上角的那个按键。）以打开终端界面。在新弹出的终端中，输入下面的命令：
+&emsp;&emsp;你初步完成了对工作区的设置。接下来，我们可以测试cdp-tests能否编译。 如果下方未显示终端，点击菜单栏的`查看`->`终端`，或使用快捷键`Ctrl`+``` （注意：不是单引号，而是键盘左上角的那个按键）打开终端界面。
+
+&emsp;&emsp;在新弹出的终端中，输入`make`命令，如下图所示。
 
 ![连接8](assets/connect8.png)
 
-&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见[测试框架](trace.md#1-了解测试框架)说明。
+&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见<a href="trace.md#1-了解测试框架" target="_blank">测试框架</a>说明。
 
 ![连接9](assets/connect9.png)
 
@@ -126,7 +129,7 @@ done.
 
 &emsp;&emsp;MobaXterm 是一款远程控制工具，支持创建SSH、Telnet、Rsh、Xdmc、RDP、VNC、FTP、 SFTP、串口(Serial COM)、本地Shell、Mosh、Aws、WSL(微软子系统)等超多连接功能。MobaXterm 提供了人性化的操作界面，支持与主流的操作系统连接进行控制和管理操作，功能十分强大。
 
-&emsp;&emsp;打开MobaXterm，单击打开工具Session（位于左上角）选择New sessions打开新建窗口，选择SSH，输入远程服务器的IP地址、登陆用户名及端口（ **端口号：6666** ），点击OK。
+&emsp;&emsp;打开MobaXterm，单击打开位于左上角的工具`Session`，选择`New sessions`打开新建窗口，选择`SSH`，输入远程服务器的IP地址、登陆用户名及端口（ **端口号：6666** ），点击OK。
 
 <center><img src = "../assets/mobaxterm-1.png" width = 600></center>
 
@@ -148,11 +151,11 @@ done.
 
 #### 2.4.2 FTP文件传输
 
-&emsp;&emsp;SSH远程登录完毕，双击左下角的Sftp，就出现了远程服务器的文件目录。
+&emsp;&emsp;SSH远程登录完毕，双击左下角的`Sftp`，就出现了远程服务器的文件目录。
 
 ![mobaxterm6](assets/mobaxterm-6.png)
 
-&emsp;&emsp;接下来在可以点击按钮“Upload to current folder”或者“Download selected files”，在windows系统和远程实验平台之间上传或下载文件。
+&emsp;&emsp;接下来在可以点击按钮`Upload to current folder`或者`Download selected files`，在Windows系统和远程实验平台之间上传或下载文件。
 
 !!! warning "注意事项 :loudspeaker:"
     &emsp;&emsp;使用完毕后，需在MobaXterm中输入`exit`命令退出！
@@ -169,9 +172,9 @@ done.
 
 &emsp;&emsp;接下来，我们将私钥加入到自己的身份认证中。在终端继续输入：
 
-```bat
-ssh-add 你的私钥的完整路径
-# 例如，如上图所示，我应该键入ssh-add C:\Users\willson\.ssh\id_rsa_priv_20210909
+```bash
+ 1|ssh-add 你的私钥的完整路径
+ 2|# 例如，如上图所示，我应该键入ssh-add C:\Users\willson\.ssh\id_rsa_priv_20210909
 ```
 
 &emsp;&emsp;在你的Windows上将公钥文件打开（用你喜欢的纯文本编辑器，比如记事本或者VS Code），复制其中的内容。
@@ -179,42 +182,40 @@ ssh-add 你的私钥的完整路径
 &emsp;&emsp;最后，登录你想要快捷认证的计算节点的终端，并执行下面的命令：
 
 ```bash
-mkdir -p ~/.ssh
-vi ~/.ssh/authorized_keys
+ 1|mkdir -p ~/.ssh
+ 2|vi ~/.ssh/authorized_keys
 ```
 
 &emsp;&emsp;这会打开一个文件编辑界面。按下`i`按键，进入编辑模式，并粘贴到上面节点终端中编辑界面的一个新行里。按下`Esc`，按下`:wq`可保存并退出。如果不放心，可以`cat ~/.ssh/authorized_keys`并检查输出和你刚才贴进去的是不是一样的。
 配置完成后，下次你从Windows登陆时，应该就无需密码认证了。
 
-### 3.2 Visual Studio Code：进阶使用
+### 3.2 VS Code：进阶使用
 
-&emsp;&emsp;有没有怀念Visual Studio、CodeBlock等IDE中便捷的一键运行功能？没关系，完备的插件市场配合自动化脚本可以完成你的一切功能需求！
-*下略：感兴趣的话可以了解一下Intelli Sense、MakeFile以及VSCode中的Task。*
+&emsp;&emsp;有没有怀念VS Code、CodeBlock等IDE中便捷的一键运行功能？没关系，完备的插件市场配合自动化脚本可以完成你的一切功能需求！
+*下略。感兴趣的话可以了解一下Intelli Sense、MakeFile以及VSCode中的Task。*
 
-### 3.3 Q&A
+## 4. Q&A
 
-#### 我不是Windows 10系统，这会带来什么问题吗？
+### 4.1 我不是Windows 10系统，这会带来什么问题吗？
 
-##### 我在使用Linux/macOS？
+#### 4.1.1 我在使用Linux/macOS？
 
 &emsp;&emsp;Visual Studio Code也有Linux版和macOS版，具体操作大同小异，毕竟环境主要在服务器上。
 
-##### 我正在使用旧的Windows版本/我没有更新我的Windows 10系统？
+#### 4.1.2 我正在使用旧的Windows版本/我没有更新我的Windows 10系统？
 
 &emsp;&emsp;请更新你的系统。使用过时的系统有各种各样的风险，其中最大的是与时代脱轨。
 
-##### 我正在使用Windows 11？
+#### 4.1.3 我正在使用Windows 11？
 
 &emsp;&emsp;此教程完全兼容Windows 11。
 
-#### 我输入的所有命令看起来都是对的，但是为什么运行失败了？
-
-##### 全角标点符号/英文字符？
+### 4.2 我输入的所有命令看起来都是对的，但是为什么运行失败了？
 
 &emsp;&emsp;确保你输入的是正常的半角英文字符与英文标点符号，如图所示：
 
 <center><img src = "../assets/char.png" width = 600></center>
 
-&emsp;&emsp;这可以通过一起按下shift+空格，或者切换到英文输入法解决。**永远不要在中文输入法下输入命令！**
+&emsp;&emsp;这可以通过一起按下shift+空格，或者切换到英文输入法解决。
 
-
+&emsp;&emsp;**永远不要在中文输入法下输入命令！**

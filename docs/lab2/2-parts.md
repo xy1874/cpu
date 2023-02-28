@@ -97,7 +97,7 @@
 
 #### 3.2.1 定义程序ROM
 
-&emsp;&emsp;取指单元包含了存放miniRV-1汇编程序的程序ROM (Instructioin ROM, IROM)。我们需要使用Vivado自带的存储IP核Distributed Memory Generator来定义IROM。该IP核的手册见Xilinx的在线文档《[pg063-dist-mem-gen.pdf](https://www.xilinx.com/support/documentation/ip_documentation/dist_mem_gen/v8_0/pg063-dist-mem-gen.pdf)》。
+&emsp;&emsp;取指单元包含了存放miniRV-1汇编程序的程序ROM (Instructioin ROM, IROM)。我们需要使用Vivado自带的存储IP核Distributed Memory Generator来定义IROM。该IP核的手册见Xilinx的在线文档《<a href="https://www.xilinx.com/support/documentation/ip_documentation/dist_mem_gen/v8_0/pg063-dist-mem-gen.pdf" target="_blank">pg063-dist-mem-gen.pdf</a>》。
 
 &emsp;&emsp;在Vivado的Project Manager下，点击IP Catalog。在搜索框中输入“distributed”，并双击Distributed Memory Generator以创建IROM，如图3-8所示。
 
@@ -219,7 +219,7 @@ af810c04,
 
 ## 4. 寄存器堆设计
 
-&emsp;&emsp;miniRV-1含有32个32位寄存器，详细说明见上一节中的“[miniRV-1通用寄存器](../1-inst/#1-minirv-1)”。
+&emsp;&emsp;miniRV-1含有32个32位寄存器，详细说明见上一节中的“<a href="../1-inst/#1-minirv-1" target="_blank">miniRV-1通用寄存器</a>”。
 
 &emsp;&emsp;分析指令格式易知，一条指令最多需要访问3个寄存器，这决定了寄存器堆必须具有3个端口——2个读端口 (对应`rs1`和`rs2`)和1个写端口 (对应`rd`)，如图3-17所示。
 

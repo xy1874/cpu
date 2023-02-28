@@ -1,34 +1,36 @@
-## 0. 关于实验环境
+## 1. 关于实验环境
 
 &emsp;&emsp;Trace测试使用Linux系统部署测试环境，我们提供了三种实验环境供同学们选择：
 
 **（1）远程实验平台**
 
-&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见[远程实验环境使用指南](remote_env.md)。
+&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见<a href="remote_env.md" target="_blank">附录1：远程实验环境使用指南</a>。
 
 !!! info 温馨提示
     &emsp;&emsp;虽然我们已经做了一些方案保证远程环境的可靠性，但在某些特殊情况下，也不能确保不出故障，为安全起见，建议同学们将代码及时上传到git仓库或者下载到本地保存。
 
 **（2）本地虚拟机**
   
-&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见[虚拟机使用指南](vm.md)。
+&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见<a href="vm.md" target="_blank">附录2：虚拟机使用指南</a>。
 
 **（3）自行部署实验环境**
 
-&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见[实验环境部署指南](env_bymyself.md)。
+&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见<a href="env_diy.md" target="_blank">附录3：实验环境部署指南</a>。
 
-## 1. 了解测试框架
 
-&emsp;&emsp;请在终端下输入命令：
+
+## 2. 了解测试框架
+
+&emsp;&emsp;请在终端里依次输入并执行下列命令，以拉取测试框架代码，并切换至peri分支：
 
 ``` bash
-cd ~
-git clone https://github.com/HITSZ-CDP/cdp-tests.git
-cd cdp-tests
-git checkout peri
+ 1|cd ~
+ 2|git clone https://github.com/HITSZ-CDP/cdp-tests.git
+ 3|cd cdp-tests
+ 4|git checkout peri
 ```
 
-&emsp;&emsp;拉取测试框架代码，并切换至peri分支。
+&emsp;&emsp;cdp-tests目录的文件结构如下图所示。
 
 ```
 .
@@ -68,11 +70,11 @@ git checkout peri
 
 
 
-## 2. 添加自己的代码
+## 3. 添加自己的代码
 
 &emsp;&emsp;`mycpu`目录中包含了你实现的CPU，以及顶层模块对外的连线，你需要将自己实现的CPU代码复制到该目录下，模块的层次结构如下图所示：
 
-<center><img src = "../assets/trace-1.png" width = 500></center>
+<center><img src = "../assets/trace-1.png" width = 350></center>
 
 &emsp;&emsp;需要注意的是：
 
@@ -97,7 +99,7 @@ git checkout peri
 14|        //......
 15|    );
 16|
-17|    // 下面两个模块，只需要实例化并连线，不需要添加文件
+17|    // 下面两个模块，只需要实例化代码和连线代码，不需要创建IP核
 18|    inst_mem imem(
 19|        ......
 20|    );
@@ -120,27 +122,27 @@ git checkout peri
 
 
 
-## 3. 运行测试
+## 4. 运行测试
 
-&emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见[使用MobaXterm](remote_env.md#13-使用mobaxterm)，虚拟机的MobaXterm用法详见[使用MobaXTerm](vm.md#3-使用mobaxterm)）
+&emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见<a href="remote_env.md#24-使用mobaxterm" target="_blank">附录1的2.4节-使用MobaXterm</a>，虚拟机的MobaXterm用法详见<a href="vm.md#4-使用mobaxterm" target="_blank">附录2的第4节-使用MobaXTerm</a>）。
 
 &emsp;&emsp;首先进入cdp-tests文件夹，输入命令：
 
 ``` bash
-cd cdp-tests
-make
+ 1|cd cdp-tests
+ 2|make
 ```
 
 &emsp;&emsp;将会编译你的Verilog代码，生成可执行的仿真模型。
 
 ![image-20210704012833242](assets/trace-2.png)
 
-### 3.1 运行单个测试
+### 4.1 运行单个测试
 
 &emsp;&emsp;如果你对你CPU没有充足的信心，你可以选择单个测试运行，所有的测试用例都位于`bin`文件夹下，输入命令
 
 ``` bash
-ls bin
+ 1|ls bin
 ```
 
 &emsp;&emsp;可以看到测试点名称。
@@ -148,7 +150,7 @@ ls bin
 &emsp;&emsp;例如，我们想运行`sltu`指令的测试，我们输入：
 
 ``` bash
-make run TEST=sltu
+ 1|make run TEST=sltu
 ```
 
 ![image-20210704013056368](assets/trace-3.png)
@@ -161,7 +163,7 @@ make run TEST=sltu
 
 &emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。
 
-### 3.2 打开波形
+### 4.2 打开波形
 
 &emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令
 
@@ -170,14 +172,14 @@ make run TEST=sltu
     如果你用MobaXterm就不需要那么麻烦，直接输入命令就可以查看波形：）
 
 ``` bash
-gtkwave auipc.vcd > /dev/null 2>&1 &  
+ 1|gtkwave auipc.vcd > /dev/null 2>&1 &  
 ```
 
 &emsp;&emsp;弹出波形窗口。（`auipc`替换成需要打开的文件名）
 
 ![image-20210704014403857](assets/trace-5.png)
 
-### 3.3 查看反汇编
+### 4.3 查看反汇编
 
 &emsp;&emsp;反汇编文件在`asm`文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察`auipc.dump`文件，可以找到出错点。
 
@@ -185,14 +187,14 @@ gtkwave auipc.vcd > /dev/null 2>&1 &
 
 &emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。
 
-### 3.4 批量运行测试
+### 4.4 批量运行测试
 
 &emsp;&emsp;如果你对你的实现有足够的信心，可以采用以下两种方式来自动化测试。
 
 **（1）使用python脚本自动测试**
 
 ``` bash
-python3 run_all_tests.py
+ 1|python3 run_all_tests.py
 ```
 
 !!! Warning
@@ -209,7 +211,7 @@ python3 run_all_tests.py
 &emsp;&emsp;输入以下命令:
 
 ``` bash
-make run TEST=start
+ 1|make run TEST=start
 ```
 
 如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。

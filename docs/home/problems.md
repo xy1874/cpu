@@ -9,7 +9,8 @@
 
 #### 1.1 数据通路图用什么软件画？
 
-&emsp;&emsp;可以使用[Visio](http://ms.hitsz.edu.cn/#)、[Visual Paradigm](https://online.visual-paradigm.com/drive/#infoart:proj=0&dashboard)、[ioDraw](https://www.iodraw.com/)、[draw.io](https://app.diagrams.net/)、[ProcessOn](https://www.processon.com/?utm_source=baidu&utm_medium=sem&utm_term=120470957204&utm_content=49530906908&uc_pagenum=1&uc_adposition=cl2&bd_vid=7544670811206821952)等。
+&emsp;&emsp;可以使用<a href="http://ms.hitsz.edu.cn/#" target="_blank">Visio</a>、<a href="https://online.visual-paradigm.com/drive/#infoart:proj=0&dashboard" target="_blank">Visual Paradigm</a>、
+<a href="https://www.iodraw.com/" target="_blank">ioDraw</a>、<a href="https://app.diagrams.net/" target="_blank">draw.io</a>、<a href="https://www.processon.com/?utm_source=baidu&utm_medium=sem&utm_term=120470957204&utm_content=49530906908&uc_pagenum=1&uc_adposition=cl2&bd_vid=7544670811206821952" target="_blank">ProcessOn</a>等
 
 #### 1.2 Verilog如何正确添加头文件？
 
@@ -17,7 +18,7 @@
 
 #### 1.3 定义了宏，但报错显示未定义？
 
-&emsp;&emsp;如果定义了头文件，首先确保头文件被正确添加（见[1.2](./#12-verilog)）。此外，引用宏定义时需在前面加上 **``` ` ```** 符号。例如，`#define MACRO1 111`，则引用时应该是````MACRO1```。
+&emsp;&emsp;如果定义了头文件，首先确保头文件被正确添加（见上一条1.2）。此外，引用宏定义时需在前面加上 **``` ` ```** 符号。例如，`#define MACRO1 111`，则引用时应该是````MACRO1```。
 
 #### 1.4 移位运算的移位位数超过`'d32`，或者是个负数，怎么办？
 
@@ -35,7 +36,7 @@
 
 &emsp;&emsp;<u>优化措施需要针对瓶颈展开，才能事半功倍</u>。从理论上分析，单周期CPU的频率取决于执行最耗时的指令，流水线CPU的频率取决于最耗时的流水线阶段。因此，想要提高频率，需要找出数据通路中最耗时的部分。
 
-&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟，详情可参考《[FPGA时序分析之关键路径-CSDN Blog](https://blog.csdn.net/dengfenglai123/article/details/115598250?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-115598250-blog-126041215.pc_relevant_multi_platform_featuressortv2dupreplace&spm=1001.2101.3001.4242.2&utm_relevant_index=4)》。
+&emsp;&emsp;在实践中，可借助Vivado综合后生成的时序报告来找出关键路径，然后通过逻辑优化或切割等方法来降低关键路径的延迟，详情可参考《<a href="https://blog.csdn.net/dengfenglai123/article/details/115598250?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-115598250-blog-126041215.pc_relevant_multi_platform_featuressortv2dupreplace&spm=1001.2101.3001.4242.2&utm_relevant_index=4" target="_blank">FPGA时序分析之关键路径-CSDN Blog</a>》。
 
 &emsp;&emsp;使用Vivado查看关键路径的具体操作步骤如下：
 
@@ -92,7 +93,7 @@
 
 #### 2.4 VSCode连接远程Trace平台，报错`Bad owner or permissions on .ssh/config`
 
-&emsp;&emsp;解决方法可参考[https://cloud.tencent.com/developer/article/1643437](https://cloud.tencent.com/developer/article/1643437)。
+&emsp;&emsp;解决方法可参考《<a href="https://cloud.tencent.com/developer/article/1643437" target="_blank">Win10下Bad owner or permissions on .ssh/config的解决办法-腾讯云</a>》。
 
 #### 2.5 build的时候报错`Timescale missing on this module`
 
@@ -104,7 +105,7 @@
 
 #### 2.7 Trace验证时，所有指令都显示Time out
 
-&emsp;&emsp;仔细按照[Trace测试说明](../../trace/trace/#2)逐一检查debug信号、模块名、存储器参数设置等是否符合要求。
+&emsp;&emsp;仔细按照<a href="../../trace/trace/#2" target="_blank">Trace测试说明</a>逐一检查debug信号、模块名、存储器参数设置等是否符合要求。
 
 #### 2.8 复位信号到底是低电平还是高电平？
 
@@ -128,7 +129,7 @@
 
 #### 2.12 Trace测试用例的汇编代码在哪里可以找到？
 
-&emsp;&emsp;看这里：[GITHUB/HITSZ-CDP/cdp-tests/asm](https://github.com/HITSZ-CDP/cdp-tests/tree/main/asm)。
+&emsp;&emsp;看这里：<a href="https://github.com/HITSZ-CDP/cdp-tests/tree/main/asm" target="_blank">`GITHUB`/`HITSZ-CDP`/`cdp-tests`/`asm`/</a>。
 
 #### 2.13 仿真Trace通过所有指令，但下板卡在某一条指令的测例
 
@@ -199,11 +200,11 @@
 
 &emsp;&emsp;仿真和下板出现不一致的情况，可能是以下几个原因：
 
-&emsp;&emsp;（1）[代码规范性](../codingstyle/)问题，比如寄存器未赋初值、阻塞赋值和非阻塞赋值混用、多驱动等；  
+&emsp;&emsp;（1）<a href="../codingstyle/" target="_blank">代码规范性</a>问题，比如寄存器未赋初值、阻塞赋值和非阻塞赋值混用、多驱动等；  
 &emsp;&emsp;（2）关键路径延迟太长，导致不满足`Setup time`或`Hold time` —— 可尝试优化关键路径或降低CPU主频；  
 &emsp;&emsp;（3）组合逻辑出现竞争或冒险。
 
-&emsp;&emsp;仿真和下板不一致时，问题通常比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用[FPGA在线调试方法](../../verify/online-debug/)抓取运行时波形进行分析。
+&emsp;&emsp;仿真和下板不一致时，问题通常比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。
 
 #### 3.7 `Timing Report`中的`WNS`、`TNS`等几个时间都显示`NA`
 
