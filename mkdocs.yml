@@ -1,6 +1,6 @@
 site_name: 计算机设计与实践（2022夏季） | 哈工大（深圳）
 copyright: 'Copyright &copy; 2019 - 2023 哈尔滨工业大学（深圳）'
-repo_name: 'HITSZ-ECEI-CS/CPUDesign'
+repo_name: 'HITSZ-COMP2012'
 repo_url: 'https://gitee.com/hitsz-cslab/cpu'
 
 markdown_extensions:
