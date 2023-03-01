@@ -19,11 +19,11 @@
 
 &emsp;&emsp;VirtualBox中对于虚拟网卡，需要稍微配置一下才可以使用，具体的配置如下：
 
-![image-20210704153913729](assets/vm-2.png)
+<center><img src = "../assets/vm-2.png" width = 550></center>
 
-![image-20210704153926882](assets/vm-3.png)
+<center><img src = "../assets/vm-3.png" width = 700></center>
 
-![image-20210704153948742](assets/vm-4.png)
+<center><img src = "../assets/vm-4.png" width = 700></center>
 
 ## 4. 使用MobaXTerm
 
