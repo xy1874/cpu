@@ -183,7 +183,7 @@
 
 &emsp;&emsp;反汇编文件在`asm`文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察`auipc.dump`文件，可以找到出错点。
 
-![image-20210704013720885](assets/trace-6.png)
+<center><img src = "../assets/trace-6.png" width = 600></center>
 
 &emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。
 
@@ -202,7 +202,7 @@
 
 &emsp;&emsp;在很长的滚屏之后，会出现一个测试报告，告诉你哪些测试通过，哪些测试不通过。所有测试点的波形文件都在`waveform`文件夹中，你可以打开对应的文件结合反汇编和在SUMMARY之前输出的报错信息进行调试。
 
-![image-20210704014045871](assets/trace-7.png)
+<center><img src = "../assets/trace-7.png" width = 450></center>
 
 ![image-20210704013913901](assets/trace-8.png)
 
@@ -216,8 +216,8 @@
 
 如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
 
-![trace9](assets/trace-9.png)
+<center><img src = "../assets/trace-9.png" width = 300></center>
 
 如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。
 
-![trace10](assets/trace-10.png)
+<center><img src = "../assets/trace-10.png" width = 380></center>

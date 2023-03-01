@@ -1533,7 +1533,7 @@
 <p><img alt="image-20210704014403857" src="../assets/trace-5.png" /></p>
 <h3 id="43">4.3 查看反汇编</h3>
 <p>&emsp;&emsp;反汇编文件在<code>asm</code>文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察<code>auipc.dump</code>文件，可以找到出错点。</p>
-<p><img alt="image-20210704013720885" src="../assets/trace-6.png" /></p>
+<p><center><img src = "../assets/trace-6.png" width = 600></center></p>
 <p>&emsp;&emsp;根据出错点，结合波形，我们可以进行高效的调试了。</p>
 <h3 id="44">4.4 批量运行测试</h3>
 <p>&emsp;&emsp;如果你对你的实现有足够的信心，可以采用以下两种方式来自动化测试。</p>
@@ -1545,16 +1545,16 @@
 <p>&emsp;&emsp;执行这条命令之前，需要保证之前已经<code>make</code>过了。</p>
 </div>
 <p>&emsp;&emsp;在很长的滚屏之后，会出现一个测试报告，告诉你哪些测试通过，哪些测试不通过。所有测试点的波形文件都在<code>waveform</code>文件夹中，你可以打开对应的文件结合反汇编和在SUMMARY之前输出的报错信息进行调试。</p>
-<p><img alt="image-20210704014045871" src="../assets/trace-7.png" /></p>
+<p><center><img src = "../assets/trace-7.png" width = 450></center></p>
 <p><img alt="image-20210704013913901" src="../assets/trace-8.png" /></p>
 <p><strong>（2）使用start测试程序自动测试</strong></p>
 <p>&emsp;&emsp;输入以下命令:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>make<span class="w"> </span>run<span class="w"> </span><span class="nv">TEST</span><span class="o">=</span>start
 </code></pre></div>
 <p>如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。</p>
-<p><img alt="trace9" src="../assets/trace-9.png" /></p>
+<p><center><img src = "../assets/trace-9.png" width = 300></center></p>
 <p>如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。</p>
-<p><img alt="trace10" src="../assets/trace-10.png" /></p>
+<p><center><img src = "../assets/trace-10.png" width = 380></center></p>
 
 
 
