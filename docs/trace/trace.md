@@ -4,18 +4,18 @@
 
 **（1）远程实验平台**
 
-&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见<a href="remote_env.md" target="_blank">附录1：远程实验环境使用指南</a>。
+&emsp;&emsp;远程实验平台已经将Trace部署在实验中心的服务器上，我们把所有依赖的配置都已经事先搭建完毕。无论你的电脑性能如何，无论你是在宿舍、实验室还是自习室，只要你还能连上校园网，你就能完成你的实验。具体使用方式详见<a href="../remote_env.md" target="_blank">附录1：远程实验环境使用指南</a>。
 
 !!! info 温馨提示
     &emsp;&emsp;虽然我们已经做了一些方案保证远程环境的可靠性，但在某些特殊情况下，也不能确保不出故障，为安全起见，建议同学们将代码及时上传到git仓库或者下载到本地保存。
 
 **（2）本地虚拟机**
   
-&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见<a href="vm.md" target="_blank">附录2：虚拟机使用指南</a>。
+&emsp;&emsp;我们提供了虚拟机镜像供同学们下载到你本地的电脑上运行。我们也帮你把所有依赖的配置都已经事先搭建完毕，你只需要下载、导入虚拟机即可使用。具体使用方式详见<a href="../vm.md" target="_blank">附录2：虚拟机使用指南</a>。
 
 **（3）自行部署实验环境**
 
-&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见<a href="env_diy.md" target="_blank">附录3：实验环境部署指南</a>。
+&emsp;&emsp;同学们也可以尝试在自己的电脑上部署实验环境，体验一下自己动手的乐趣：）具体搭建方法详见<a href="../env_diy.md" target="_blank">附录3：实验环境部署指南</a>。
 
 
 
@@ -124,7 +124,7 @@
 
 ## 4. 运行测试
 
-&emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见<a href="remote_env.md#24-使用mobaxterm" target="_blank">附录1的2.4节-使用MobaXterm</a>，虚拟机的MobaXterm用法详见<a href="vm.md#4-使用mobaxterm" target="_blank">附录2的第4节-使用MobaXTerm</a>）。
+&emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见<a href="../remote_env.md#24-使用mobaxterm" target="_blank">附录1的2.4节-使用MobaXterm</a>，虚拟机的MobaXterm用法详见<a href="../vm.md#4-使用mobaxterm" target="_blank">附录2的第4节-使用MobaXTerm</a>）。
 
 &emsp;&emsp;首先进入cdp-tests文件夹，输入命令：
 

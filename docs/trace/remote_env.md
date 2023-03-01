@@ -119,7 +119,7 @@
 
 ![连接8](assets/connect8.png)
 
-&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见<a href="trace.md#1-了解测试框架" target="_blank">测试框架</a>说明。
+&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见<a href="../trace.md#1-了解测试框架" target="_blank">测试框架</a>说明。
 
 ![连接9](assets/connect9.png)
 
