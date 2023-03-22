@@ -79,7 +79,7 @@
 - 汇编例子：
 <center>
 ``` asm
-add x4, x2, x3    ; (x4) ← (x2) + (x3), (PC) ← (PC) + 4
+add x4, x2, x3    # (x4) ← (x2) + (x3), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -90,7 +90,7 @@ add x4, x2, x3    ; (x4) ← (x2) + (x3), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sub x7, x5, x9    ; (x7) ← (x5) - (x9), (PC) ← (PC) + 4
+sub x7, x5, x9    # (x7) ← (x5) - (x9), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -101,7 +101,7 @@ sub x7, x5, x9    ; (x7) ← (x5) - (x9), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-and x6, x1, x0    ; (x6) ← (x1) & (x0), (PC) ← (PC) + 4
+and x6, x1, x0    # (x6) ← (x1) & (x0), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -112,7 +112,7 @@ and x6, x1, x0    ; (x6) ← (x1) & (x0), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-or x12, x13, x1    ; (x12) ← (x13) | (x1), (PC) ← (PC) + 4
+or x12, x13, x1    # (x12) ← (x13) | (x1), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -123,7 +123,7 @@ or x12, x13, x1    ; (x12) ← (x13) | (x1), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-xor t0, t0, t0    ; (t0) ← (t0) ^ (t0), (PC) ← (PC) + 4
+xor t0, t0, t0    # (t0) ← (t0) ^ (t0), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -134,7 +134,7 @@ xor t0, t0, t0    ; (t0) ← (t0) ^ (t0), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sll t1, t6, t2    ; (t1) ← (t6) << (t2), (PC) ← (PC) + 4
+sll t1, t6, t2    # (t1) ← (t6) << (t2), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -145,7 +145,7 @@ sll t1, t6, t2    ; (t1) ← (t6) << (t2), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-srl t5, t3, t4    ; (t5) ← (t3) >> (t4), (PC) ← (PC) + 4
+srl t5, t3, t4    # (t5) ← (t3) >> (t4), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -156,7 +156,7 @@ srl t5, t3, t4    ; (t5) ← (t3) >> (t4), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sra t3, t4, t7    ; (t3) ← (t4) >> (t7), (PC) ← (PC) + 4
+sra t3, t4, t7    # (t3) ← (t4) >> (t7), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -167,7 +167,7 @@ sra t3, t4, t7    ; (t3) ← (t4) >> (t7), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-slt t1, t2, t0    ; (t1) ← ((t2) < (t0)), (PC) ← (PC) + 4
+slt t1, t2, t0    # (t1) ← ((t2) < (t0)), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -178,7 +178,7 @@ slt t1, t2, t0    ; (t1) ← ((t2) < (t0)), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sltu s5, t1, s1    ; (s5) ← ((t1) < (s1)), (PC) ← (PC) + 4
+sltu s5, t1, s1    # (s5) ← ((t1) < (s1)), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -191,7 +191,7 @@ sltu s5, t1, s1    ; (s5) ← ((t1) < (s1)), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-addi sp, sp, 4    ; (sp) ← (sp) + 4, (PC) ← (PC) + 4
+addi sp, sp, 4    # (sp) ← (sp) + 4, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -202,7 +202,7 @@ addi sp, sp, 4    ; (sp) ← (sp) + 4, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-andi t1, t3, 0xFFE    ; (t1) ← (t3) & 0xFFE, (PC) ← (PC) + 4
+andi t1, t3, 0xFFE    # (t1) ← (t3) & 0xFFE, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -213,7 +213,7 @@ andi t1, t3, 0xFFE    ; (t1) ← (t3) & 0xFFE, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-ori t6, t2, 0x001    ; (t6) ← (t2) | 0x001, (PC) ← (PC) + 4
+ori t6, t2, 0x001    # (t6) ← (t2) | 0x001, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -224,7 +224,7 @@ ori t6, t2, 0x001    ; (t6) ← (t2) | 0x001, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-xori s4, t0, 0x002    ; (s4) ← (t0) ^ 0x002, (PC) ← (PC) + 4
+xori s4, t0, 0x002    # (s4) ← (t0) ^ 0x002, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -235,7 +235,7 @@ xori s4, t0, 0x002    ; (s4) ← (t0) ^ 0x002, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-slli a5, t3, 3    ; (a5) ← (t3) << 3, (PC) ← (PC) + 4
+slli a5, t3, 3    # (a5) ← (t3) << 3, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -246,7 +246,7 @@ slli a5, t3, 3    ; (a5) ← (t3) << 3, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-srli a1, t2, 1    ; (a1) ← (t2) >> 1, (PC) ← (PC) + 4
+srli a1, t2, 1    # (a1) ← (t2) >> 1, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -257,7 +257,7 @@ srli a1, t2, 1    ; (a1) ← (t2) >> 1, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-srai t3, t1, 7    ; (t3) ← (t1) >> 7, (PC) ← (PC) + 4
+srai t3, t1, 7    # (t3) ← (t1) >> 7, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -268,7 +268,7 @@ srai t3, t1, 7    ; (t3) ← (t1) >> 7, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-slti t0, t5, 0    ; (t0) ← ((t5) < 0), (PC) ← (PC) + 4
+slti t0, t5, 0    # (t0) ← ((t5) < 0), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -279,7 +279,7 @@ slti t0, t5, 0    ; (t0) ← ((t5) < 0), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sltiu t3, t1, -1024    ; (t3) ← ((t1) < 0xC00), (PC) ← (PC) + 4
+sltiu t3, t1, -1024    # (t3) ← ((t1) < 0xC00), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -290,7 +290,7 @@ sltiu t3, t1, -1024    ; (t3) ← ((t1) < 0xC00), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lb t0, -3(fp)    ; (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4
+lb t0, -3(fp)    # (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -301,7 +301,7 @@ lb t0, -3(fp)    ; (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lbu t0, -3(fp)    ; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
+lbu t0, -3(fp)    # (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -312,7 +312,7 @@ lbu t0, -3(fp)    ; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lh t5, 6(fp)    ; (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4
+lh t5, 6(fp)    # (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -323,7 +323,7 @@ lh t5, 6(fp)    ; (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lhu t5, 6(fp)    ; (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4
+lhu t5, 6(fp)    # (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -334,7 +334,7 @@ lhu t5, 6(fp)    ; (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-lh t3, 8(fp)    ; (t3) ← Mem[(fp) + 8], (PC) ← (PC) + 4
+lh t3, 8(fp)    # (t3) ← Mem[(fp) + 8], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -345,7 +345,7 @@ lh t3, 8(fp)    ; (t3) ← Mem[(fp) + 8], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-jalr ra, -4(t0)    ; t ← (PC) + 4, (PC) ← ((t0) - 4) & ~1, (ra) ← t
+jalr ra, -4(t0)    # t ← (PC) + 4, (PC) ← ((t0) - 4) & ~1, (ra) ← t
 ```
 </center>
 
@@ -357,7 +357,7 @@ jalr ra, -4(t0)    ; t ← (PC) + 4, (PC) ← ((t0) - 4) & ~1, (ra) ← t
 - 汇编例子：
 <center>
 ``` asm
-sb t1, 5(fp)    ; Mem[(fp) + 3] ← (t1)[7:0], (PC) ← (PC) + 4
+sb t1, 5(fp)    # Mem[(fp) + 3] ← (t1)[7:0], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -368,7 +368,7 @@ sb t1, 5(fp)    ; Mem[(fp) + 3] ← (t1)[7:0], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sh t3, 10(fp)    ; Mem[(fp) + 10] ← (t3)[15:0], (PC) ← (PC) + 4
+sh t3, 10(fp)    # Mem[(fp) + 10] ← (t3)[15:0], (PC) ← (PC) + 4
 ```
 </center>
 
@@ -379,7 +379,7 @@ sh t3, 10(fp)    ; Mem[(fp) + 10] ← (t3)[15:0], (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-sw t5, 4(fp)    ; Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4
+sw t5, 4(fp)    # Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4
 ```
 </center>
 
@@ -393,7 +393,7 @@ sw t5, 4(fp)    ; Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-beq t0, t1, -4    ; PC ← ((t0) == (t1)) ? PC - 4 : PC + 4
+beq t0, t1, -4    # PC ← ((t0) == (t1)) ? PC - 4 : PC + 4
 ```
 </center>
 
@@ -404,7 +404,7 @@ beq t0, t1, -4    ; PC ← ((t0) == (t1)) ? PC - 4 : PC + 4
 - 汇编例子：
 <center>
 ``` asm
-bne t0, t1, 8    ; PC ← ((t0) != (t1)) ? PC + 8 : PC + 4
+bne t0, t1, 8    # PC ← ((t0) != (t1)) ? PC + 8 : PC + 4
 ```
 </center>
 
@@ -415,7 +415,7 @@ bne t0, t1, 8    ; PC ← ((t0) != (t1)) ? PC + 8 : PC + 4
 - 汇编例子：
 <center>
 ``` asm
-blt t0, t1, -4    ; PC ← ((t0) < (t1)) ? PC - 4 : PC + 4
+blt t0, t1, -4    # PC ← ((t0) < (t1)) ? PC - 4 : PC + 4
 ```
 </center>
 
@@ -426,7 +426,7 @@ blt t0, t1, -4    ; PC ← ((t0) < (t1)) ? PC - 4 : PC + 4
 - 汇编例子：
 <center>
 ``` asm
-bltu t0, t1, 8    ; PC ← ((t0) < (t1)) ? PC + 8 : PC + 4
+bltu t0, t1, 8    # PC ← ((t0) < (t1)) ? PC + 8 : PC + 4
 ```
 </center>
 
@@ -437,7 +437,7 @@ bltu t0, t1, 8    ; PC ← ((t0) < (t1)) ? PC + 8 : PC + 4
 - 汇编例子：
 <center>
 ``` asm
-bge t0, t1, -4    ; PC ← ((t0) >= (t1)) ? PC - 4 : PC + 4
+bge t0, t1, -4    # PC ← ((t0) >= (t1)) ? PC - 4 : PC + 4
 ```
 </center>
 
@@ -448,7 +448,7 @@ bge t0, t1, -4    ; PC ← ((t0) >= (t1)) ? PC - 4 : PC + 4
 - 汇编例子：
 <center>
 ``` asm
-bgeu t0, t1, 8    ; PC ← ((t0) >= (t1)) ? PC + 8 : PC + 4
+bgeu t0, t1, 8    # PC ← ((t0) >= (t1)) ? PC + 8 : PC + 4
 ```
 </center>
 
@@ -461,7 +461,7 @@ bgeu t0, t1, 8    ; PC ← ((t0) >= (t1)) ? PC + 8 : PC + 4
 - 汇编例子：  
 <center>
 ``` asm
-lui t0, 0xABCDE    ; (t0) ← 0xABCDE000, (PC) ← (PC) + 4
+lui t0, 0xABCDE    # (t0) ← 0xABCDE000, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -472,7 +472,7 @@ lui t0, 0xABCDE    ; (t0) ← 0xABCDE000, (PC) ← (PC) + 4
 - 汇编例子：  
 <center>
 ``` asm
-auipc t3, 0x2468A    ; (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4
+auipc t3, 0x2468A    # (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4
 ```
 </center>
 
@@ -485,6 +485,6 @@ auipc t3, 0x2468A    ; (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4
 - 汇编例子：
 <center>
 ``` asm
-jal ra, -4    ; (ra) ← (PC) + 4, (PC) ← (PC) - 4
+jal ra, -4    # (ra) ← (PC) + 4, (PC) ← (PC) - 4
 ```
 </center>

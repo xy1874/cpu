@@ -2160,7 +2160,7 @@
 <li>功能描述：把寄存器rs1加上寄存器rs2，结果写入寄存器rd。忽略算术溢出。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">add</span><span class="w"> </span><span class="no">x4</span><span class="p">,</span><span class="w"> </span><span class="no">x2</span><span class="p">,</span><span class="w"> </span><span class="no">x3</span><span class="w">    </span><span class="c1">; (x4) ← (x2) + (x3), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">add</span><span class="w"> </span><span class="no">x4</span><span class="p">,</span><span class="w"> </span><span class="no">x2</span><span class="p">,</span><span class="w"> </span><span class="no">x3</span><span class="w">    </span><span class="c1"># (x4) ← (x2) + (x3), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2171,7 +2171,7 @@
 <li>功能描述：从寄存器rs1减去寄存器rs2，结果写入寄存器rd。忽略算术溢出。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sub</span><span class="w"> </span><span class="no">x7</span><span class="p">,</span><span class="w"> </span><span class="no">x5</span><span class="p">,</span><span class="w"> </span><span class="no">x9</span><span class="w">    </span><span class="c1">; (x7) ← (x5) - (x9), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sub</span><span class="w"> </span><span class="no">x7</span><span class="p">,</span><span class="w"> </span><span class="no">x5</span><span class="p">,</span><span class="w"> </span><span class="no">x9</span><span class="w">    </span><span class="c1"># (x7) ← (x5) - (x9), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2182,7 +2182,7 @@
 <li>功能描述：将寄存器rs1和寄存器rs2进行按位与，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">and</span><span class="w"> </span><span class="no">x6</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="p">,</span><span class="w"> </span><span class="no">x0</span><span class="w">    </span><span class="c1">; (x6) ← (x1) &amp; (x0), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">and</span><span class="w"> </span><span class="no">x6</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="p">,</span><span class="w"> </span><span class="no">x0</span><span class="w">    </span><span class="c1"># (x6) ← (x1) &amp; (x0), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2193,7 +2193,7 @@
 <li>功能描述：将寄存器rs1和寄存器rs2进行按位或，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">or</span><span class="w"> </span><span class="no">x12</span><span class="p">,</span><span class="w"> </span><span class="no">x13</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="w">    </span><span class="c1">; (x12) ← (x13) | (x1), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">or</span><span class="w"> </span><span class="no">x12</span><span class="p">,</span><span class="w"> </span><span class="no">x13</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="w">    </span><span class="c1"># (x12) ← (x13) | (x1), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2204,7 +2204,7 @@
 <li>功能描述：将寄存器rs1和寄存器rs2进行按位异或，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">xor</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="w">    </span><span class="c1">; (t0) ← (t0) ^ (t0), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">xor</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="w">    </span><span class="c1"># (t0) ← (t0) ^ (t0), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2215,7 +2215,7 @@
 <li>功能描述：把寄存器rs1左移rs2位，低位补0，结果写入寄存器rd。<code>rs2[4:0]</code>表示左移位数，高位忽略。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sll</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t6</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="w">    </span><span class="c1">; (t1) ← (t6) &lt;&lt; (t2), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sll</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t6</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="w">    </span><span class="c1"># (t1) ← (t6) &lt;&lt; (t2), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2226,7 +2226,7 @@
 <li>功能描述：把寄存器rs1右移rs2位，高位补0，结果写入寄存器rd。<code>rs2[4:0]</code>表示右移位数，高位忽略。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">srl</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t4</span><span class="w">    </span><span class="c1">; (t5) ← (t3) &gt;&gt; (t4), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">srl</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t4</span><span class="w">    </span><span class="c1"># (t5) ← (t3) &gt;&gt; (t4), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2237,7 +2237,7 @@
 <li>功能描述：把寄存器rs1右移rs2位，高位补<code>rs1[31]</code>，结果写入寄存器rd。<code>rs2[4:0]</code>表示右移位数，高位忽略。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sra</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t4</span><span class="p">,</span><span class="w"> </span><span class="no">t7</span><span class="w">    </span><span class="c1">; (t3) ← (t4) &gt;&gt; (t7), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sra</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t4</span><span class="p">,</span><span class="w"> </span><span class="no">t7</span><span class="w">    </span><span class="c1"># (t3) ← (t4) &gt;&gt; (t7), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2248,7 +2248,7 @@
 <li>功能描述：比较寄存器rs1和寄存器rs2，比较时视为有符号数。如果rs1更小，向寄存器rd写入1，否则写入0。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">slt</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="w">    </span><span class="c1">; (t1) ← ((t2) &lt; (t0)), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">slt</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="w">    </span><span class="c1"># (t1) ← ((t2) &lt; (t0)), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2259,7 +2259,7 @@
 <li>功能描述：比较寄存器rs1和寄存器rs2，比较时视为无符号数。如果rs1更小，向寄存器rd写入1，否则写入0。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sltu</span><span class="w"> </span><span class="no">s5</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">s1</span><span class="w">    </span><span class="c1">; (s5) ← ((t1) &lt; (s1)), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sltu</span><span class="w"> </span><span class="no">s5</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">s1</span><span class="w">    </span><span class="c1"># (s5) ← ((t1) &lt; (s1)), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2271,7 +2271,7 @@
 <li>功能描述：把符号扩展的立即数加到寄存器rs1上，结果写入寄存器rd。忽略算术溢出。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w">    </span><span class="c1">; (sp) ← (sp) + 4, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">addi</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w">    </span><span class="c1"># (sp) ← (sp) + 4, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2282,7 +2282,7 @@
 <li>功能描述：把符号扩展的立即数与寄存器rs1的值进行按位与，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">andi</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">0xFFE</span><span class="w">    </span><span class="c1">; (t1) ← (t3) &amp; 0xFFE, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">andi</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">0xFFE</span><span class="w">    </span><span class="c1"># (t1) ← (t3) &amp; 0xFFE, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2293,7 +2293,7 @@
 <li>功能描述：把符号扩展的立即数与寄存器rs1的值进行按位或，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">ori</span><span class="w"> </span><span class="no">t6</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="mi">0x001</span><span class="w">    </span><span class="c1">; (t6) ← (t2) | 0x001, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">ori</span><span class="w"> </span><span class="no">t6</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="mi">0x001</span><span class="w">    </span><span class="c1"># (t6) ← (t2) | 0x001, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2304,7 +2304,7 @@
 <li>功能描述：把符号扩展的立即数与寄存器rs1的值进行按位异或，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">xori</span><span class="w"> </span><span class="no">s4</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0x002</span><span class="w">    </span><span class="c1">; (s4) ← (t0) ^ 0x002, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">xori</span><span class="w"> </span><span class="no">s4</span><span class="p">,</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0x002</span><span class="w">    </span><span class="c1"># (s4) ← (t0) ^ 0x002, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2315,7 +2315,7 @@
 <li>功能描述：把寄存器rs1左移shamt位，低位补0，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">slli</span><span class="w"> </span><span class="no">a5</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="c1">; (a5) ← (t3) &lt;&lt; 3, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">slli</span><span class="w"> </span><span class="no">a5</span><span class="p">,</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="c1"># (a5) ← (t3) &lt;&lt; 3, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2326,7 +2326,7 @@
 <li>功能描述：把寄存器rs1右移shamt位，高位补0，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">srli</span><span class="w"> </span><span class="no">a1</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">; (a1) ← (t2) &gt;&gt; 1, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">srli</span><span class="w"> </span><span class="no">a1</span><span class="p">,</span><span class="w"> </span><span class="no">t2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1"># (a1) ← (t2) &gt;&gt; 1, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2337,7 +2337,7 @@
 <li>功能描述：把寄存器rs1右移shamt位，高位补<code>rs1[31]</code>，结果写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">srai</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w">    </span><span class="c1">; (t3) ← (t1) &gt;&gt; 7, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">srai</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w">    </span><span class="c1"># (t3) ← (t1) &gt;&gt; 7, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2348,7 +2348,7 @@
 <li>功能描述：比较寄存器rs1和符号扩展的立即数，比较时视为有符号数。如果rs1更小，向寄存器rd写入1，否则写入0。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">slti</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">; (t0) ← ((t5) &lt; 0), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">slti</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1"># (t0) ← ((t5) &lt; 0), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2359,7 +2359,7 @@
 <li>功能描述：比较寄存器rs1和符号扩展的立即数，比较时视为无符号数。如果rs1更小，向寄存器rd写入1，否则写入0。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sltiu</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1024</span><span class="w">    </span><span class="c1">; (t3) ← ((t1) &lt; 0xC00), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sltiu</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1024</span><span class="w">    </span><span class="c1"># (t3) ← ((t1) &lt; 0xC00), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2370,7 +2370,7 @@
 <li>功能描述：从地址(rs1)+sext(offset)读取一个字节，经符号扩展后写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lb</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">-3</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lb</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">-3</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># (t0) ← sext(Mem[(fp) - 3][7:0]), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2381,7 +2381,7 @@
 <li>功能描述：从地址(rs1)+sext(offset)读取一个字节，并写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lbu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">-3</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lbu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">-3</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># (t0) ← Mem[(fp) - 3][7:0], (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2392,7 +2392,7 @@
 <li>功能描述：从地址(rs1)+sext(offset)读取两个字节，经符号扩展后写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lh</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lh</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># (t5) ← sext(Mem[(fp) + 6][15:0]), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2403,7 +2403,7 @@
 <li>功能描述：从地址(rs1)+sext(offset)读取两个字节，并写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lhu</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lhu</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># (t5) ← Mem[(fp) + 6][15:0], (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2414,7 +2414,7 @@
 <li>功能描述：从地址(rs1)+sext(offset)读取四个字节，经符号扩展后写入寄存器rd。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lh</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; (t3) ← Mem[(fp) + 8], (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lh</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># (t3) ← Mem[(fp) + 8], (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2425,7 +2425,7 @@
 <li>功能描述：将PC设置为(rs1)+sext(offset)，把计算出的地址的最低位设为0，并将原PC+4的值写入寄存器rd。rd默认为1。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">jalr</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="p">(</span><span class="no">t0</span><span class="p">)</span><span class="w">    </span><span class="c1">; t ← (PC) + 4, (PC) ← ((t0) - 4) &amp; ~1, (ra) ← t</span>
+<div class="highlight"><pre><span></span><code><span class="nf">jalr</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="p">(</span><span class="no">t0</span><span class="p">)</span><span class="w">    </span><span class="c1"># t ← (PC) + 4, (PC) ← ((t0) - 4) &amp; ~1, (ra) ← t</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2437,7 +2437,7 @@
 <li>功能描述：将寄存器rs2的低位字节存入内存地址(rs1)+sext(offset)。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sb</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; Mem[(fp) + 3] ← (t1)[7:0], (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sb</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># Mem[(fp) + 3] ← (t1)[7:0], (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2448,7 +2448,7 @@
 <li>功能描述：将寄存器rs2的低位2个字节存入内存地址(rs1)+sext(offset)。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sh</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; Mem[(fp) + 10] ← (t3)[15:0], (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sh</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># Mem[(fp) + 10] ← (t3)[15:0], (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2459,7 +2459,7 @@
 <li>功能描述：将寄存器rs2存入内存地址(rs1)+sext(offset)。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">sw</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1">; Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">sw</span><span class="w"> </span><span class="no">t5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">(</span><span class="no">fp</span><span class="p">)</span><span class="w">    </span><span class="c1"># Mem[(fp) + 4] ← (t5), (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2471,7 +2471,7 @@
 <li>功能描述：若寄存器rs1和寄存器rs2的值相等，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">beq</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1">; PC ← ((t0) == (t1)) ? PC - 4 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">beq</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1"># PC ← ((t0) == (t1)) ? PC - 4 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2482,7 +2482,7 @@
 <li>功能描述：若寄存器rs1和寄存器rs2的值不相等，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">bne</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1">; PC ← ((t0) != (t1)) ? PC + 8 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">bne</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1"># PC ← ((t0) != (t1)) ? PC + 8 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2493,7 +2493,7 @@
 <li>功能描述：若寄存器rs1的值小于寄存器rs2的值，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">blt</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1">; PC ← ((t0) &lt; (t1)) ? PC - 4 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">blt</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1"># PC ← ((t0) &lt; (t1)) ? PC - 4 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2504,7 +2504,7 @@
 <li>功能描述：若寄存器rs1的值小于寄存器rs2的值 (均视为无符号数)，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">bltu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1">; PC ← ((t0) &lt; (t1)) ? PC + 8 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">bltu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1"># PC ← ((t0) &lt; (t1)) ? PC + 8 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2515,7 +2515,7 @@
 <li>功能描述：若寄存器rs1的值大于等于寄存器rs2的值，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">bge</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1">; PC ← ((t0) &gt;= (t1)) ? PC - 4 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">bge</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1"># PC ← ((t0) &gt;= (t1)) ? PC - 4 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2526,7 +2526,7 @@
 <li>功能描述：若寄存器rs1的值大于等于寄存器rs2的值 (均视为无符号数)，把PC的值设置为当前值加上符号扩展的偏移量。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">bgeu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1">; PC ← ((t0) &gt;= (t1)) ? PC + 8 : PC + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">bgeu</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="no">t1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="c1"># PC ← ((t0) &gt;= (t1)) ? PC + 8 : PC + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2538,7 +2538,7 @@
 <li>功能描述：将符号扩展的20位立即数逻辑左移12位，结果写入寄存器rd。  </li>
 <li>汇编例子：<br />
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">lui</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0xABCDE</span><span class="w">    </span><span class="c1">; (t0) ← 0xABCDE000, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">lui</span><span class="w"> </span><span class="no">t0</span><span class="p">,</span><span class="w"> </span><span class="mi">0xABCDE</span><span class="w">    </span><span class="c1"># (t0) ← 0xABCDE000, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2549,7 +2549,7 @@
 <li>功能描述：把符号扩展的20位立即数逻辑左移12位，再加到PC上，结果写入寄存器rd。  </li>
 <li>汇编例子：<br />
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">auipc</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">0x2468A</span><span class="w">    </span><span class="c1">; (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">auipc</span><span class="w"> </span><span class="no">t3</span><span class="p">,</span><span class="w"> </span><span class="mi">0x2468A</span><span class="w">    </span><span class="c1"># (t3) ← (PC) + 0x2468A000, (PC) ← (PC) + 4</span>
 </code></pre></div>
 </center></li>
 </ul>
@@ -2561,7 +2561,7 @@
 <li>功能描述：把下一条指令的地址保存到寄存器rd，然后把PC设置为当前值加上符号扩展的立即数。rd默认为1。  </li>
 <li>汇编例子：
 <center>
-<div class="highlight"><pre><span></span><code><span class="nf">jal</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1">; (ra) ← (PC) + 4, (PC) ← (PC) - 4</span>
+<div class="highlight"><pre><span></span><code><span class="nf">jal</span><span class="w"> </span><span class="no">ra</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="w">    </span><span class="c1"># (ra) ← (PC) + 4, (PC) ← (PC) - 4</span>
 </code></pre></div>
 </center></li>
 </ul>
