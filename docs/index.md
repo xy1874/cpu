@@ -18,7 +18,7 @@
 
 - 学期：2023夏季
 
-- 实验包下载：<a href="https://share.weiyun.com/Ac3fecnb" target="_blank">腾讯微云</a>（访问码：`xkqmh6`）
+- 课程材料下载：<a href="https://share.weiyun.com/Ac3fecnb" target="_blank">腾讯微云</a>（访问码：`xkqmh6`）
 
 - ==线上答疑平台==：<a href="https://piazza.com/hitsz/summer2023/comp2012" target="_blank">Piazza/COMP2012</a>（Access Code：`comp2012`）
 
