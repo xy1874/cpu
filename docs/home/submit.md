@@ -1,6 +1,6 @@
 ## 1. 实验报告要求
 
-&emsp;&emsp;务必按照<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5-%E6%8A%A5%E5%91%8A%E6%A8%A1%E6%9D%BF-20220715.docx" target="_blank">实验报告模板</a>认真撰写！
+&emsp;&emsp;务必按照 ==实验报告模板== 认真撰写！
 
 !!! info "PS :mega:"
     &emsp;&emsp;实验报告要求将 **单周期** 和 **流水线** CPU的<u>资源使用情况</u>、<u>功耗</u>等数据截图。截图前，先让工程运行完综合（Synthesis）与实现（Implementation）。
