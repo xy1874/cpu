@@ -1791,8 +1791,8 @@
 <a href="https://www.iodraw.com/" target="_blank">ioDraw</a>、<a href="https://app.diagrams.net/" target="_blank">draw.io</a>、<a href="https://www.processon.com/?utm_source=baidu&utm_medium=sem&utm_term=120470957204&utm_content=49530906908&uc_pagenum=1&uc_adposition=cl2&bd_vid=7544670811206821952" target="_blank">ProcessOn</a>等</p>
 <h4 id="12-verilog">1.2 Verilog如何正确添加头文件？</h4>
 <p>&emsp;&emsp;在工程中新建文件时，文件类型选择<code>Verilog Header</code>。新建完成后，在<code>Sources</code>窗口找到<code>.vh文件</code>并在其上右键选择<code>Set Global Include</code>。</p>
-<p>&emsp;&emsp;另外，也可以在每一个需要使用宏定义的<code>.v</code>文件内添加<code>`include "defines.vh"</code>语句。</p>
-<p>&emsp;&emsp;PS：Trace测试框架暂不支持头文件，因此可能还是要逐个<code>.v</code>文件添加include语句......</p>
+<p>&emsp;&emsp;也可以在每一个需要使用宏定义的<code>.v</code>文件内添加<code>`include "defines.vh"</code>语句。</p>
+<p>&emsp;&emsp;另外，在Trace比对测试时，如果执行<code>make</code>命令编译时出现宏定义未定义的错误，则需要手动在相应的<code>.v</code>文件内添加include语句。</p>
 <h4 id="13">1.3 定义了宏，但报错显示未定义？</h4>
 <p>&emsp;&emsp;如果定义了头文件，首先确保头文件被正确添加（见上一条1.2）。此外，引用宏定义时需在前面加上 <strong><code>`</code></strong> 符号。例如，<code>#define MACRO1 111</code>，则引用时应该是<code>`MACRO1</code>。</p>
 <h4 id="14-d32">1.4 移位运算的移位位数超过<code>'d32</code>，或者是个负数，怎么办？</h4>
@@ -1851,7 +1851,7 @@
 <h4 id="211-tracesimple">2.11 Trace验证中的<code>simple</code>是什么指令？</h4>
 <p>&emsp;&emsp;<code>simple</code>只给出数据段和代码段定义，且代码段内没有测试内容，不能算是测试指令。</p>
 <h4 id="212-trace">2.12 Trace测试用例的汇编代码在哪里可以找到？</h4>
-<p>&emsp;&emsp;看这里：<a href="https://github.com/HITSZ-CDP/cdp-tests/tree/main/asm" target="_blank"><code>GITHUB</code>/<code>HITSZ-CDP</code>/<code>cdp-tests</code>/<code>asm</code>/</a>。</p>
+<p>&emsp;&emsp;看Trace测试包下的<code>asm</code>目录，即<code>cdp-tests/asm/</code>。</p>
 <h4 id="213-trace">2.13 仿真Trace通过所有指令，但下板卡在某一条指令的测例</h4>
 <p>&emsp;&emsp;检查CPU和DRAM是否使用不同的时钟。</p>
 <h2 id="3">3. 下板</h2>

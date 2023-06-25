@@ -51,7 +51,6 @@
 <center>表2-1 RISC-V SoC支持指令</center>
 <center><img src = "../assets/t2-1.png"></center>
 
-
 ### 2.2 外设编址方式
 
 &emsp;&emsp;在本课程中，存储器和外设统一编址，即存储器和外设共用整个32位地址空间，其中最高的4KB (`0xFFFFF000` ~ `0xFFFFFFFF`) 用作I/O地址空间。

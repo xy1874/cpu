@@ -7,7 +7,7 @@
 <center><img src = "../assets/b-1.png" width = 250></center>
 <center>图1 复位键的电路图</center>
 
-&emsp;&emsp;更多关于Minisys开发板的信息，请看《<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/Minisys%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E6%89%8B%E5%86%8C.pdf" target="_blank">Minisys开发板硬件手册</a>》。
+&emsp;&emsp;更多关于Minisys开发板的信息，请看首页实验包下载链接中的《Minisys开发板硬件手册》。
 
 ## 2. 使用注意事项
 

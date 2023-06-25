@@ -16,9 +16,9 @@
 
 &emsp;&emsp;在工程中新建文件时，文件类型选择`Verilog Header`。新建完成后，在`Sources`窗口找到`.vh文件`并在其上右键选择`Set Global Include`。
 
-&emsp;&emsp;另外，也可以在每一个需要使用宏定义的`.v`文件内添加``include "defines.vh"`语句。
+&emsp;&emsp;也可以在每一个需要使用宏定义的`.v`文件内添加``include "defines.vh"`语句。
 
-&emsp;&emsp;PS：Trace测试框架暂不支持头文件，因此可能还是要逐个`.v`文件添加include语句......
+&emsp;&emsp;另外，在Trace比对测试时，如果执行`make`命令编译时出现宏定义未定义的错误，则需要手动在相应的`.v`文件内添加include语句。
 
 #### 1.3 定义了宏，但报错显示未定义？
 
@@ -133,7 +133,7 @@
 
 #### 2.12 Trace测试用例的汇编代码在哪里可以找到？
 
-&emsp;&emsp;看这里：<a href="https://github.com/HITSZ-CDP/cdp-tests/tree/main/asm" target="_blank">`GITHUB`/`HITSZ-CDP`/`cdp-tests`/`asm`/</a>。
+&emsp;&emsp;看Trace测试包下的`asm`目录，即`cdp-tests/asm/`。
 
 #### 2.13 仿真Trace通过所有指令，但下板卡在某一条指令的测例
 
