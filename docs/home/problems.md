@@ -16,6 +16,10 @@
 
 &emsp;&emsp;在工程中新建文件时，文件类型选择`Verilog Header`。新建完成后，在`Sources`窗口找到`.vh文件`并在其上右键选择`Set Global Include`。
 
+&emsp;&emsp;另外，也可以在每一个需要使用宏定义的`.v`文件内添加``include "defines.vh"`语句。
+
+&emsp;&emsp;PS：Trace测试框架暂不支持头文件，因此可能还是要逐个`.v`文件添加include语句......
+
 #### 1.3 定义了宏，但报错显示未定义？
 
 &emsp;&emsp;如果定义了头文件，首先确保头文件被正确添加（见上一条1.2）。此外，引用宏定义时需在前面加上 **``` ` ```** 符号。例如，`#define MACRO1 111`，则引用时应该是````MACRO1```。

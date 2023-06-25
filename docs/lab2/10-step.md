@@ -1,8 +1,8 @@
-&emsp;&emsp;（1）根据给出的数据通路表示例，完成数据通路表，画出数据通路图;
+&emsp;&emsp;（1）根据给出的数据通路表的示例，完成数据通路表，画出数据通路图;
 
-&emsp;&emsp;（2）根据给出的控制信号表示例，完成控制信号表，在数据通路图上添加控制信号，完成单周期CPU设计结构图;
+&emsp;&emsp;（2）根据给出的控制信号表的示例，完成控制信号表，在数据通路图上添加控制信号，完成单周期CPU设计结构图;
 
-&emsp;&emsp;（3）划分模块，新建`.v`源文件并使用Verilog HDL实现各模块 (芯片型号：<font color=blue>**XC7A100TFGG484-1**</font>);
+&emsp;&emsp;（3）从指导书首页的实验包下载链接中下载Vivado模板工程（`proj_miniRV.zip`或`proj_miniLA.zip`）；划分好子模块，新建`.v`源文件并使用Verilog HDL实现各模块 (芯片型号：<font color=blue>**XC7A100TFGG484-1**</font>);
 
 &emsp;&emsp;（4）编写仿真程序和使用Trace验证方法，测试设计的正确性;
 

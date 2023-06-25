@@ -40,6 +40,34 @@
 <center><img src = "../assets/8-2.png" width = 500></center>
 <center>图8-2 带有总线桥的myCPU顶层模块结构图</center>
 
-&emsp;&emsp;总线桥是一个特殊的接口部件，其主要功能是作为总线操作的 **中转机构** 和 **控制机构**。当CPU访问数据RAM或其他设备时，总线桥将把接收到的访问请求转发给相应的从设备。此外，若存在多个部件或设备同时请求总线的情形，总线桥还需进行总线仲裁。
+&emsp;&emsp;总线桥是一个特殊的接口部件，其主要功能是作为总线操作的 **中转机构** 和 **控制机构**。
 
-&emsp;&emsp;
+!!! info "补充说明 :bookmark_tabs:"
+    &emsp;&emsp;在本课程的SoC当中，不存在多个主设备同时请求总线的情形，即不需要总线仲裁。
+
+&emsp;&emsp;当需要访问DRAM或其他设备时，CPU将发送相应的读/写请求到总线桥，总线桥再将接收到的访问请求转发给相应的从设备。具体地，总线桥接收到CPU的访问请求后，根据请求中的地址判断将要访问的是什么从设备（是DRAM还是外设、是哪个外设），然后将访问请求转发给对应的从设备，如图8-3所示。
+
+``` Verilog
+ 1|    // 根据CPU访问请求的地址判断当前访问的是什么设备
+ 2|    wire access_mem = (addr_from_cpu[31:12] != 20'hFFFFF) ? 1'b1 : 1'b0;
+ 3|    wire access_dig = (addr_from_cpu == `PERI_ADDR_DIG) ? 1'b1 : 1'b0;
+ 4|    wire access_led = (addr_from_cpu == `PERI_ADDR_LED) ? 1'b1 : 1'b0;
+ 5|    wire access_sw  = (addr_from_cpu == `PERI_ADDR_SW ) ? 1'b1 : 1'b0;
+ 6|    wire access_btn = (addr_from_cpu == `PERI_ADDR_BTN) ? 1'b1 : 1'b0;
+```
+<center>图8-3 总线桥`Bridge.v`代码节选1</center>
+
+&emsp;&emsp;从设备接收到总线桥转发的访问请求之后，对请求进行解析和处理，并在完成相应的读/写操作之后，将读数据或写响应信息返回给总线桥。总线桥再根据CPU读/写请求的地址，从相应的从设备处获取读数据或写响应信息并返回给CPU，如图8-4所示。
+
+``` Verilog
+ 1|    // 根据请求地址返回读数据给CPU
+ 2|    always @(*) begin
+ 3|        casex (access_bit)
+ 4|            5'b1????: rdata_to_cpu = rdata_from_dram;
+ 5|            5'b00010: rdata_to_cpu = rdata_from_sw;
+ 6|            5'b00001: rdata_to_cpu = rdata_from_btn;
+ 7|            default:  rdata_to_cpu = 32'hFFFF_FFFF;
+ 8|        endcase
+ 9|    end
+```
+<center>图8-4 总线桥`Bridge.v`代码节选2</center>

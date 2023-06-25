@@ -21,14 +21,22 @@
 
 ## 2. 了解测试框架
 
-&emsp;&emsp;请在终端里依次输入并执行下列命令，以拉取测试框架代码，并切换至peri分支：
+&emsp;&emsp;请在终端里依次输入并执行下列命令，以拉取测试框架代码：
 
 ``` bash
  1|cd ~
- 2|git clone https://github.com/HITSZ-CDP/cdp-tests.git
+ 2|git clone https://gitee.com/hitsz-cslab/cdp-tests.git
  3|cd cdp-tests
- 4|git checkout peri
 ```
+
+!!! info "关于miniLA :loudspeaker:"
+    &emsp;&emsp;实现miniLA指令集的同学，拉取测试框架时，请执行以下命令：
+
+    ``` bash
+    1|cd ~
+    2|git clone -b miniLA https://gitee.com/hitsz-cslab/cdp-tests.git
+    3|cd cdp-tests
+    ```
 
 &emsp;&emsp;cdp-tests目录的文件结构如下图所示。
 
@@ -56,73 +64,92 @@
 │   ├── ........
 │   └── xori.vcd
 ├── Makefile
-├── mycpu（你实现的CPU的Verilog代码，放在此目录下，仅放Verilog代码，不拷贝IP核）
-│   ├── cpu.v
-|   ├── .....
-│   └── top.v
+├── mySoC（你实现的SoC的Verilog代码，放在此目录下，仅放Verilog代码，不拷贝IP核）
+|   ├── defines.vh
+│   ├── miniRV_SoC.v（或miniLA_SoC.v）
+|   ├── myCPU.v
+|   ├── Bridge.v
+│   └── ......
 ├── vsrc（仿真需要用到的其他文件）
-|    └── ram.v（distributed memory的行为仿真模型）
+|   ├── ram.v（distributed memory的行为仿真模型）
+│   └── ram1.v（用于字节和半字的Load/Store指令测试）
 ├── run_all_tests.py（自动化测试脚本）
 └── Makefile
 ```
 
-&emsp;&emsp;我们测试的原理是差分测试，即比对标准模型和待测模型之间的区别。在实验中，标准模型就是`golden_model`下使用C语言实现的一个RISC-V CPU模型，而待测模块就是你所实现的CPU。驱动测试的代码逻辑位于`csrc`文件夹中，分别让标准模型和待测模型执行同一条指令，比对他们执行的结果，来确定你的CPU是否实现正确。**你只需要关注`mycpu`目录，暂时不需要关注其他目录，你需要将自己实现的CPU的Verilog代码粘贴到这个目录下。**
+&emsp;&emsp;测试的原理是差分测试，即比对标准模型和待测模型之间的区别。在实验中，标准模型就是`golden_model`下使用C语言实现的CPU模型，而待测模块就是你所实现的CPU。驱动测试的代码逻辑位于`csrc`文件夹中，分别让标准模型和待测模型执行同一条指令，比对他们执行的结果，来确定你的CPU是否实现正确。**你只需要关注`mySoC`目录，暂时不需要关注其他目录，你需要将自己实现的CPU的Verilog代码粘贴到这个目录下。**
 
 
 
 ## 3. 添加自己的代码
 
-&emsp;&emsp;`mycpu`目录中包含了你实现的CPU，以及顶层模块对外的连线，你需要将自己实现的CPU代码复制到该目录下，模块的层次结构如下图所示：
+&emsp;&emsp;`mySoC`目录中包含了你实现的CPU、总线桥以及SoC顶层模块及其对外的连线，你需要将自己实现的整个SoC工程的代码复制到该目录下，模块的层次结构如下图所示：
 
 <center><img src = "../assets/trace-1.png" width = 350></center>
 
 &emsp;&emsp;需要注意的是：
 
-- 在之前的实验中，我们是使用IP核来实现的指令和数据存储器，而在此处，我们已经为你提供了相应的IP，你无需将IP核的xci文件拷贝至目录下，只需在`top`中实例化并完成连线即可。
+- 在之前的实验中，我们是使用IP核来实现的指令和数据存储器，而在此处，我们已经为你提供了相应的IP，你无需将IP核的xci文件拷贝至目录下，只需在SoC顶层模块中实例化并完成连线即可。
 
-- **你需要保证在`mycpu`目录下的模块的层次关系中，顶层模块名叫做`top`，且`top`模块的接口信号命名满足要求。**
+- **你需要保证在`mySoC`目录下的模块的层次关系中，SoC的顶层模块名叫做`miniRV_SoC`（或`miniLA_SoC`），且顶层模块的接口信号命名满足要求。**
 
 ``` Verilog
- 1|module top(
- 2|    input clk,
- 3|    input rst_n,
- 4|    output        debug_wb_have_inst,   // WB阶段是否有指令 (对单周期CPU，此flag恒为1)
- 5|    output [31:0] debug_wb_pc,          // WB阶段的PC (若wb_have_inst=0，此项可为任意值)
- 6|    output        debug_wb_ena,         // WB阶段的寄存器写使能 (若wb_have_inst=0，此项可为任意值)
- 7|    output [4:0]  debug_wb_reg,         // WB阶段写入的寄存器号 (若wb_ena或wb_have_inst=0，此项可为任意值)
- 8|    output [31:0] debug_wb_value        // WB阶段写入寄存器的值 (若wb_ena或wb_have_inst=0，此项可为任意值)
- 9|);
-10|
-11|    mini_rv mini_rv_u (
-12|        .clk(clk),
-13|        .rst_n(rst_n),
-14|        //......
-15|    );
+ 1|`include "defines.vh"  // 运行Trace测试时，将此文件的RUN_TRACE取消注释; 下板时，注释RUN_TRACE.
+ 2|module miniRV_SoC (
+ 3|    input  wire        fpga_rst,             // High active
+ 4|    input  wire        fpga_clk,
+ 5|    ......   // 外设I/O接口信号
+ 6|`ifdef RUN_TRACE
+ 7|    ,// Debug Interface
+ 8|    output wire        debug_wb_have_inst,   // WB阶段是否有指令 (对单周期CPU，可在复位后恒为1)
+ 9|    output wire [31:0] debug_wb_pc,          // WB阶段的PC (若wb_have_inst=0，此项可为任意值)
+10|    output wire        debug_wb_ena,         // WB阶段的寄存器写使能 (若wb_have_inst=0，此项可为任意值)
+11|    output wire [ 4:0] debug_wb_reg,         // WB阶段写入的寄存器号 (若wb_ena或wb_have_inst=0，此项可为任意值)
+12|    output wire [31:0] debug_wb_value        // WB阶段写入寄存器的值 (若wb_ena或wb_have_inst=0，此项可为任意值)
+13|`endif
+14|);
+15|    ......
 16|
-17|    // 下面两个模块，只需要实例化代码和连线代码，不需要创建IP核
-18|    inst_mem imem(
-19|        ......
-20|    );
-21|    
-22|    data_mem dmem(
-23|        ......
-24|    );
-25|
-26|endmodule
+17|    myCPU Core_cpu (
+18|        .cpu_rst     (fpga_rst),
+19|        .cpu_clk     (cpu_clk),
+20|        //......
+21|    );
+22|
+23|    // 下面两个模块，只需要实例化代码和连线代码，不需要创建IP核
+24|    IROM Mem_IROM (
+25|        .a      (...),
+26|        .spo    (...)
+27|    );
+28|    
+29|    DRAM Mem_DRAM (
+30|        .clk    (...),
+31|        .a      (...),
+32|        .spo    (...),
+33|        .we     (...),
+34|        .d      (...)
+35|    );
+36|
+37|endmodule
 ```
 
-!!! warning
-    &emsp;&emsp;（1）对于Trace比对，需要将指令ROM和数据RAM的大小设置为 **32bit*65536**！
-
-    &emsp;&emsp;（2）指令ROM的模块名必须是 **inst_mem**，数据RAM的模块名必须是 **data_mem**！
+!!! Warning "Trace注意事项 :mega:"
+    &emsp;&emsp;（1）运行Trace前，需将`defines.vh`中的`RUN_TRACE`取消注释！综合/实现/比特流前，将`RUN_TRACE`注释！
     
-    &emsp;&emsp;（3）CPU复位后执行的首条指令的地址必须是 **0x0000_0000**！  
+    &emsp;&emsp;（2）对于Trace比对，需要将指令ROM和数据RAM的大小设置为 **32bit*65536**！
+
+    &emsp;&emsp;（3）指令ROM的模块名必须是 **IROM**，数据RAM的模块名必须是 **DRAM**！
+    
+    &emsp;&emsp;（4）高电平复位，且CPU复位后执行的首条指令的地址必须是 **0x0000_0000**！  
     
     &emsp;&emsp;**以上设置错误会导致Trace比对失败！**
 
 
 
 ## 4. 运行测试
+
+!!! tip "注意事项 :loudspeaker:"
+    &emsp;&emsp;如果在实现字节、半字的Load/Store指令时，更改了IP核配置或使用了多体存储器，则在使用Trace测试时，需进入到`cdp-tests/vsrc/`目录，将`ram1.v`的代码替换掉`ram.v`的代码。
 
 &emsp;&emsp;推荐使用 **MobaXterm运行测试** （远程实验平台的MobaXterm用法详见<a href="../remote_env/#24-mobaxterm" target="_blank">附录1的2.4节-使用MobaXterm</a>，虚拟机的MobaXterm用法详见<a href="../vm/#4-mobaxterm" target="_blank">附录2的第4节-使用MobaXTerm</a>）。
 
@@ -207,6 +234,9 @@
 ![image-20210704013913901](assets/trace-8.png)
 
 **（2）使用start测试程序自动测试**
+
+!!! info "关于miniLA :loudspeaker:"
+    &emsp;&emsp;miniLA的Trace测试包无此功能，故可略过。
 
 &emsp;&emsp;输入以下命令:
 

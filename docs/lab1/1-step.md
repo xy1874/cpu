@@ -52,30 +52,27 @@
 <center><img src = "../assets/t2-1.png"></center>
 
 
-### 2.2 外设地址空间
+### 2.2 外设编址方式
 
-&emsp;&emsp;本实验采用I/O统一编制的方式，即将整个32位地址空间分成若干部分，其中高4KB用作I/O地址空间，如图2-6所示。
-
-<center><img src = "../assets/2-6.png" width = 180></center>
-<center>图2-6 地址空间分配</center>
+&emsp;&emsp;在本课程中，存储器和外设统一编址，即存储器和外设共用整个32位地址空间，其中最高的4KB (`0xFFFFF000` ~ `0xFFFFFFFF`) 用作I/O地址空间。
 
 ### 2.3 程序测试
 
-&emsp;&emsp;在Logisim中打开RISC-V SoC的IMEM子电路，在指令存储器上点击右键，选择“清空内容”，并再次选择“编辑内容”，如图2-7所示。
+&emsp;&emsp;在Logisim中双击打开RISC-V SoC的`IMEM`子电路，在指令存储器上点击右键选择`Clear Contents`，然后再次右键选择`Edit Contents`，如图2-6所示。
 
-<center><img src = "../assets/2-7.png" width = 280></center>
-<center>图2-7 清空指令存储器</center>
+<center><img src = "../assets/2-6.png" width = 280></center>
+<center>图2-6 清空指令存储器</center>
 
-&emsp;&emsp;然后，将刚才在RARS汇编软件汇编出来的“**.hex”（.text）文件的内容粘贴到编辑器中，即将测试程序的汇编完成的指令存放到指令存储器中（注：从0地址开始）。
+&emsp;&emsp;然后，将刚才在RARS汇编软件汇编出来的`xxx.hex`（`.text`）文件的内容粘贴到编辑器中，即将测试程序的汇编完成的指令存放到指令存储器中（注：从0地址开始）。
 
-&emsp;&emsp;如果汇编程序中有存放在数据段（.data）的数据，也需要拷贝到数据存储器中。方法与指令存储器拷贝数据是一样的。在Logisim中打开RISC-V SoC的DMEM子电路，根据汇编程序数据的存储位置将“**.hex”（.data）的内容拷贝到RAM/ROM中。RAM和ROM的主要区别是，当在Logisim中按`Ctrl+R`复位时，RAM中的数据会被清空，而ROM中的数据不会被清空。
+&emsp;&emsp;如果汇编程序中有存放在数据段（`.data`）的数据，也需要拷贝到数据存储器中。方法与指令存储器拷贝数据是一样的。在Logisim中打开RISC-V SoC的`DMEM`子电路，根据汇编程序数据的存储位置将`xxx.hex`（`.data`）的内容拷贝到RAM/ROM中。RAM和ROM的主要区别是，当在Logisim中按 ++ctrl+r++ 复位时，RAM中的数据会被清空，而ROM中的数据不会被清空。
 
-&emsp;&emsp;使用快捷键`Ctrl+K`进入连续时钟执行模式，再次`Ctrl+K`则暂停执行；使用快捷键`Ctrl+T`进入单步时钟执行模式，此模式可方便地查看程序的执行过程；使用快捷键`Ctrl+R`复位执行。程序执行时，电路的信号将实时发生变化，如图2-8所示。
+&emsp;&emsp;使用快捷键 ++ctrl+k++ 进入连续时钟执行模式，再次 ++ctrl+k++ 则暂停执行；使用快捷键 ++ctrl+t++ 进入单步时钟执行模式，此模式可方便地查看程序的执行过程；使用快捷键 ++ctrl+r++ 复位执行。程序执行时，电路的信号将实时发生变化，如图2-7所示。
 
-<center><img src = "../assets/2-8.png"></center>
-<center>图2-8 程序执行</center>
+<center><img src = "../assets/2-7.png"></center>
+<center>图2-7 程序执行</center>
 
-&emsp;&emsp;为了使CPU运行频率更快，建议在菜单栏`Simulate`->`Tick Frequency`中修改时钟频率为4.1KHz，如图2-9所示。
+&emsp;&emsp;为了使CPU运行频率更快，建议在菜单栏`Simulate`->`Tick Frequency`中修改时钟频率为4.1KHz，如图2-8所示。
 
-<center><img src = "../assets/2-9.png"></center>
-<center>图2-9 修改时钟频率</center>
+<center><img src = "../assets/2-8.png" width = 450></center>
+<center>图2-8 修改时钟频率</center>
