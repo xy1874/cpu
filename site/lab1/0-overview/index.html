@@ -1529,7 +1529,7 @@
 <tr>
 <td align="center">3'b110</td>
 <td align="center">A <script type="math/tex">\div</script> B</td>
-<td align="center">运算结果以有符号整数显示</td>
+<td align="center">除法的 <strong>商</strong> 以有符号整数显示</td>
 </tr>
 </tbody>
 </table>
@@ -1539,6 +1539,26 @@
 <p>&emsp;&emsp;除法可使用《计算机组成原理》中的恢复余数法或加减交替法等算法来实现。<br />
 &emsp;&emsp;PPT回顾：<br />
 <embed src = "https://docs.qq.com/pdf/DZGF2cXhWUEhPdklk#page=50" width="100%" height="500"></p>
+<p>&emsp;&emsp;以上两种算法也适用于整数除法，注意试商是从被除数最高位开始的。符号位单独处理，取除数和被除数的绝对值进行运算。<br />
+&emsp;&emsp;设被除数<script type="math/tex">x</script> = +<code>1101B</code>，除数<script type="math/tex">y</script> = -<code>0110B</code>；<script type="math/tex">x</script>的绝对值<script type="math/tex">x^*</script> = <code>01101B</code>，<script type="math/tex">y</script>的绝对值<script type="math/tex">y^*</script> = <code>00110B</code>，<script type="math/tex">y^*</script>的补码<script type="math/tex">[-y^*]_补</script> = <code>11010B</code>，则有：  </p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">恢复余数法</label><label for="__tabbed_1_2">加减交替法</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>&emsp;&emsp;令被除数减去<script type="math/tex">y^*</script>，即加上<script type="math/tex">[-y^*]_补</script>：<br />
+&emsp;&emsp;&emsp;&emsp;若得到的余数为负数，表明不够减，故商上0，并加上<script type="math/tex">y^*</script>以恢复余数，再令被除数左移1位；<br />
+&emsp;&emsp;&emsp;&emsp;若得到的余数为正数，表明够减，故商上1，再令被除数左移1位；<br />
+&emsp;&emsp;重复以上步骤N次，N为位宽。在本例中，N = 4。
+<center><img src = "../assets/div_rr.png" width = 64%></center></p>
+</div>
+<div class="tabbed-block">
+<p>&emsp;&emsp;令被除数减去<script type="math/tex">y^*</script>，即加上<script type="math/tex">[-y^*]_补</script>：<br />
+&emsp;&emsp;&emsp;&emsp;若得到的余数为负数，表明不够减，故商上0，令被除数左移1位，再加上<script type="math/tex">[y]_补</script>；<br />
+&emsp;&emsp;&emsp;&emsp;若得到的余数为正数，表明够减，故商上1，令被除数左移1位，再加上<script type="math/tex">[-y^*]_补</script>；<br />
+&emsp;&emsp;重复以上步骤N次，N为位宽。在本例中，N = 4。
+<center><img src = "../assets/div_as.png" width = 64%></center></p>
+</div>
+</div>
+</div>
 </div>
 <h2 id="2a-for-minila">2A. 实验内容 (for miniLA)</h2>
 <h3 id="1_2">题目1：基本输入输出</h3>
