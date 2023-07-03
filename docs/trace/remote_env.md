@@ -83,12 +83,7 @@
 
 &emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。
 
-&emsp;&emsp;在终端中键入以下内容，并回车：
-
-``` bash
- 1|cd ~
- 2|git clone https://github.com/HITSZ-CDP/cdp-tests.git
-```
+&emsp;&emsp;参考<a href="../trace/#2" target="_blank">上一节</a>，在终端中执行相应的git clone命令下载测试框架。
 
 &emsp;&emsp;你应该会看到这样的输出：
 
@@ -99,7 +94,7 @@
 
 &emsp;&emsp;这代表你已经将cdp-tests的副本下载到自己的工作空间了。
 
-&emsp;&emsp;接下来，输入`git checkout peri`命令，切换到peri分支：
+<!-- &emsp;&emsp;接下来，输入`git checkout peri`命令，切换到peri分支： -->
 
 &emsp;&emsp;你可以点击左侧边栏最上面的按钮，并打开文件夹：
 
