@@ -1661,7 +1661,7 @@
 <p><img alt="安装插件" src="../assets/vscode_extension.png" /></p>
 <p>&emsp;&emsp;左侧边栏将出现此图标：<img src = "../assets/icon.png" width = 30>。点击这个图标，选择<code>SSH TARGETS</code>右侧的<code>+</code>号，如下图所示。</p>
 <p><center><img src = "../assets/ssh_add_host.png" width = 400></center></p>
-<p>&emsp;&emsp;这会在屏幕上方中央弹出输入框，要求输入ssh指令。在这里输入<code>ssh 你的学号@计算节点IP -p 6666</code>，例如<code>ssh 200110101@10.249.11.143 -p 6666</code>就是学号为200110101的同学链接到远程实验平台，端口号为6666。</p>
+<p>&emsp;&emsp;这会在屏幕上方中央弹出输入框，要求输入ssh指令。在这里输入<code>ssh 你的学号@计算节点IP -p 6666</code>，例如<code>ssh 200110101@10.249.12.98 -p 6666</code>就是学号为200110101的同学链接到远程实验平台，端口号为6666。</p>
 <p><img alt="增加host2" src="../assets/ssh_add_host2.png" /></p>
 <p>&emsp;&emsp;输入完成后，按下回车。如果弹出下图所示的界面，则再次按下回车：</p>
 <p><img alt="增加host3" src="../assets/ssh_add_host3.png" /></p>
@@ -1686,16 +1686,14 @@
 </div>
 <h3 id="23-trace">2.3 下载trace测试包</h3>
 <p>&emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。</p>
-<p>&emsp;&emsp;在终端中键入以下内容，并回车：</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span><span class="nb">cd</span><span class="w"> </span>~
-<span class="w"> </span><span class="m">2</span><span class="p">|</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HITSZ-CDP/cdp-tests.git
-</code></pre></div>
+<p>&emsp;&emsp;参考<a href="../trace/#2" target="_blank">上一节</a>，在终端中执行相应的git clone命令下载测试框架。</p>
 <p>&emsp;&emsp;你应该会看到这样的输出：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>Cloning<span class="w"> </span>into<span class="w"> </span><span class="s1">&#39;cdp-tests&#39;</span>...
 <span class="w"> </span><span class="m">2</span><span class="p">|</span><span class="k">done</span>.
 </code></pre></div>
 <p>&emsp;&emsp;这代表你已经将cdp-tests的副本下载到自己的工作空间了。</p>
-<p>&emsp;&emsp;接下来，输入<code>git checkout peri</code>命令，切换到peri分支：</p>
+<!-- &emsp;&emsp;接下来，输入`git checkout peri`命令，切换到peri分支： -->
+
 <p>&emsp;&emsp;你可以点击左侧边栏最上面的按钮，并打开文件夹：</p>
 <p><img alt="连接5" src="../assets/connect5.png" /></p>
 <p>&emsp;&emsp;在弹出的菜单中，选择cdp-tests，并按下“确认”：</p>
