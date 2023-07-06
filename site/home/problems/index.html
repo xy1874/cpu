@@ -1841,7 +1841,7 @@
 <h4 id="27-tracetime-out">2.7 Trace验证时，所有指令都显示Time out</h4>
 <p>&emsp;&emsp;仔细按照<a href="../../trace/trace/#2" target="_blank">Trace测试说明</a>逐一检查debug信号、模块名、存储器参数设置等是否符合要求。</p>
 <h4 id="28">2.8 复位信号到底是低电平还是高电平？</h4>
-<p>&emsp;&emsp;Trace验证时提供的复位信号是低电平复位，下板时板上的复位按钮是高电平复位。</p>
+<p>&emsp;&emsp;Trace验证时提供的复位信号和下板时板上的复位按钮是都高电平复位。</p>
 <h4 id="29-tracereferencepcmycpupc">2.9 Trace验证时，<code>REFERENCE</code>的PC和<code>MYCPU</code>的PC不一致</h4>
 <p>&emsp;&emsp;检查复位逻辑，务必保证复位后取第一条指令的PC为<code>32'h0</code>。</p>
 <p>&emsp;&emsp;对于流水线CPU，确保一条指令比对完后、下一条指令比对前，拉低<code>debug_wb_have_inst</code>。</p>
