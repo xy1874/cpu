@@ -12,7 +12,7 @@
         <link rel="prev" href="../vm/">
       
       
-        <link rel="next" href="../../verify/realtest/">
+        <link rel="next" href="../../verify/trace-debug/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
@@ -290,8 +290,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../verify/realtest/" class="md-tabs__link">
-        CPU的调试与下板验证
+      <a href="../../verify/trace-debug/" class="md-tabs__link">
+        CPU的下板调试
       </a>
     </li>
   
@@ -1167,57 +1167,14 @@
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-          CPU的调试与下板验证
+          CPU的下板调试
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
-          CPU的调试与下板验证
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../verify/realtest/" class="md-nav__link">
-        下板验证说明
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-          CPU调试方法
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_6_2">
-          <span class="md-nav__icon md-icon"></span>
-          CPU调试方法
+          CPU的下板调试
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1228,7 +1185,7 @@
   
     <li class="md-nav__item">
       <a href="../../verify/trace-debug/" class="md-nav__link">
-        方法1：利用Trace调试
+        方法1：Trace下板调试
       </a>
     </li>
   
@@ -1244,13 +1201,6 @@
       <a href="../../verify/online-debug/" class="md-nav__link">
         方法2：FPGA在线调试
       </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -1319,7 +1269,7 @@
 <ol>
 <li>你需要安装一个Linux操作系统。它可以是一个能运行Linux系统的虚拟机，也可以是在你自己电脑上启用WSL（Windows Subsystem for Linux），或是整一台运行Linux的电脑。</li>
 <li>安装C++编译器和make工具。</li>
-<li>安装verilator。不建议大家使用apt-get安装，因为这样安装的版本较老。安装方法请参考<a href="https://veripool.org/guide/latest/install.html" target="_blank">verilator官方安装指南</a>。</li>
+<li>安装verilator。不建议大家使用apt-get安装，因为这样安装的版本较老。安装方法请参考<a href="https://veripool.org/guide/latest/install.html" target="_blank">Verilator官方安装指南</a>。</li>
 </ol>
 <p>&emsp;&emsp;安装完成后，请参考远程实验平台或虚拟机用法，下载cdp-tests测试包，编译运行，查看测试结果。</p>
 

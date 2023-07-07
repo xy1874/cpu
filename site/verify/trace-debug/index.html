@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../realtest/">
+        <link rel="prev" href="../../trace/env_diy/">
       
       
         <link rel="next" href="../online-debug/">
@@ -19,7 +19,7 @@
     
     
       
-        <title>方法1：利用Trace调试 - 计算机设计与实践（2023夏季） | 哈工大（深圳）</title>
+        <title>方法1：Trace下板调试 - 计算机设计与实践（2023夏季） | 哈工大（深圳）</title>
       
     
     
@@ -70,6 +70,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#1-dram" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -99,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              方法1：利用Trace调试
+              方法1：Trace下板调试
             
           </span>
         </div>
@@ -285,8 +290,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../realtest/" class="md-tabs__link md-tabs__link--active">
-        CPU的调试与下板验证
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        CPU的下板调试
       </a>
     </li>
   
@@ -1125,57 +1130,14 @@
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-          CPU的调试与下板验证
+          CPU的下板调试
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
-          CPU的调试与下板验证
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../realtest/" class="md-nav__link">
-        下板验证说明
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-          CPU调试方法
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_6_2">
-          <span class="md-nav__icon md-icon"></span>
-          CPU调试方法
+          CPU的下板调试
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1192,9 +1154,52 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          方法1：Trace下板调试
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
-        方法1：利用Trace调试
+        方法1：Trace下板调试
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dram" class="md-nav__link">
+    1. DRAM访存地址修改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ip" class="md-nav__link">
+    2. 存储器IP替换
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 测试结果说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1210,13 +1215,6 @@
       <a href="../online-debug/" class="md-nav__link">
         方法2：FPGA在线调试
       </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -1246,6 +1244,35 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-dram" class="md-nav__link">
+    1. DRAM访存地址修改
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ip" class="md-nav__link">
+    2. 存储器IP替换
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3. 测试结果说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1259,12 +1286,49 @@
                   
 
 
-  <h1>方法1：利用Trace调试</h1>
+  <h1>方法1：Trace下板调试</h1>
 
-<p>&emsp;&emsp;在CPU下板测试中，如果数码管显示卡在某一个功能点，没有继续计数，一种方法是可以采用Trace来进一步定位错误点。</p>
+<p>&emsp;&emsp;在前面的章节中，我们在虚拟机上使用Trace测试框架对CPU进行了功能上的仿真验证。在下板时，我们也可以使用Trace测试程序来调试，即将Trace比对测试的汇编程序导入IROM存储器并生成比特流下板运行。</p>
+<p>&emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank"><code>cdp-tests / asm / start.dump</code></a></p>
+<h2 id="1-dram">1. DRAM访存地址修改</h2>
+<p>&emsp;&emsp;对于哈佛结构的CPU，汇编程序的代码段和数据段应当分别存放在IROM和DRAM。DRAM的基地址为<code>0x0000_0000</code>，而start.dump程序的数据段基地址为<code>0x0000_4000</code>。因此，为了使得CPU能够正确运行start.dump程序，我们需要将测试程序访问DRAM的地址减去<code>0x0000_4000</code>，即：</p>
+<p>&emsp;&emsp;原DRAM实例化代码：</p>
+<div class="highlight"><pre><span></span><code><span class="mh">1</span><span class="o">|</span><span class="w">    </span><span class="n">dram</span><span class="w"> </span><span class="n">U_dram</span><span class="w"> </span><span class="p">(</span>
+<span class="mh">2</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">clk</span><span class="w">    </span><span class="p">(</span><span class="n">cpu_clk</span><span class="p">),</span>
+<span class="mh">3</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">a</span><span class="w">      </span><span class="p">(</span><span class="n">waddr</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">2</span><span class="p">]),</span>
+<span class="mh">4</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">spo</span><span class="w">    </span><span class="p">(</span><span class="n">rdata</span><span class="p">),</span>
+<span class="mh">5</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">we</span><span class="w">     </span><span class="p">(</span><span class="n">we</span><span class="p">),</span>
+<span class="mh">6</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">d</span><span class="w">      </span><span class="p">(</span><span class="n">wdata</span><span class="p">)</span>
+<span class="mh">7</span><span class="o">|</span><span class="w">    </span><span class="p">);</span>
+</code></pre></div>
+<p>&emsp;&emsp;修改后的DRAM实例化代码：</p>
+<div class="highlight"><pre><span></span><code><span class="mh">1</span><span class="o">|</span><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">waddr_tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waddr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">32&#39;h4000</span><span class="p">;</span>
+<span class="mh">2</span><span class="o">|</span><span class="w">    </span>
+<span class="mh">3</span><span class="o">|</span><span class="w">    </span><span class="n">dram</span><span class="w"> </span><span class="n">U_dram</span><span class="w"> </span><span class="p">(</span>
+<span class="mh">4</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">clk</span><span class="w">    </span><span class="p">(</span><span class="n">cpu_clk</span><span class="p">),</span>
+<span class="mh">5</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">a</span><span class="w">      </span><span class="p">(</span><span class="n">waddr_tmp</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">2</span><span class="p">]),</span>
+<span class="mh">6</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">spo</span><span class="w">    </span><span class="p">(</span><span class="n">rdata</span><span class="p">),</span>
+<span class="mh">7</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">we</span><span class="w">     </span><span class="p">(</span><span class="n">we</span><span class="p">),</span>
+<span class="mh">8</span><span class="o">|</span><span class="w">        </span><span class="p">.</span><span class="n">d</span><span class="w">      </span><span class="p">(</span><span class="n">wdata</span><span class="p">)</span>
+<span class="mh">9</span><span class="o">|</span><span class="w">    </span><span class="p">);</span>
+</code></pre></div>
+<h2 id="2-ip">2. 存储器IP替换</h2>
+<p>&emsp;&emsp;由于下板测试程序较大，导致导入.coe后重新综合工程耗时较长，因此课程指导书网站提供了已综合好的IROM和DRAM IP核，同学们可将其直接导入CPU工程中使用。</p>
+<p>&emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。</p>
+<p>&emsp;&emsp;首先，从指导书网站<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip" target="_blank">下载download_test.zip压缩包</a>文件并解压到无中文路径下。</p>
+<p>&emsp;&emsp;然后，备份原工程，按照上一节所述修改RTL代码，并删除已实例化的IROM和DRAM IP核。</p>
+<p>&emsp;&emsp;接着，按下图所示点击添加IP核。</p>
+<p><center><img src = "../assets/1.png" width = 450></center></p>
+<p><center><img src = "../assets/2.png" width></center></p>
+<p><center><img src = "../assets/3.png" width = 600></center>
+<center>从解压的目录中添加已综合的DRAM IP核</center></p>
+<h2 id="3">3. 测试结果说明</h2>
+<p>&emsp;&emsp;cdp-tests测试包给了37条指令（24条必做和13条选做）的测试程序。每通过一个测试点，数码管显示的数值会加1，直至测试完毕。测试完毕时，数码管将以16进制形式显示通过测试的指令数。例如，如果实现了24条必做指令并通过了测试，则数码管将显示0x25000018。数码管高8位显示0x25，表示共有37个测试点，数码管低8位显示0x18，表示通过了24个测试点。</p>
+<p>&emsp;&emsp;需要注意的是，对于测试不通过的情形，如果数码管显示的值停在n，则表示第n+1条指令的测试失败。测试失败时，可查看start.dump的测试代码以定位出错指令，并进行相应的调试。</p>
+<p>&emsp;&emsp;在下板测试中，如果数码管显示卡在某一个功能点，没有继续计数，一种方法是采用虚拟机中的Trace测试框架来进一步定位错误点。</p>
 <div class="admonition warning">
 <p class="admonition-title">注意 <img alt="📢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f4e2.svg" title=":loudspeaker:" /></p>
-<p>&emsp;&emsp;<strong>Trace测试时，DRAM地址不需要减去0x4000；下板测试时，DRAM地址才需要减去0x4000。</strong></p>
+<p>&emsp;&emsp;在虚拟机或远程平台运行Trace测试时，DRAM地址不需要减去0x4000；<strong>只有在下板运行Trace时，DRAM地址才需要减去0x4000</strong>。</p>
 <div class="highlight"><pre><span></span><code><span class="mh">1</span><span class="o">|</span><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">waddr_tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">waddr</span><span class="p">;</span><span class="c1">// - 16&#39;h4000;</span>
 <span class="mh">2</span><span class="o">|</span><span class="w">     </span>
 <span class="mh">3</span><span class="o">|</span><span class="w">    </span><span class="n">data_mem</span><span class="w"> </span><span class="n">dmem</span><span class="w"> </span><span class="p">(</span>
@@ -1289,6 +1353,7 @@
 <p>&emsp;&emsp;打开start.dump文件，找到PC值为<code>0x000018f8</code>的指令，即可定位到具体出错的指令，如下图所示。</p>
 <p><center><img src = "../assets/t-2.png" width = 650></center></p>
 <p>&emsp;&emsp;显然，在上述例子中，mycpu执行到auipc指令时出错。</p>
+<p>&emsp;&emsp;如果在虚拟机的Trace测试框架中通过了测试，但下板运行Trace测试程序时出错，即出现仿真和下板不一致的情况，请参考<a href="../../home/problems/#36" target="_blank">常见问题汇总之3.6</a>。</p>
 
 
 

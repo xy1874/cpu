@@ -290,8 +290,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../verify/realtest/" class="md-tabs__link">
-        CPU的调试与下板验证
+      <a href="../../verify/trace-debug/" class="md-tabs__link">
+        CPU的下板调试
       </a>
     </li>
   
@@ -1222,57 +1222,14 @@
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-          CPU的调试与下板验证
+          CPU的下板调试
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
-          CPU的调试与下板验证
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../verify/realtest/" class="md-nav__link">
-        下板验证说明
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-          CPU调试方法
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_6_2">
-          <span class="md-nav__icon md-icon"></span>
-          CPU调试方法
+          CPU的下板调试
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -1283,7 +1240,7 @@
   
     <li class="md-nav__item">
       <a href="../../verify/trace-debug/" class="md-nav__link">
-        方法1：利用Trace调试
+        方法1：Trace下板调试
       </a>
     </li>
   
@@ -1299,13 +1256,6 @@
       <a href="../../verify/online-debug/" class="md-nav__link">
         方法2：FPGA在线调试
       </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -1601,10 +1551,11 @@
 <p>&emsp;&emsp;输入以下命令:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>make<span class="w"> </span>run<span class="w"> </span><span class="nv">TEST</span><span class="o">=</span>start
 </code></pre></div>
-<p>如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。</p>
+<p>&emsp;&emsp;如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。</p>
 <p><center><img src = "../assets/trace-9.png" width = 300></center></p>
-<p>如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。</p>
+<p>&emsp;&emsp;如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。</p>
 <p><center><img src = "../assets/trace-10.png" width = 380></center></p>
+<p>&emsp;&emsp;例如，上图所示的测试结果表面，该CPU通过了0x18，即24条指令的测试。</p>
 
 
 

@@ -244,10 +244,12 @@
  1|make run TEST=start
 ```
 
-如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
+&emsp;&emsp;如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
 
 <center><img src = "../assets/trace-9.png" width = 300></center>
 
-如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。
+&emsp;&emsp;如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。
 
 <center><img src = "../assets/trace-10.png" width = 380></center>
+
+&emsp;&emsp;例如，上图所示的测试结果表面，该CPU通过了0x18，即24条指令的测试。

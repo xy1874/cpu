@@ -8,6 +8,6 @@
 
 1. 你需要安装一个Linux操作系统。它可以是一个能运行Linux系统的虚拟机，也可以是在你自己电脑上启用WSL（Windows Subsystem for Linux），或是整一台运行Linux的电脑。
 2. 安装C++编译器和make工具。
-3. 安装verilator。不建议大家使用apt-get安装，因为这样安装的版本较老。安装方法请参考<a href="https://veripool.org/guide/latest/install.html" target="_blank">verilator官方安装指南</a>。
+3. 安装verilator。不建议大家使用apt-get安装，因为这样安装的版本较老。安装方法请参考<a href="https://veripool.org/guide/latest/install.html" target="_blank">Verilator官方安装指南</a>。
 
 &emsp;&emsp;安装完成后，请参考远程实验平台或虚拟机用法，下载cdp-tests测试包，编译运行，查看测试结果。
