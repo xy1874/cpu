@@ -1289,7 +1289,11 @@
   <h1>方法1：Trace下板调试</h1>
 
 <p>&emsp;&emsp;在前面的章节中，我们在虚拟机上使用Trace测试框架对CPU进行了功能上的仿真验证。在下板时，我们也可以使用Trace测试程序来调试，即将Trace比对测试的汇编程序导入IROM存储器并生成比特流下板运行。</p>
-<p>&emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank"><code>cdp-tests / asm / start.dump</code></a></p>
+<p>&emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank"><code>cdp-tests / asm / start.dump</code></a>。</p>
+<div class="admonition note">
+<p class="admonition-title">关于下板运行Trace的说明 <img alt="📢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f4e2.svg" title=":loudspeaker:" /></p>
+<p>&emsp;&emsp;本节所介绍的下板运行Trace并非必做内容，而仅仅是一种下板之后的调试手段。</p>
+</div>
 <h2 id="1-dram">1. DRAM访存地址修改</h2>
 <p>&emsp;&emsp;对于哈佛结构的CPU，汇编程序的代码段和数据段应当分别存放在IROM和DRAM。DRAM的基地址为<code>0x0000_0000</code>，而start.dump程序的数据段基地址为<code>0x0000_4000</code>。因此，为了使得CPU能够正确运行start.dump程序，我们需要将测试程序访问DRAM的地址减去<code>0x0000_4000</code>，即：</p>
 <p>&emsp;&emsp;原DRAM实例化代码：</p>

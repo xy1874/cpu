@@ -1,6 +1,9 @@
 &emsp;&emsp;在前面的章节中，我们在虚拟机上使用Trace测试框架对CPU进行了功能上的仿真验证。在下板时，我们也可以使用Trace测试程序来调试，即将Trace比对测试的汇编程序导入IROM存储器并生成比特流下板运行。
 
-&emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank">`cdp-tests / asm / start.dump`</a>
+&emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank">`cdp-tests / asm / start.dump`</a>。
+
+!!! note "关于下板运行Trace的说明 :loudspeaker:"
+    &emsp;&emsp;本节所介绍的下板运行Trace并非必做内容，而仅仅是一种下板之后的调试手段。
 
 ## 1. DRAM访存地址修改
 
