@@ -38,9 +38,9 @@
 
 ## 2. 存储器IP替换
 
-&emsp;&emsp;由于下板测试程序较大，导致导入.coe后重新综合工程耗时较长，因此课程指导书网站提供了已综合好的IROM和DRAM IP核，同学们可将其直接导入CPU工程中使用。
+<!-- &emsp;&emsp;由于下板测试程序较大，导致导入.coe后重新综合工程耗时较长，因此课程指导书网站提供了已综合好的IROM和DRAM IP核，同学们可将其直接导入CPU工程中使用。
 
-&emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。
+&emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。 -->
 
 <!-- &emsp;&emsp;首先，从指导书网站<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip" target="_blank">下载download_test.zip压缩包</a>文件并解压到无中文路径下。 -->
 
