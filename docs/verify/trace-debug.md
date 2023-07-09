@@ -3,7 +3,7 @@
 &emsp;&emsp;本课程提供可在FPGA上运行Trace比对的汇编测试程序，该程序的源码见测试包的<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/start.dump" target="_blank">`cdp-tests / asm / start.dump`</a>。
 
 !!! note "关于下板运行Trace的说明 :loudspeaker:"
-    &emsp;&emsp;本节所介绍的下板运行Trace并非必做内容，而仅仅是一种下板之后的调试手段。
+    &emsp;&emsp;本节所介绍的下板运行Trace并非必做内容，而是一种在FPGA板上运行的调试手段。
 
 ## 1. DRAM访存地址修改
 
@@ -42,24 +42,33 @@
 
 &emsp;&emsp;下面以导入DRAM为例，介绍导入已综合IP核的方法 (IROM同理)。
 
-&emsp;&emsp;首先，从指导书网站<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip" target="_blank">下载download_test.zip压缩包</a>文件并解压到无中文路径下。
+<!-- &emsp;&emsp;首先，从指导书网站<a href="https://gitee.com/hitsz-cslab/cpu/blob/master/stupkt/download_test.zip" target="_blank">下载download_test.zip压缩包</a>文件并解压到无中文路径下。 -->
 
-&emsp;&emsp;然后，备份原工程，按照上一节所述修改RTL代码，并删除已实例化的IROM和DRAM IP核。
+&emsp;&emsp;首先，从首页的课程材料下载链接中，下载onboard_trace.zip压缩包并解压。
 
-&emsp;&emsp;接着，按下图所示点击添加IP核。
+<!-- &emsp;&emsp;然后，备份原工程，按照上一节所述修改RTL代码，并删除已实例化的IROM和DRAM IP核。 -->
+
+&emsp;&emsp;然后，参照<a href="../../lab2/2-parts/#321-rom" target="_blank">实验2 - 3.2.1 定义程序ROM</a>，将`inst_rom.coe`和`data_ram.coe`分别导入到IROM和DRAM的存储器IP核中。
+
+<!-- &emsp;&emsp;接着，按下图所示点击添加IP核。
 
 <center><img src = "../assets/1.png" width = 450></center>
 
 <center><img src = "../assets/2.png" width></center>
 
 <center><img src = "../assets/3.png" width = 600></center>
-<center>从解压的目录中添加已综合的DRAM IP核</center>
+<center>从解压的目录中添加已综合的DRAM IP核</center> -->
+
+&emsp;&emsp;接着，运行综合、实现、生成比特流，最终下板运行Trace测试。
 
 
 
 ## 3. 测试结果说明
 
-&emsp;&emsp;cdp-tests测试包给了37条指令（24条必做和13条选做）的测试程序。每通过一个测试点，数码管显示的数值会加1，直至测试完毕。测试完毕时，数码管将以16进制形式显示通过测试的指令数。例如，如果实现了24条必做指令并通过了测试，则数码管将显示0x25000018。数码管高8位显示0x25，表示共有37个测试点，数码管低8位显示0x18，表示通过了24个测试点。
+&emsp;&emsp;cdp-tests测试包提供了37条指令（24条必做和13条选做）的测试程序。每通过一个测试点，数码管显示的数值会加1，直至测试完毕。测试完毕时，数码管将以16进制形式显示测试总数和通过了的测试数量。
+
+!!! example "举例说明 :chestnut:"
+    &emsp;&emsp;如果实现了24条必做指令并通过了测试，则数码管将显示`0x25000018`。数码管高2位显示`0x25`，表示共有`37`个测试点，数码管低2位显示`0x18`，表示通过了`24`个测试点。
 
 &emsp;&emsp;需要注意的是，对于测试不通过的情形，如果数码管显示的值停在n，则表示第n+1条指令的测试失败。测试失败时，可查看start.dump的测试代码以定位出错指令，并进行相应的调试。
 
