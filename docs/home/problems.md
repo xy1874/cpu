@@ -208,7 +208,9 @@
 &emsp;&emsp;（2）关键路径延迟太长，导致不满足`Setup time`或`Hold time` —— 可尝试优化关键路径或降低CPU主频；  
 &emsp;&emsp;（3）组合逻辑出现竞争或冒险。
 
-&emsp;&emsp;仿真和下板不一致时，问题通常比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。
+&emsp;&emsp;常见的问题包括：阻塞赋值和非阻塞赋值混用、组合逻辑的`if`语句没有`else`、`case`语句没有`default`、时钟频率不合适，或下板用的汇编程序有bug等等。
+
+&emsp;&emsp;仿真和下板不一致时，问题可能比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。
 
 #### 3.7 `Timing Report`中的`WNS`、`TNS`等几个时间都显示`NA`
 

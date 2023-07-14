@@ -12,7 +12,7 @@
         <link rel="prev" href="../codingstyle/">
       
       
-        <link rel="next" href="../operation/">
+        <link rel="next" href="../submit/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
@@ -728,6 +728,20 @@
           作业提交说明
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submit/" class="md-nav__link">
+        ★课程提交要求
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -1838,7 +1852,8 @@
 <p>&emsp;&emsp;（1）<a href="../codingstyle/" target="_blank">代码规范性</a>问题，比如寄存器未赋初值、阻塞赋值和非阻塞赋值混用、多驱动等；<br />
 &emsp;&emsp;（2）关键路径延迟太长，导致不满足<code>Setup time</code>或<code>Hold time</code> —— 可尝试优化关键路径或降低CPU主频；<br />
 &emsp;&emsp;（3）组合逻辑出现竞争或冒险。</p>
-<p>&emsp;&emsp;仿真和下板不一致时，问题通常比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。</p>
+<p>&emsp;&emsp;常见的问题包括：阻塞赋值和非阻塞赋值混用、组合逻辑的<code>if</code>语句没有<code>else</code>、<code>case</code>语句没有<code>default</code>、时钟频率不合适，或下板用的汇编程序有bug等等。</p>
+<p>&emsp;&emsp;仿真和下板不一致时，问题可能比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。</p>
 <h4 id="37-timing-reportwnstnsna">3.7 <code>Timing Report</code>中的<code>WNS</code>、<code>TNS</code>等几个时间都显示<code>NA</code></h4>
 <p>&emsp;&emsp;IP核的分频器不要设置成Global buffer。如果是自己实现分频器，不能有复位信号。</p>
 
