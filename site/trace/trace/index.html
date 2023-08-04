@@ -1531,15 +1531,15 @@
 <p><img alt="image-20210704013210584" src="../assets/trace-4.png" /></p>
 <p>&emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。</p>
 <h3 id="42">4.2 打开波形</h3>
-<p>&emsp;&emsp;在执行完某个测试之后，所生成的波形会在<code>waveform</code>文件夹中，如果要查看<code>auipc</code>测试点的波形，进入<code>waveform</code>文件夹，输入命令</p>
+<p>&emsp;&emsp;在执行完某个测试之后，所生成的波形会在<code>waveform</code>文件夹中，如果要查看<code>auipc</code>测试点的波形，进入<code>waveform</code>文件夹，输入命令（<code>auipc</code>替换成需要打开的文件名）：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>gtkwave<span class="w"> </span>waveform/auipc.vcd<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span><span class="w">  </span>
+</code></pre></div>
 <div class="admonition warning 提示">
 <p class="admonition-title">Warning</p>
 <p>&emsp;&emsp;如果你要通过VSCode工具自带的终端查看波形，你需要在你自己的电脑上安装vcxsrv，此外还需要在VSCode安装remote X11插件，安装完成后就可以查看波形了。
 如果你用MobaXterm就不需要那么麻烦，直接输入命令就可以查看波形：）</p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>gtkwave<span class="w"> </span>auipc.vcd<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span><span class="w">  </span>
-</code></pre></div>
-<p>&emsp;&emsp;弹出波形窗口。（<code>auipc</code>替换成需要打开的文件名）</p>
+<p>&emsp;&emsp;弹出波形窗口。</p>
 <p><img alt="image-20210704014403857" src="../assets/trace-5.png" /></p>
 <h3 id="43">4.3 查看反汇编</h3>
 <p>&emsp;&emsp;反汇编文件在<code>asm</code>文件夹中，在上述例子中，我们看到是在PC=8处出现了错误，写回的值不对，而观察<code>auipc.dump</code>文件，可以找到出错点。</p>

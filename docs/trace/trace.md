@@ -192,17 +192,17 @@
 
 ### 4.2 打开波形
 
-&emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令
+&emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令（`auipc`替换成需要打开的文件名）：
+
+``` bash
+ 1|gtkwave waveform/auipc.vcd > /dev/null 2>&1 &  
+```
 
 !!! warning 提示
     &emsp;&emsp;如果你要通过VSCode工具自带的终端查看波形，你需要在你自己的电脑上安装vcxsrv，此外还需要在VSCode安装remote X11插件，安装完成后就可以查看波形了。
     如果你用MobaXterm就不需要那么麻烦，直接输入命令就可以查看波形：）
 
-``` bash
- 1|gtkwave auipc.vcd > /dev/null 2>&1 &  
-```
-
-&emsp;&emsp;弹出波形窗口。（`auipc`替换成需要打开的文件名）
+&emsp;&emsp;弹出波形窗口。
 
 ![image-20210704014403857](assets/trace-5.png)
 
