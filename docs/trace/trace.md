@@ -192,7 +192,7 @@
 
 ### 4.2 打开波形
 
-&emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中，如果要查看`auipc`测试点的波形，进入`waveform`文件夹，输入命令（`auipc`替换成需要打开的文件名）：
+&emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中。如果要查看某个测试用例的波形，比如`auipc`，则在终端输入并执行以下命令（实际操作时，将`auipc`替换成需要打开的文件名，比如替换成`add`、`ori`等等）：
 
 ``` bash
  1|gtkwave waveform/auipc.vcd > /dev/null 2>&1 &  

@@ -1531,7 +1531,7 @@
 <p><img alt="image-20210704013210584" src="../assets/trace-4.png" /></p>
 <p>&emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。</p>
 <h3 id="42">4.2 打开波形</h3>
-<p>&emsp;&emsp;在执行完某个测试之后，所生成的波形会在<code>waveform</code>文件夹中，如果要查看<code>auipc</code>测试点的波形，进入<code>waveform</code>文件夹，输入命令（<code>auipc</code>替换成需要打开的文件名）：</p>
+<p>&emsp;&emsp;在执行完某个测试之后，所生成的波形会在<code>waveform</code>文件夹中。如果要查看某个测试用例的波形，比如<code>auipc</code>，则在终端输入并执行以下命令（实际操作时，将<code>auipc</code>替换成需要打开的文件名，比如替换成<code>add</code>、<code>ori</code>等等）：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">1</span><span class="p">|</span>gtkwave<span class="w"> </span>waveform/auipc.vcd<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span><span class="w">  </span>
 </code></pre></div>
 <div class="admonition warning 提示">
