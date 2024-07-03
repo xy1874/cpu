@@ -1,5 +1,5 @@
 !!! warning "声明 :loudspeaker:"
-    &emsp;&emsp;本课程资料仅限哈尔滨工业大学（深圳）《计算机设计与实践》2023夏季课程使用，严禁扩散或用作其他用途。
+    &emsp;&emsp;本课程资料仅限哈尔滨工业大学（深圳）《计算机设计与实践》2024夏季课程使用，严禁扩散或用作其他用途。
 
 
 
@@ -14,7 +14,7 @@
 
 # 相关链接
 
-- ==线上答疑平台==：<a href="https://piazza.com/hitsz/summer2023/comp2012" target="_blank">Piazza/COMP2012</a>（访问码：`comp2012`）
+<!-- - ==线上答疑平台==：<a href="https://piazza.com/hitsz/summer2023/comp2012" target="_blank">Piazza/COMP2012</a>（访问码：`comp2012`） -->
 
 - 课程材料下载：<a href="https://share.weiyun.com/Ac3fecnb" target="_blank">腾讯微云</a>（访问码：`xkqmh6`）
 

@@ -67,19 +67,19 @@
 
 &emsp;&emsp;分支指令在执行阶段即可得出分支结果。因此，分支失败时，最多只需清空执行阶段之前的流水级。所谓清空流水级，就是把相应的相应的寄存器清零，如图5-6所示。
 
-``` Verilog
- 1|    always @(posedge clk or negedge rst_n) begin
- 2|        if (~rst_n)              id_pc <= 32'h0;
- 3|        else if (flush_pipeline) id_pc <= 32'h0;
- 4|        else                     ......
- 5|    end
- 6|
- 7|    always @(posedge clk or negedge rst_n) begin
- 8|        if (~rst_n)              id_inst <= 32'h0;
- 9|        else if (flush_pipeline) id_inst <= id_inst;
-10|        else                     ......
-11|    end
-12|    
-13|    ......
+``` Verilog linenums="1"
+    always @(posedge clk or posedge rst) begin
+        if (rst)                 id_pc <= 32'h0;
+        else if (flush_pipeline) id_pc <= 32'h0;
+        else                     ......
+    end
+
+    always @(posedge clk or posedge rst) begin
+        if (rst)                 id_inst <= 32'h0;
+        else if (flush_pipeline) id_inst <= id_inst;
+        else                     ......
+    end
+    
+    ......
 ```
 <center>图5-6 清空IF/ID寄存器的RTL参考实现</center>
