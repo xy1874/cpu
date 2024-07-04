@@ -18,8 +18,11 @@
 
 - 课程材料下载：<a href="https://share.weiyun.com/Ac3fecnb" target="_blank">腾讯微云</a>（访问码：`xkqmh6`）
 
+- 在线答疑文档：
 
-&emsp;&emsp;
+<embed src = "https://docs.qq.com/doc/DZHNIeWxpQVp2UmZ1?is_no_hook_redirect=1" width="100%" height="600">
+
+
 
 !!! abstract "致谢 :rose:"
     - 特别鸣谢17级胡博涵、18级黎庚祉、19级罗尹同学在Trace测试框架上做出的贡献。
