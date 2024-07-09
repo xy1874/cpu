@@ -1579,7 +1579,9 @@
 <p>&emsp;&emsp;要求除了生成随机数之外，其余运算的 <mark><strong>运算结果应以10进制显示</strong></mark>。</p>
 <div class="admonition example">
 <p class="admonition-title">栗子 <img alt="🌰" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f330.svg" title=":chestnut:" /></p>
-<p>&emsp;&emsp;假设从拨码开关输入操作数A为<code>8'b1011_0101</code>（即11.5），输入操作数B为<code>8'b0010_0111</code>（即2.7），则计算A + B时，数码管高4位应当显示<code>16'h0014</code>，低4位应当显示<code>16'h0002</code>（即A + B = 11.5 + 2.7 = 14.2）。</p>
+<p>&emsp;&emsp;假设从拨码开关输入操作数A为<code>8'b1011_0101</code>（即11.5），输入操作数B为<code>8'b0010_0111</code>（即2.7），则：</p>
+<p>&emsp;&emsp;计算A + B时，实际应计算11.5 + 2.7 = 14.2，并在数码管高4位显示<code>16'h0014</code>，低4位显示<code>16'h0002</code>。求绝对值同理。</p>
+<p>&emsp;&emsp;计算A <script type="math/tex">\times</script> 2<sup>B</sup>时，应计算11.5 <script type="math/tex">\times</script> 2<sup>39</sup>。除法同理。</p>
 </div>
 <p>&emsp;&emsp;编写程序时，可先在数据段定义变量，用于提供输入的测试数据以及记录输出的计算结果，并在此基础上完成程序的调试。<ins>调试完毕后，再将提供输入数据的变量地址改成拨码开关的I/O地址、将保存运算结果的地址改成数码管的I/O地址即可</ins>。</p>
 <h2 id="2a-for-minila">2A. 实验内容 (for miniLA)</h2>
