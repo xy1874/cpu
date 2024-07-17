@@ -23,19 +23,19 @@
 
 &emsp;&emsp;请在终端里依次输入并执行下列命令，以拉取测试框架代码：
 
-``` bash
- 1|cd ~
- 2|git clone https://gitee.com/hitsz-cslab/cdp-tests.git
- 3|cd cdp-tests
+``` bash linenums="1"
+cd ~
+git clone https://gitee.com/hitsz-cslab/cdp-tests.git
+cd cdp-tests
 ```
 
 !!! info "关于miniLA :loudspeaker:"
     &emsp;&emsp;实现miniLA指令集的同学，拉取测试框架时，请执行以下命令：
 
-    ``` bash
-    1|cd ~
-    2|git clone -b miniLA https://gitee.com/hitsz-cslab/cdp-tests.git
-    3|cd cdp-tests
+    ``` bash linenums="1"
+    cd ~
+    git clone -b miniLA https://gitee.com/hitsz-cslab/cdp-tests.git
+    cd cdp-tests
     ```
 
 &emsp;&emsp;cdp-tests目录的文件结构如下图所示。
@@ -93,44 +93,44 @@
 
 - **你需要保证在`mySoC`目录下的模块的层次关系中，SoC的顶层模块名叫做`miniRV_SoC`（或`miniLA_SoC`），且顶层模块的接口信号命名满足要求。**
 
-``` Verilog
- 1|`include "defines.vh"  // 运行Trace测试时，将此文件的RUN_TRACE取消注释; 下板时，注释RUN_TRACE.
- 2|module miniRV_SoC (
- 3|    input  wire        fpga_rst,             // High active
- 4|    input  wire        fpga_clk,
- 5|    ......   // 外设I/O接口信号
- 6|`ifdef RUN_TRACE
- 7|    ,// Debug Interface
- 8|    output wire        debug_wb_have_inst,   // WB阶段是否有指令 (对单周期CPU，可在复位后恒为1)
- 9|    output wire [31:0] debug_wb_pc,          // WB阶段的PC (若wb_have_inst=0，此项可为任意值)
-10|    output wire        debug_wb_ena,         // WB阶段的寄存器写使能 (若wb_have_inst=0，此项可为任意值)
-11|    output wire [ 4:0] debug_wb_reg,         // WB阶段写入的寄存器号 (若wb_ena或wb_have_inst=0，此项可为任意值)
-12|    output wire [31:0] debug_wb_value        // WB阶段写入寄存器的值 (若wb_ena或wb_have_inst=0，此项可为任意值)
-13|`endif
-14|);
-15|    ......
-16|
-17|    myCPU Core_cpu (
-18|        .cpu_rst     (fpga_rst),
-19|        .cpu_clk     (cpu_clk),
-20|        //......
-21|    );
-22|
-23|    // 下面两个模块，只需要实例化代码和连线代码，不需要创建IP核
-24|    IROM Mem_IROM (
-25|        .a      (...),
-26|        .spo    (...)
-27|    );
-28|    
-29|    DRAM Mem_DRAM (
-30|        .clk    (...),
-31|        .a      (...),
-32|        .spo    (...),
-33|        .we     (...),
-34|        .d      (...)
-35|    );
-36|
-37|endmodule
+``` Verilog linenums="1"
+`include "defines.vh"  // 运行Trace测试时，将此文件的RUN_TRACE取消注释; 下板时，注释RUN_TRACE.
+module miniRV_SoC (
+    input  wire        fpga_rst,             // High active
+    input  wire        fpga_clk,
+    ......   // 外设I/O接口信号
+`ifdef RUN_TRACE
+    ,// Debug Interface
+    output wire        debug_wb_have_inst,   // WB阶段是否有指令 (对单周期CPU，可在复位后恒为1)
+    output wire [31:0] debug_wb_pc,          // WB阶段的PC (若wb_have_inst=0，此项可为任意值)
+    output wire        debug_wb_ena,         // WB阶段的寄存器写使能 (若wb_have_inst=0，此项可为任意值)
+    output wire [ 4:0] debug_wb_reg,         // WB阶段写入的寄存器号 (若wb_ena或wb_have_inst=0，此项可为任意值)
+    output wire [31:0] debug_wb_value        // WB阶段写入寄存器的值 (若wb_ena或wb_have_inst=0，此项可为任意值)
+`endif
+);
+    ......
+
+    myCPU Core_cpu (
+        .cpu_rst     (fpga_rst),
+        .cpu_clk     (cpu_clk),
+        //......
+    );
+
+    // 下面两个模块，只需要实例化代码和连线代码，不需要创建IP核
+    IROM Mem_IROM (
+        .a      (...),
+        .spo    (...)
+    );
+    
+    DRAM Mem_DRAM (
+        .clk    (...),
+        .a      (...),
+        .spo    (...),
+        .we     (...),
+        .d      (...)
+    );
+
+endmodule
 ```
 
 !!! Warning "Trace注意事项 :mega:"
@@ -155,9 +155,9 @@
 
 &emsp;&emsp;首先进入cdp-tests文件夹，输入命令：
 
-``` bash
- 1|cd cdp-tests
- 2|make
+``` bash linenums="1"
+cd cdp-tests
+make
 ```
 
 &emsp;&emsp;将会编译你的Verilog代码，生成可执行的仿真模型。
@@ -168,16 +168,16 @@
 
 &emsp;&emsp;如果你对你CPU没有充足的信心，你可以选择单个测试运行，所有的测试用例都位于`bin`文件夹下，输入命令
 
-``` bash
- 1|ls bin
+``` bash linenums="1"
+ls bin
 ```
 
 &emsp;&emsp;可以看到测试点名称。
 
 &emsp;&emsp;例如，我们想运行`sltu`指令的测试，我们输入：
 
-``` bash
- 1|make run TEST=sltu
+``` bash linenums="1"
+make run TEST=sltu
 ```
 
 ![image-20210704013056368](assets/trace-3.png)
@@ -194,8 +194,8 @@
 
 &emsp;&emsp;在执行完某个测试之后，所生成的波形会在`waveform`文件夹中。如果要查看某个测试用例的波形，比如`auipc`，则在终端输入并执行以下命令（实际操作时，将`auipc`替换成需要打开的文件名，比如替换成`add`、`ori`等等）：
 
-``` bash
- 1|gtkwave waveform/auipc.vcd > /dev/null 2>&1 &  
+``` bash linenums="1"
+gtkwave waveform/auipc.vcd > /dev/null 2>&1 &  
 ```
 
 !!! warning 提示
@@ -220,8 +220,8 @@
 
 **（1）使用python脚本自动测试**
 
-``` bash
- 1|python3 run_all_tests.py
+``` bash linenums="1"
+python3 run_all_tests.py
 ```
 
 !!! Warning
@@ -240,8 +240,8 @@
 
 &emsp;&emsp;输入以下命令:
 
-``` bash
- 1|make run TEST=start
+``` bash linenums="1"
+make run TEST=start
 ```
 
 &emsp;&emsp;如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
